@@ -49,6 +49,12 @@ class _TypeSelectionState extends State<TypeSelection> {
                     isSelected: selectedType == AccountType.association,
                     type: AccountType.association,
                   ),
+                  _typeRow(
+                    icon: Icons.account_balance,
+                    label: 'أفراد',
+                    isSelected: selectedType == AccountType.people,
+                    type: AccountType.people,
+                  ),
                   SizedBox(
                     height: 20,
                   ),
@@ -62,6 +68,9 @@ class _TypeSelectionState extends State<TypeSelection> {
                         })
                       ],
                     ),
+                  SizedBox(
+                    height: 10,
+                  ),
                 ],
               ),
             ),
