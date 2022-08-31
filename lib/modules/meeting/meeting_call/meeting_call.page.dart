@@ -146,6 +146,7 @@ class _MeetingCallPageState extends State<MeetingCallPage> {
     _users.forEach((UserStatus status) => list.add(ViewWRapper(
         userStatus: status,
         child: RtcRemoteView.SurfaceView(
+          channelId: "",
           uid: status.id,
         ))));
 

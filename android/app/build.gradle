@@ -33,7 +33,7 @@ if (keystorePropertiesFile.exists()) {
 apply plugin: 'com.google.firebase.crashlytics'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
 
     signingConfigs {
         release {
@@ -56,7 +56,7 @@ android {
     defaultConfig {
         applicationId "sa.com.gader"
         minSdkVersion 19
-        targetSdkVersion 31
+        targetSdkVersion 33
         multiDexEnabled true
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName

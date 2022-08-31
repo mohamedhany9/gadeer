@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gadeer/component/custom_button.dart';
+import 'package:gadeer/data/model/user_type_model.dart';
 import 'package:gadeer/helper/app.theme.dart';
 import 'package:gadeer/helper/constants.dart';
 import 'package:gadeer/modules/register/bloc/register.bloc.dart';
 import 'package:gadeer/modules/register/bloc/register.event.dart';
+import 'package:gadeer/modules/register/service/register_api_service.dart';
 
 import '../bloc/register.event.dart';
 
@@ -18,6 +20,24 @@ class TypeSelection extends StatefulWidget {
 
 class _TypeSelectionState extends State<TypeSelection> {
   AccountType? selectedType;
+
+  List<UserTypeData> usertypeList = [] ;
+
+  getSubjectData() async {
+      try {
+      ServiceApi serviceApi = new ServiceApi();
+      await serviceApi.getUsertype();
+      setState(() {
+        usertypeList = serviceApi.usertypeList;
+      });
+      } catch (e) {}
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getSubjectData();
+  }
 
   @override
   Widget build(BuildContext context) {
