@@ -3,6 +3,7 @@ import 'package:gadeer/modules/register/bloc/register.bloc.dart';
 import 'package:gadeer/modules/register/bloc/register.event.dart';
 import 'package:gadeer/modules/register/widgets/association_register_form.widget.dart';
 import 'package:gadeer/modules/register/widgets/consultant_register_form.widget.dart';
+import 'package:gadeer/modules/register/widgets/people_register_form.widget.dart';
 
 class AccountInformationWidget extends StatelessWidget {
   final RegisterBloc? registerBloc;
@@ -11,6 +12,7 @@ class AccountInformationWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return registerBloc!.state.accountType == AccountType.consultant
         ? ConsultantRegisterForm(registerBloc)
-        : AssociationFormWidget(registerBloc);
+        : registerBloc!.state.accountType == AccountType.association ?
+        AssociationFormWidget(registerBloc) : PeopleFormWidget(registerBloc);
   }
 }

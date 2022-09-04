@@ -1,5 +1,5 @@
 class Constants {
-  static const String baseUrl = "https://gadeer.org/api/";
+  static const String baseUrl = "http://gadeer.live/api/";
   static const String assetImageDirectory = "assets/images/";
   static const String background1 = assetImageDirectory + 'background1.png';
   static const String background2 = assetImageDirectory + 'background2.png';
