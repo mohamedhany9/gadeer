@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gadeer/component/custom_button.dart';
 import 'package:gadeer/data/model/user_type_model.dart';
 import 'package:gadeer/helper/app.theme.dart';
@@ -7,6 +8,7 @@ import 'package:gadeer/modules/register/bloc/register.bloc.dart';
 import 'package:gadeer/modules/register/bloc/register.event.dart';
 import 'package:gadeer/modules/register/service/register_api_service.dart';
 
+import '../../../helper/notifications.dart';
 import '../bloc/register.event.dart';
 
 class TypeSelection extends StatefulWidget {
@@ -23,14 +25,17 @@ class _TypeSelectionState extends State<TypeSelection> {
 
   List<UserTypeData> usertypeList = [] ;
 
+  bool _loading = true ;
+
   getSubjectData() async {
-      try {
+    try {
       ServiceApi serviceApi = new ServiceApi();
       await serviceApi.getUsertype();
       setState(() {
         usertypeList = serviceApi.usertypeList;
+        _loading = false;
       });
-      } catch (e) {}
+    } catch (e) {}
   }
 
   @override
@@ -45,7 +50,23 @@ class _TypeSelectionState extends State<TypeSelection> {
       child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: Center(
-            child: Container(
+            child: _loading == true ? Center(
+              child: Container(
+                color: Colors.white,
+                height: 70,
+                width: 70,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                    child: SpinKitFadingCube(
+                      color: AppColors.primary,
+                      size: 30.0,
+                      duration: Duration(milliseconds: 1000),
+                    ),
+                  ),
+                ),
+              ),
+            ) :Container(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -57,24 +78,24 @@ class _TypeSelectionState extends State<TypeSelection> {
                   SizedBox(
                     height: 30,
                   ),
-                  _typeRow(
+                  usertypeList[0].isActive == false ? _typeRow(
                     icon: Icons.account_circle,
                     label: 'خــبيــر',
                     isSelected: selectedType == AccountType.consultant,
                     type: AccountType.consultant,
-                  ),
-                  _typeRow(
+                  ) : Container(),
+                  usertypeList[1].isActive == false ? _typeRow(
                     icon: Icons.account_balance,
                     label: 'جمعيه',
                     isSelected: selectedType == AccountType.association,
                     type: AccountType.association,
-                  ),
-                  _typeRow(
+                  ):Container(),
+                  usertypeList[0].isActive == false ? _typeRow(
                     icon: Icons.account_balance,
                     label: 'أفراد',
                     isSelected: selectedType == AccountType.people,
                     type: AccountType.people,
-                  ),
+                  ):Container(),
                   SizedBox(
                     height: 20,
                   ),
