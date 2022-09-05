@@ -89,27 +89,27 @@ class _PeopleFormWidgetState extends State<PeopleFormWidget> {
     );
   }
 
-  _buildEstablishDate() {
-    return DateTimeFieldBlocBuilder(
-      dateTimeFieldBloc: _formBloc!.establishDate,
-      format: DateFormat("dd-MM-yyyy"),
-      initialDate: _formBloc!.establishDate.value ?? DateTime.now(),
-      firstDate: DateTime(1500),
-      lastDate: DateTime.now(),
-      decoration: inputDecoration(
-        label: 'تاريخ التأسيس',
-      ),
-    );
-  }
+  // _buildEstablishDate() {
+  //   return DateTimeFieldBlocBuilder(
+  //     dateTimeFieldBloc: _formBloc!.establishDate,
+  //     format: DateFormat("dd-MM-yyyy"),
+  //     initialDate: _formBloc!.establishDate.value ?? DateTime.now(),
+  //     firstDate: DateTime(1500),
+  //     lastDate: DateTime.now(),
+  //     decoration: inputDecoration(
+  //       label: 'تاريخ التأسيس',
+  //     ),
+  //   );
+  // }
 
-  _buildIdNumber() {
-    return TextFieldBlocBuilder(
-      textFieldBloc: _formBloc!.idNumber,
-      keyboardType: TextInputType.number,
-      decoration:
-      inputDecoration(label: "رقم الترخيص", icon: Icons.card_membership),
-    );
-  }
+  // _buildIdNumber() {
+  //   return TextFieldBlocBuilder(
+  //     textFieldBloc: _formBloc!.idNumber,
+  //     keyboardType: TextInputType.number,
+  //     decoration:
+  //     inputDecoration(label: "رقم الترخيص", icon: Icons.card_membership),
+  //   );
+  // }
 
   _buildSectionField() {
     return DropdownFieldBlocBuilder<AssosiationSection>(

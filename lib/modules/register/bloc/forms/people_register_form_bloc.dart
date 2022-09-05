@@ -25,8 +25,8 @@ class PeopleFormBloc extends FormBloc<LoginResponse, Object>
   PeopleFormBloc() : super(isLoading: true) {
     addFieldBlocs(fieldBlocs: [
       name,
-      establishDate,
-      idNumber,
+      // establishDate,
+      // idNumber,
       section,
       email,
       password,
@@ -38,11 +38,11 @@ class PeopleFormBloc extends FormBloc<LoginResponse, Object>
 
   final name = TextFieldBloc(name: 'first_name');
   final email = TextFieldBloc(name: 'email');
-  final idNumber = TextFieldBloc(name: 'id_number');
+  // final idNumber = TextFieldBloc(name: 'id_number');
 
-  final establishDate = InputFieldBloc<DateTime, Object>(
-    name: 'establish_date',
-  );
+  // final establishDate = InputFieldBloc<DateTime, Object>(
+  //   name: 'establish_date',
+  // );
   final password = TextFieldBloc(name: 'password');
   final area = SelectFieldBloc<CityModel, Object>(name: 'area_id');
   final city = SelectFieldBloc<CityModel, Object>(name: 'city_id');
@@ -101,14 +101,12 @@ class PeopleFormBloc extends FormBloc<LoginResponse, Object>
       phoneId: Get.find<RegisterBloc>().state.phoneId,
       email: email.value,
       password: password.value,
-      idNumber: idNumber.value == null
-          ? null
-          : NumHelper.parse(idNumber.value).toString(),
-      establishDate: establishDate.value,
+      // idNumber: idNumber.value == null ? null : NumHelper.parse(idNumber.value).toString(),
+      // establishDate: establishDate.value,
       sectionId: section.value?.id ?? 0,
       areaId: area.value?.id,
       cityId: city.value?.id,
-      membershipType: AccountType.people.toShortString(),
+      membershipType: "user",
     );
     this
         .registerService
