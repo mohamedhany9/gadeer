@@ -40,11 +40,17 @@ class AccountFormBloc extends FormBloc<UpdateAccountResponse, String>
   final jobTitle = TextFieldBloc(name: 'job_title');
 
   AccountFormBloc() {
-    addFieldBlocs(fieldBlocs: [fName, idNumber, email, city, area]);
+    addFieldBlocs(fieldBlocs: [fName, email, city, area]);
     if (_accountBloc.state.accountType == AccountType.consultant) {
-      addFieldBlocs(fieldBlocs: [lName, jobTitle, gender]);
-    } else {
-      addFieldBlocs(fieldBlocs: [establishDate, section]);
+
+      addFieldBlocs(fieldBlocs: [idNumber,lName, jobTitle, gender]);
+
+    } else if(_accountBloc.state.accountType == AccountType.association){
+
+       addFieldBlocs(fieldBlocs: [idNumber,establishDate, section]);
+
+    }else {
+      addFieldBlocs(fieldBlocs: []);
     }
     loadData();
   }

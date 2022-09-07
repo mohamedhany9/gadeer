@@ -93,8 +93,8 @@ class _TypeSelectionState extends State<TypeSelection> {
                   usertypeList[0].isActive == false ? _typeRow(
                     icon: Icons.account_balance,
                     label: 'أفراد',
-                    isSelected: selectedType == AccountType.people,
-                    type: AccountType.people,
+                    isSelected: selectedType == AccountType.user,
+                    type: AccountType.user,
                   ):Container(),
                   SizedBox(
                     height: 20,

@@ -18,8 +18,8 @@ class AccountBloc extends Cubit<AccountState> {
     emit(state.copyWith(
         user: userModel,
         accountType: userModel?.membershipType == "consultant"
-            ? AccountType.consultant
-            : AccountType.association));
+            ? AccountType.consultant : userModel?.membershipType == "association"
+            ? AccountType.association : AccountType.user));
   }
 
   updateAccount(UserModel userModel) async {

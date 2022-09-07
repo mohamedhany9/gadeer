@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-enum AccountType { consultant, association, people }
+enum AccountType { consultant, association, user }
 
 extension ParseToString on AccountType {
   String toShortString() {
