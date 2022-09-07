@@ -56,8 +56,8 @@ class _ConsultingPageState extends State<ConsultingPage>
         },
         builder: (context, state) {
           return Scaffold(
-            floatingActionButton: Get.find<AccountBloc>().state.accountType ==
-                    AccountType.association
+            floatingActionButton: Get.find<AccountBloc>().state.accountType == AccountType.association ||
+               Get.find<AccountBloc>().state.accountType == AccountType.user
                 ? AddConsultingButton("consulting")
                 : null,
             backgroundColor: Colors.white,

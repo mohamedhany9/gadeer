@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
     return GetBuilder<HomeController>(builder: (home) {
       return Scaffold(
         floatingActionButton:
-            _accountBloc.state.accountType == AccountType.association
+            _accountBloc.state.accountType == AccountType.association || _accountBloc.state.accountType == AccountType.user
                 ? AddConsultingButton("home")
                 : null,
         body: RefreshIndicator(

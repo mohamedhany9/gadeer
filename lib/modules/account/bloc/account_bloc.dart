@@ -25,6 +25,7 @@ class AccountBloc extends Cubit<AccountState> {
   updateAccount(UserModel userModel) async {
     emit(state.copyWith(user: userModel));
     Get.find<HomeController>().update();
+    Get.back();
   }
 
   changeAvatar(File image) async {
