@@ -58,7 +58,7 @@ class _PeopleFormWidgetState extends State<PeopleFormWidget> {
                   ),
                   _buildAssociationName(),
                   // _buildIdNumber(),
-                  _buildSectionField(),
+                 // _buildSectionField(),
                   _buildLocationField(),
                   // _buildEstablishDate(),
                   _buildEmailField(),
@@ -111,13 +111,13 @@ class _PeopleFormWidgetState extends State<PeopleFormWidget> {
   //   );
   // }
 
-  _buildSectionField() {
-    return DropdownFieldBlocBuilder<AssosiationSection>(
-      selectFieldBloc: _formBloc!.section,
-      decoration: inputDecoration(hint: 'تخصص الفرد', icon: Icons.category),
-      itemBuilder: (context, sec) => sec.title ?? "",
-    );
-  }
+  // _buildSectionField() {
+  //   return DropdownFieldBlocBuilder<AssosiationSection>(
+  //     selectFieldBloc: _formBloc!.section,
+  //     decoration: inputDecoration(hint: 'تخصص الفرد', icon: Icons.category),
+  //     itemBuilder: (context, sec) => sec.title ?? "",
+  //   );
+  // }
 
   _buildLocationField() {
     return Column(

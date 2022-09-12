@@ -103,7 +103,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
           textFieldBloc: _formBloc.fName,
           decoration: inputDecoration(
             label: accountType == AccountType.association
-                ? "اسم الجمعيه"
+                ? "اسم الجمعية"
                 : "الاسم الاول",
             icon: accountType == AccountType.association
                 ? Icons.location_city
@@ -149,7 +149,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
   _buildSectionField() {
     return DropdownFieldBlocBuilder<AssosiationSection>(
       selectFieldBloc: _formBloc.section,
-      decoration: inputDecoration(hint: 'تخصص الجمعيه', icon: Icons.category),
+      decoration: inputDecoration(hint: 'تخصص الجمعية', icon: Icons.category),
       itemBuilder: (context, sec) => sec.title ?? "",
     );
   }

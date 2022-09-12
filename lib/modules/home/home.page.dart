@@ -30,6 +30,7 @@ class _HomePageState extends State<HomePage> {
   final AccountBloc _accountBloc = Get.find();
   final String? status = Get.find<AccountBloc>().state.user!.status;
 
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(builder: (home) {
@@ -76,7 +77,9 @@ class _HomePageState extends State<HomePage> {
                 SliverToBoxAdapter(
                     child: Column(
                   children: [
+
                     if (_homeController.hourPriceNotSet == true)
+                      _accountBloc.state.accountType == AccountType.user ? Container() :
                       ErrorTextWidget("برجاء تحديد سعر ساعه الاستشاره", () {
                         Get.find<AppBloc>().changePage(2);
                       }),
@@ -94,7 +97,8 @@ class _HomePageState extends State<HomePage> {
                       }),
                     if (_homeController.homeResponse != null &&
                         _homeController.homeResponse?.isCompleted == false)
-                      ErrorTextWidget(
+                      _accountBloc.state.accountType == AccountType.user ? Container() :
+                        ErrorTextWidget(
                           "لكي تتمكن من الاستفادة من مميزات التطبيق برحاء استكمال بيانات الملف الشخصي",
                           () {
                         _appBloc.changePage(2);

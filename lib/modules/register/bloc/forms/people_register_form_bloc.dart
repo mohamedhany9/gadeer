@@ -27,7 +27,7 @@ class PeopleFormBloc extends FormBloc<LoginResponse, Object>
       name,
       // establishDate,
       // idNumber,
-      section,
+     // section,
       email,
       password,
       area,

@@ -220,7 +220,7 @@ class _FotterWidget extends StatelessWidget {
                     accountBloc.state.user?.membershipType ==
                             AccountType.association.toShortString()
                         ? "خبير"
-                        : "جمعيه",
+                        : "جمعية",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white,

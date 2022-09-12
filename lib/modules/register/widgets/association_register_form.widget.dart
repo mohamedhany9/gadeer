@@ -83,7 +83,7 @@ class _AssociationFormWidgetState extends State<AssociationFormWidget> {
       textFieldBloc: _formBloc!.name,
       decoration: inputDecoration(
         hint: "الهلال الاحمر",
-        label: "اسم الجمعيه",
+        label: "اسم الجمعية",
         icon: Icons.build,
       ),
     );
@@ -114,7 +114,7 @@ class _AssociationFormWidgetState extends State<AssociationFormWidget> {
   _buildSectionField() {
     return DropdownFieldBlocBuilder<AssosiationSection>(
       selectFieldBloc: _formBloc!.section,
-      decoration: inputDecoration(hint: 'تخصص الجمعيه', icon: Icons.category),
+      decoration: inputDecoration(hint: 'تخصص الجمعية', icon: Icons.category),
       itemBuilder: (context, sec) => sec.title ?? "",
     );
   }

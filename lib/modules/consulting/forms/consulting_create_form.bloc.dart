@@ -83,7 +83,7 @@ class ConsultingCreateFormBloc extends FormBloc<AddConsultingResponse, Object>
     print(category.value?.title);
     if (category.value?.id != 16 && consultant == null) {
       emitFailure(
-          failureResponse: "يجب اختيار الاستشاري او اختيار مجال الاستشاره عام");
+          failureResponse: "يجب اختيار الاستشاري");
       return;
     }
 
