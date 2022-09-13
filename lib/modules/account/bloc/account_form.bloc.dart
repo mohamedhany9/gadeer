@@ -84,9 +84,11 @@ class AccountFormBloc extends FormBloc<UpdateAccountResponse, String>
         .firstWhere((element) => element.id == userModel?.area?.id));
     city.updateInitialValue(_homeController.cities
         .firstWhere((element) => element.id == userModel?.city?.id));
+    if(userModel?.membershipType != "user"){
     if (userModel?.section != null) {
       section.updateInitialValue(_homeController.sections
           .firstWhere((element) => element.id == userModel?.section));
+    }
     }
 
     area.onValueChanges(onData: (p, current) async* {

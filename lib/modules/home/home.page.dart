@@ -118,6 +118,7 @@ class _HomePageState extends State<HomePage> {
                             [],
                       ),
                     if (_homeController.homeResponse != null)
+                      _accountBloc.state.accountType == AccountType.user ? Container() :
                       TopUsers(
                           profiles: _homeController.homeResponse?.profiles),
                     SizedBox(

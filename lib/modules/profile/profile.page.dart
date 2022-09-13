@@ -71,7 +71,8 @@ class _ProfilePageState extends State<ProfilePage>
                     ),
                     state.profile == null
                         ? Container()
-                        : state.profile!.membershipType ==
+                        : state.profile!.membershipType == AccountType.user.toShortString() ? Container()
+                        :state.profile!.membershipType ==
                                 AccountType.consultant.toShortString()
                             ? Column(
                                 children: [
