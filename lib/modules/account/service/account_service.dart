@@ -70,6 +70,19 @@ class AccountService {
     return ChangePasswordResponse.fromJson(response);
   }
 
+  Future<ChangePasswordResponse> deleteaccount() async {
+    var response = await _apiService.post("users/delete",
+        // data: changePasswordRequest.toJson(),
+        headers: {
+          Constants.authorization: Constants.bearer +
+              (await _hiveService.get<String>(
+                  Constants.gaderBox, Constants.token) ??
+                  "")
+        });
+
+    return ChangePasswordResponse.fromJson(response);
+  }
+
   Future logOut() async {
     await _apiService.post("user/logout", headers: {
       Constants.authorization: Constants.bearer +

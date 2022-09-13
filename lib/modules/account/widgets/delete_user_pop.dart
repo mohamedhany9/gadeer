@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gadeer/component/custom_button.dart';
 import 'package:gadeer/component/custom_text_field.dart';
+import 'package:gadeer/config/routes.dart';
 import 'package:gadeer/data/request/account/change_password.request.dart';
 import 'package:gadeer/helper/app.theme.dart';
 import 'package:gadeer/helper/constants.dart';
@@ -39,57 +40,6 @@ class _DeleteUserPobState extends State<DeleteUserPob> {
               SizedBox(
                 height: 24,
               ),
-              buildTextField(
-                autoValidate: autoValidate,
-                cont: password,
-                isPassword: !showPassword,
-                label: "كلمه المرور الجديده",
-                validator: Validator.password,
-                suffix: IconButton(
-                    icon: FaIcon(
-                      !showPassword
-                          ? FontAwesomeIcons.eye
-                          : FontAwesomeIcons.eyeSlash,
-                      color: Colors.grey,
-                      size: 20,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        showPassword = !showPassword;
-                      });
-                    }),
-              ),
-              SizedBox(
-                height: 24,
-              ),
-              buildTextField(
-                autoValidate: autoValidate,
-                cont: confirm,
-                isPassword: !showPassword,
-                label: "تأكيد كلمه المرور",
-                validator: (String? e) {
-                  if (e != password.text) {
-                    return "يجب ان تتطابق كلمتي المرور";
-                  }
-                  return null;
-                },
-                suffix: IconButton(
-                    icon: FaIcon(
-                      !showPassword
-                          ? FontAwesomeIcons.eye
-                          : FontAwesomeIcons.eyeSlash,
-                      color: Colors.grey,
-                      size: 20,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        showPassword = !showPassword;
-                      });
-                    }),
-              ),
-              SizedBox(
-                height: 24,
-              ),
               _ActionsRow(
                 isLoading: isLoading,
                 onConfirm: () {
@@ -102,27 +52,26 @@ class _DeleteUserPobState extends State<DeleteUserPob> {
   }
 
   void _onConfirm() async {
-    autoValidate = true;
 
     setState(() {});
-    if (_formKey.currentState!.validate()) {
       isLoading = true;
       setState(() {});
       await Get.find<AccountService>()
-          .changePassword(ChangePasswordRequest(password: password.text))
+          .deleteaccount()
           .then((value) {
         if (value.status == 0) {
           Notifications.error(value.message);
         } else {
           Get.back();
           Notifications.success(value.message);
+          Get.toNamed(Routes.login);
         }
       }).catchError((e) {
         Notifications.error(Constants.netError);
       });
       isLoading = false;
       setState(() {});
-    }
+
   }
 }
 

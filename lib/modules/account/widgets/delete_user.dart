@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:gadeer/config/routes.dart';
 import 'package:gadeer/data/service/hive.service.dart';
 import 'package:gadeer/helper/constants.dart';
 import 'package:gadeer/modules/account/widgets/delete_user_pop.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/instance_manager.dart';
 
 
@@ -20,7 +22,7 @@ class _DeleteUserWidgetState extends State<DeleteUserWidget> {
 
   final HiveService _hiveService = Get.find();
 
-
+  // Bearer 1288|Vwk7he9XDJPzB2xOMsxDvGNMNo2T2b2RWmngXc7j
   Future<FormData> AttachaccessoryData() async {
     return FormData.fromMap({});
   }
@@ -34,13 +36,13 @@ class _DeleteUserWidgetState extends State<DeleteUserWidget> {
           headers: {
             "Accept": "application/json",
             'Content-Type': 'multipart/form-data',
-            // 'Authorization' : 'Bearer $token_apis'
+             'Authorization' : Constants.authorization
           },
         ),
       );
       if(response.statusCode == 200)
       {
-
+        print("Delete");
       }
       else{}
   }
@@ -51,10 +53,10 @@ class _DeleteUserWidgetState extends State<DeleteUserWidget> {
       padding: const EdgeInsets.symmetric(horizontal: 36.0, vertical: 12),
       child: InkWell(
         onTap: () async {
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>DeleteUserPob()));
-          await _hiveService.get<String>(
-              Constants.gaderBox, Constants.token);
-          print(Constants.authorization);
+          Get.dialog(Dialog(child: DeleteUserPob()));
+          // await _hiveService.get<String>(
+          //     Constants.gaderBox, Constants.token);
+          // print(Constants.authorization);
         },
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
