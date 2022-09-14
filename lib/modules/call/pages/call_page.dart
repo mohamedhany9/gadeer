@@ -117,7 +117,6 @@ class _CallPageState extends State<CallPage> {
     if (_remoteUid != null) {
       return (remoteVideoEnabled == true)
           ? RtcRemoteView.SurfaceView(
-        channelId: "",
               uid: _remoteUid!,
             )
           : Center(
