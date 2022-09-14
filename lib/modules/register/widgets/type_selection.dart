@@ -78,19 +78,19 @@ class _TypeSelectionState extends State<TypeSelection> {
                   SizedBox(
                     height: 30,
                   ),
-                  usertypeList[0].isActive == false ? _typeRow(
+                  usertypeList[0].isActive == true ? _typeRow(
                     icon: Icons.account_circle,
                     label: 'خــبيــر',
                     isSelected: selectedType == AccountType.consultant,
                     type: AccountType.consultant,
                   ) : Container(),
-                  usertypeList[1].isActive == false ? _typeRow(
+                  usertypeList[1].isActive == true ? _typeRow(
                     icon: Icons.account_balance,
                     label: 'جمعية',
                     isSelected: selectedType == AccountType.association,
                     type: AccountType.association,
                   ):Container(),
-                  usertypeList[0].isActive == false ? _typeRow(
+                  usertypeList[0].isActive == true ? _typeRow(
                     icon: Icons.account_balance,
                     label: 'أفراد',
                     isSelected: selectedType == AccountType.user,
