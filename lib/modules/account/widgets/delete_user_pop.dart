@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gadeer/component/custom_button.dart';
-import 'package:gadeer/component/custom_text_field.dart';
 import 'package:gadeer/config/routes.dart';
-import 'package:gadeer/data/request/account/change_password.request.dart';
 import 'package:gadeer/helper/app.theme.dart';
 import 'package:gadeer/helper/constants.dart';
 import 'package:gadeer/helper/notifications.dart';
-import 'package:gadeer/helper/validator.dart';
 import 'package:gadeer/modules/account/service/account_service.dart';
 import 'package:get/get.dart';
 
