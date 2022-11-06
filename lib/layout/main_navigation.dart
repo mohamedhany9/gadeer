@@ -6,6 +6,7 @@ import 'package:gadeer/helper/notification_helper.dart';
 import 'package:gadeer/modules/account/account.page.dart';
 import 'package:gadeer/modules/app/bloc/app.bloc.dart';
 import 'package:gadeer/modules/app/bloc/app.state.dart';
+import 'package:gadeer/modules/consultants_home/contsultants_page.dart';
 import 'package:gadeer/modules/consulting/consulting.page.dart';
 import 'package:gadeer/modules/home/home.page.dart';
 import 'package:gadeer/modules/profile/profile.page.dart';
@@ -61,6 +62,7 @@ class _MainNavigationState extends State<MainNavigation> {
                       ConsultingPage(),
                       ProfilePage(),
                       AccountPage(),
+                      ConsultantsPage(null),
                     ],
                   ),
                 )),

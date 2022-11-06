@@ -81,6 +81,12 @@ class _MasterLayoutState extends State<MasterLayout> {
                   inactiveColor: Colors.blueGrey,
                   activeColor: Colors.white,
                   activeBackgroundColor: AppColors.primary),
+              BottomNavyBarItem(
+                  icon: Icon(Icons.people),
+                  title: Text("الخبراء"),
+                  inactiveColor: Colors.blueGrey,
+                  activeColor: Colors.white,
+                  activeBackgroundColor: AppColors.primary),
             ],
           ),
           body: UpgradeAlert(
