@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gadeer/component/custom_button.dart';
 import 'package:gadeer/helper/constants.dart';
 import 'package:gadeer/modules/account/bloc/account_bloc.dart';
 import 'package:gadeer/modules/chat/widgets/chat_header.widget.dart';
 import 'package:gadeer/modules/consulting/bloc/consulting.bloc.dart';
 import 'package:gadeer/modules/consulting/bloc/consulting.state.dart';
+import 'package:gadeer/modules/meeting/widgets/add_meeting.widget.dart';
 import 'package:get/get.dart';
 
 import 'controller/chat_controller.dart';
@@ -72,6 +74,18 @@ class ChatPage extends StatelessWidget {
               ),
               if (consultingBloc.state.current?.status != "completed")
                 AddCommentWidget(consultingId),
+              SizedBox(
+                height: 8,
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: CustomButton("اضافة اجتماع", () {
+                  Get.to(AddMeetingWidget(consultingBloc.state.current!.id));
+                },),
+              ),
+              SizedBox(
+                height: 4,
+              ),
             ],
           ),
         ),

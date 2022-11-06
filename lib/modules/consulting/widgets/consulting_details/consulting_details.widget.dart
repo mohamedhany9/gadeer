@@ -32,6 +32,7 @@ class ConsultingDetailsWidget extends StatelessWidget {
             SizedBox(
               height: 8,
             ),
+            consultingDetailsModel!.date == null ? Container() :
             DetailsItem(
               title: "تاريخ الاستشارة",
               icon: Icons.calendar_today,
@@ -40,6 +41,7 @@ class ConsultingDetailsWidget extends StatelessWidget {
             SizedBox(
               height: 8,
             ),
+            consultingDetailsModel!.time == null ? Container():
             DetailsItem(
               title: "وقت الاستشارة",
               icon: FontAwesomeIcons.stopwatch,

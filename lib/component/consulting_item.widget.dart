@@ -58,7 +58,7 @@ class ConsultingItemWidget extends StatelessWidget {
                 ),
                 subtitle: Row(
                   children: [
-                    Text(
+                    consulting.date == null ? Container():Text(
                       consulting.date!,
                       style: TextStyle(
                         color: Colors.blueGrey[300],
@@ -68,7 +68,7 @@ class ConsultingItemWidget extends StatelessWidget {
                     SizedBox(
                       width: 4,
                     ),
-                    Text(
+                    consulting.time == null ? Container() : Text(
                       consulting.time!,
                       style: TextStyle(
                         color: Colors.blueGrey[300],
