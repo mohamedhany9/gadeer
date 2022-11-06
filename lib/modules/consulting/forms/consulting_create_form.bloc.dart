@@ -24,13 +24,13 @@ class ConsultingCreateFormBloc extends FormBloc<AddConsultingResponse, Object>
     name: 'description',
   );
 
-  final date = InputFieldBloc<DateTime, Object>(
-    name: 'date',
-  );
+  // final date = InputFieldBloc<DateTime, Object>(
+  //   name: 'date',
+  // );
 
-  final time = InputFieldBloc<TimeOfDay, Object>(
-    name: 'time',
-  );
+  // final time = InputFieldBloc<TimeOfDay, Object>(
+  //   name: 'time',
+  // );
 
   final category = SelectFieldBloc<CategoryModel, Object>(name: 'category');
   final subCategory =
@@ -38,7 +38,7 @@ class ConsultingCreateFormBloc extends FormBloc<AddConsultingResponse, Object>
 
   ConsultingCreateFormBloc() {
     addFieldBlocs(
-      fieldBlocs: [title, description, date, time, category],
+      fieldBlocs: [title, description, category],
     );
     initData();
   }
@@ -90,9 +90,7 @@ class ConsultingCreateFormBloc extends FormBloc<AddConsultingResponse, Object>
     AddConsultRequest addConsultRequest = AddConsultRequest(
       title: title.value,
       categories: selctedCats,
-      date: date.value,
       consultantId: consultant?.id,
-      time: time.value,
       description: description.value,
       type: "_private",
     );

@@ -30,31 +30,31 @@ class MainConsultingDataFormWidget extends StatelessWidget {
             borderRadius: 5,
           ),
         ),
-        DateTimeFieldBlocBuilder(
-          dateTimeFieldBloc: formBloc!.date,
-          format: DateFormat("dd-MM-yyyy"),
-          initialDate: formBloc!.date.value ?? DateTime.now(),
-          firstDate: DateTime.now(),
-          lastDate: DateTime.now().add(Duration(days: 300)),
-          decoration: inputDecoration(
-            hint: 'التاريخ المحدد للاستشارة',
-            label: 'التاريخ',
-            borderRadius: 5,
-          ),
-        ),
-        SizedBox(
-          width: 10,
-        ),
-        TimeFieldBlocBuilder(
-          initialTime: TimeOfDay.now(),
-          timeFieldBloc: formBloc!.time,
-          format: DateFormat("hh:mm"),
-          decoration: inputDecoration(
-            hint: 'الوقت المحدد للاستشارة',
-            label: 'الوقت',
-            borderRadius: 5,
-          ),
-        ),
+        // DateTimeFieldBlocBuilder(
+        //   dateTimeFieldBloc: formBloc!.date,
+        //   format: DateFormat("dd-MM-yyyy"),
+        //   initialDate: formBloc!.date.value ?? DateTime.now(),
+        //   firstDate: DateTime.now(),
+        //   lastDate: DateTime.now().add(Duration(days: 300)),
+        //   decoration: inputDecoration(
+        //     hint: 'التاريخ المحدد للاستشارة',
+        //     label: 'التاريخ',
+        //     borderRadius: 5,
+        //   ),
+        // ),
+        // SizedBox(
+        //   width: 10,
+        // ),
+        // TimeFieldBlocBuilder(
+        //   initialTime: TimeOfDay.now(),
+        //   timeFieldBloc: formBloc!.time,
+        //   format: DateFormat("hh:mm"),
+        //   decoration: inputDecoration(
+        //     hint: 'الوقت المحدد للاستشارة',
+        //     label: 'الوقت',
+        //     borderRadius: 5,
+        //   ),
+        // ),
       ],
     );
   }
