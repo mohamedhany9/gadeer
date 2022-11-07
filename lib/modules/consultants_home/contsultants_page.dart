@@ -5,8 +5,8 @@ import 'package:gadeer/data/model/profile.model.dart';
 import 'package:gadeer/data/response/consulting/add_consulting.response.dart';
 import 'package:gadeer/helper/constants.dart';
 import 'package:gadeer/helper/notifications.dart';
+import 'package:gadeer/modules/consultants_home/widget/all_constultants.dart';
 import 'package:gadeer/modules/consulting/widgets/add_consulting_form/category_selection.widget.dart';
-import 'package:gadeer/modules/consulting/widgets/add_consulting_form/consultant_selection.widget.dart';
 
 import '../consulting/forms/consulting_create_form.bloc.dart';
 
@@ -23,12 +23,21 @@ class _ConsultantsPageState extends State<ConsultantsPage> {
 
   ConsultingCreateFormBloc? formBloc;
 
+  List<int?> selctedCats = [];
+
   @override
   void initState() {
     formBloc = ConsultingCreateFormBloc();
     ProfileModel? consultant = widget.consultant;
 
     formBloc?.initializeConsultant(consultant);
+
+    if (formBloc!.category.value != null) {
+      selctedCats.add(formBloc!.category.value!.id);
+    }
+    if (formBloc!.subCategory.value != null) {
+      selctedCats.add(formBloc!.subCategory.value!.id);
+    }
 
     print("hany");
     print(formBloc!.consultant);
@@ -60,17 +69,15 @@ class _ConsultantsPageState extends State<ConsultantsPage> {
           onFailure: formBloc!.onFailure,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: SingleChildScrollView(
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Column(
-                  children: [
-                    CategorySelectionWidget(formBloc),
-                    ConsultantSelectionWidget(formBloc,(){
-                      setState(() {});
-                    })
-                  ],
-                ),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                children: [
+                  CategorySelectionWidget(formBloc),
+                  Expanded(
+                      child
+                      : AllConsultantPage([]))
+                ],
               ),
             ),
           ),
