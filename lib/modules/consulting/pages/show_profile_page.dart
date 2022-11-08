@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gadeer/component/custom_button.dart';
 import 'package:gadeer/data/model/profile.model.dart';
+import 'package:gadeer/modules/consultants_home/widget/consult_card_page.dart';
 import 'package:gadeer/modules/consulting/pages/add_consulting_form.widget.dart';
 import 'package:gadeer/modules/consulting/widgets/show_profile/profile_details.widget.dart';
 import 'package:gadeer/modules/consulting/widgets/show_profile/profile_header.widget.dart';
@@ -14,25 +15,22 @@ class ShowProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: [
-                ProfileHeaderWidget(profile, isSelectable),
-                SizedBox(
-                  height: 12,
-                ),
-                ProfileDeatilsWidget(profile),
-              ],
-            ),
-          ),
-          if (!isSelectable && profile?.membershipType == "consultant")
-            _buildAddConsultingButton(),
-          if (isSelectable && profile?.membershipType == "consultant")
-            _buildSelectConsultingButton(),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              height: 480,
+                child: ConsultCardPage(profile)),
+            // SizedBox(
+            //   height: 12,
+            // ),
+            ProfileDeatilsWidget(profile),
+            // if (!isSelectable && profile?.membershipType == "consultant")
+            //   _buildAddConsultingButton(),
+            // if (isSelectable && profile?.membershipType == "consultant")
+            //   _buildSelectConsultingButton(),
+          ],
+        ),
       ),
     );
   }
