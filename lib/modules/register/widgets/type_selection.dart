@@ -91,7 +91,7 @@ class _TypeSelectionState extends State<TypeSelection> {
                     type: AccountType.association,
                   ):Container(),
                   usertypeList[0].isActive == true ? _typeRow(
-                    icon: Icons.account_balance,
+                    icon: Icons.accessibility_new_outlined,
                     label: 'أفراد',
                     isSelected: selectedType == AccountType.user,
                     type: AccountType.user,
