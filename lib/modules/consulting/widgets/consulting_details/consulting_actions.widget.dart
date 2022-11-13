@@ -10,12 +10,25 @@ import 'package:get/get.dart';
 
 import 'add_rate.widget.dart';
 
-class ConsultingActionsWidget extends StatelessWidget {
+class ConsultingActionsWidget extends StatefulWidget {
   ConsultingActionsWidget({Key? key}) : super(key: key);
+
+  @override
+  State<ConsultingActionsWidget> createState() => _ConsultingActionsWidgetState();
+}
+
+class _ConsultingActionsWidgetState extends State<ConsultingActionsWidget> {
   final ConsultingBloc consultingBloc = Get.find<ConsultingBloc>();
+
   final AccountType accountType =
       Get.find<AccountBloc>().state.accountType!;
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    _modalBottomSheetMenu();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -94,5 +107,11 @@ class ConsultingActionsWidget extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void _modalBottomSheetMenu() {
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      await Get.bottomSheet(AddRateWidget(), backgroundColor: Colors.white);
+    });
   }
 }

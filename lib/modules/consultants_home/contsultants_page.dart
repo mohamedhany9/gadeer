@@ -210,7 +210,7 @@ class _ConsultantsPageState extends State<ConsultantsPage> {
   }
 
   Future _searchConsultants(String? jobTitle) async {
-    Notifications.showLoading();
+    //Notifications.showLoading();
     await consultingService
         .searchConsulting(
         ConsultingSearchRequest(categories: selctedCats, jobTitle: jobTitle ?? ""))
