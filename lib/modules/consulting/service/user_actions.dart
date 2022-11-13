@@ -1,8 +1,11 @@
+import 'package:gadeer/config/routes.dart';
+import 'package:gadeer/data/request/consulting/add_comment.request.dart';
 import 'package:gadeer/helper/constants.dart';
 import 'package:gadeer/helper/notifications.dart';
 import 'package:gadeer/modules/account/bloc/account_bloc.dart';
 import 'package:gadeer/modules/call/pages/call_page.dart';
 import 'package:gadeer/modules/call/service/call.service.dart';
+import 'package:gadeer/modules/chat/controller/chat_controller.dart';
 import 'package:gadeer/modules/consulting/bloc/consulting.bloc.dart';
 import 'package:gadeer/modules/register/bloc/register.event.dart';
 import 'package:get/get.dart';
@@ -15,6 +18,10 @@ class UserActions {
   static final AccountType accountType =
       Get.find<AccountBloc>().state.accountType!;
 
+
+  static final ChatController chatController = Get.find();
+
+
   static Future acceptConsulting(int? id) async {
     Notifications.showLoading();
     await Get.find<ConsultingService>().acceptConsulting(id).then((value) {
@@ -22,6 +29,18 @@ class UserActions {
       if (value.status == 1) {
         Notifications.success("تم قبول الاستشارة");
         consultingBloc.updateSyncConsulting(value.consulting!);
+
+        AddCommentRequest addCommentRequest =
+        AddCommentRequest(message: "صباح الخير");
+
+        chatController.addComment(consultingBloc.state.current!.id.toString(), addCommentRequest).then((value){
+
+          Get.toNamed(
+            Routes.chatPage,
+            arguments: consultingBloc.state.current!.id.toString(),
+          );
+
+        });
       } else {
         Notifications.error(value.message ?? "");
       }

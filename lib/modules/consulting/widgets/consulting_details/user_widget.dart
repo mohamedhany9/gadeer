@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gadeer/component/custom_button.dart';
 import 'package:gadeer/data/model/profile.model.dart';
 import 'package:gadeer/helper/app.theme.dart';
 import 'package:gadeer/modules/account/bloc/account_bloc.dart';
@@ -52,7 +53,13 @@ class UserWidget extends StatelessWidget {
                   ConsultantActionsWidget(),
                 SizedBox(
                   height: 8,
-                )
+                ),
+                Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    child: CustomButton("إتمام الاستشارة",(){})),
+                SizedBox(
+                  height: 8,
+                ),
               ],
             ),
           ),

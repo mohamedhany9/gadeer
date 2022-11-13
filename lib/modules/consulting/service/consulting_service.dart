@@ -1,10 +1,12 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:gadeer/data/request/consulting/add_consulting.request.dart';
+import 'package:gadeer/data/request/consulting/add_consulting_switch.dart';
 import 'package:gadeer/data/request/consulting/add_offline_time.request.dart';
 import 'package:gadeer/data/request/consulting/add_rate.request.dart';
 import 'package:gadeer/data/request/consulting/search_consult.request.dart';
 import 'package:gadeer/data/request/consulting/update_consulting.request.dart';
 import 'package:gadeer/data/response/consulting/add_consulting.response.dart';
+import 'package:gadeer/data/response/consulting/add_consulting_switch_response.dart';
 import 'package:gadeer/data/response/consulting/all_consulting.response.dart';
 import 'package:gadeer/data/response/consulting/consulting_action.response.dart';
 import 'package:gadeer/data/response/consulting/consultant_search.response.dart';
@@ -29,6 +31,18 @@ class ConsultingService {
     });
 
     return AddConsultingResponse.fromJson(response);
+  }
+
+  Future<AddConsultingSwitchResponse> addConsultSwitch(
+      AddConsultingSwitch addConsultRequest) async {
+    var response = await apiService
+        .post("rateBtn", data: addConsultRequest.toJson(), headers: {
+      Constants.authorization: Constants.bearer +
+          (await hiveService.get<String>(Constants.gaderBox, Constants.token) ??
+              "")
+    });
+
+    return AddConsultingSwitchResponse.fromJson(response);
   }
 
   Future<AllConsultingResponse> getAllConsults() async {

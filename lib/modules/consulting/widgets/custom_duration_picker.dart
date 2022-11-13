@@ -61,11 +61,11 @@ void _animateColumnControllerToItem(
 }
 
 const Widget _leftSelectionOverlay =
-CupertinoPickerDefaultSelectionOverlay(capEndEdge: false);
+CupertinoPickerDefaultSelectionOverlay(capLeftEdge: false);
 const Widget _centerSelectionOverlay = CupertinoPickerDefaultSelectionOverlay(
-    capEndEdge: false, capStartEdge: false);
+    capLeftEdge: false, capRightEdge: false);
 const Widget _rightSelectionOverlay =
-CupertinoPickerDefaultSelectionOverlay(capEndEdge: false);
+CupertinoPickerDefaultSelectionOverlay(capLeftEdge: false);
 
 ///  * [CupertinoPicker], the class that implements a content agnostic spinner UI.
 class CupertinoTimerPickerX extends StatefulWidget {

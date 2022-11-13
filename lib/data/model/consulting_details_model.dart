@@ -23,6 +23,7 @@ class ConsultingDetailsModel {
   String? endAt;
   String? type;
   String? statusColor;
+  bool rateStatus = true ;
 
   ConsultingDetailsModel(
       {this.id,
@@ -39,11 +40,13 @@ class ConsultingDetailsModel {
       this.time,
       this.status,
       this.startAt,
-      this.endAt});
+      this.endAt,
+      required this.rateStatus});
 
   ConsultingDetailsModel.fromJson(Map<String, dynamic> json) {
     statusColor = json["status_color"];
     print("xx" + json["status_color"]);
+    rateStatus = json["rate_popup_status"];
     estimationTime = json["estimation_time"];
 
     if (json['categories'] != null) {

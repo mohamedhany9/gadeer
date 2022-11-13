@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gadeer/data/model/consulting.model.dart';
 import 'package:gadeer/data/model/consulting_details_model.dart';
 import 'package:gadeer/data/model/meeting_model.dart';
+import 'package:gadeer/data/request/consulting/add_consulting_switch.dart';
 import 'package:gadeer/data/response/consulting/add_consulting.response.dart';
+import 'package:gadeer/data/response/consulting/add_consulting_switch_response.dart';
 import 'package:gadeer/data/response/consulting/all_consulting.response.dart';
 import 'package:gadeer/data/response/consulting/delete_consulting.response.dart';
 import 'package:gadeer/data/response/consulting/show_consulting.response.dart';
@@ -111,6 +113,20 @@ class ConsultingBloc extends Cubit<ConsultingState> {
             ..removeWhere((element) => element!.id == id)));
       Get.back();
     }
+  }
+
+  switchConsulting(AddConsultingSwitch addConsultRequest) async {
+    Notifications.showLoading();
+    AddConsultingSwitchResponse? switchConsultingResponse;
+    await _consultingService.addConsultSwitch(addConsultRequest).then((res) {
+      Notifications.hideLoading();
+      switchConsultingResponse = res;
+    }).catchError((e) {
+      Notifications.hideLoading();
+
+      // Notifications.error(Constants.netError);
+    });
+
   }
 
   updateSyncConsulting(ConsultingDetailsModel? consultingDetailsModel) {

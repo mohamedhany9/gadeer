@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gadeer/component/action_icon.dart';
 import 'package:gadeer/component/details_item.widget.dart';
 import 'package:gadeer/data/model/consulting_details_model.dart';
+import 'package:gadeer/data/request/consulting/add_consulting_switch.dart';
 import 'package:gadeer/helper/notifications.dart';
 import 'package:gadeer/config/routes.dart';
 import 'package:gadeer/modules/account/bloc/account_bloc.dart';
@@ -10,12 +12,22 @@ import 'package:gadeer/modules/consulting/bloc/consulting.bloc.dart';
 import 'package:gadeer/modules/register/bloc/register.event.dart';
 import 'package:get/get.dart';
 
-class ConsultingDetailsWidget extends StatelessWidget {
+class ConsultingDetailsWidget extends StatefulWidget {
   final ConsultingDetailsModel? consultingDetailsModel;
   ConsultingDetailsWidget(this.consultingDetailsModel);
+
+  @override
+  State<ConsultingDetailsWidget> createState() => _ConsultingDetailsWidgetState();
+}
+
+class _ConsultingDetailsWidgetState extends State<ConsultingDetailsWidget> {
   final ConsultingBloc consultingBloc = Get.find<ConsultingBloc>();
 
   final AccountType accountType = Get.find<AccountBloc>().state.accountType!;
+
+  bool _switchValue=true;
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,25 +39,25 @@ class ConsultingDetailsWidget extends StatelessWidget {
             DetailsItem(
               title: "تفاصيل الاستشارة",
               icon: Icons.description,
-              body: consultingDetailsModel!.description,
+              body: widget.consultingDetailsModel!.description,
             ),
             SizedBox(
               height: 8,
             ),
-            consultingDetailsModel!.date == null ? Container() :
+            widget.consultingDetailsModel!.date == null ? Container() :
             DetailsItem(
               title: "تاريخ الاستشارة",
               icon: Icons.calendar_today,
-              body: consultingDetailsModel!.date,
+              body: widget.consultingDetailsModel!.date,
             ),
             SizedBox(
               height: 8,
             ),
-            consultingDetailsModel!.time == null ? Container():
+            widget.consultingDetailsModel!.time == null ? Container():
             DetailsItem(
               title: "وقت الاستشارة",
               icon: FontAwesomeIcons.stopwatch,
-              body: consultingDetailsModel!.time,
+              body: widget.consultingDetailsModel!.time,
             ),
             SizedBox(
               height: 8,
@@ -54,7 +66,7 @@ class ConsultingDetailsWidget extends StatelessWidget {
               title: "نوع الاستشارة",
               icon: Icons.link,
               body:
-                  consultingDetailsModel!.type == "_private" ? "خاصة" : "عامة",
+                  widget.consultingDetailsModel!.type == "_private" ? "خاصة" : "عامة",
             ),
             SizedBox(
               height: 8,
@@ -62,24 +74,54 @@ class ConsultingDetailsWidget extends StatelessWidget {
             DetailsItem(
                 title: "مده الاستشارة",
                 icon: Icons.timer,
-                body: "${consultingDetailsModel?.estimationTime}"),
+                body: "${widget.consultingDetailsModel?.estimationTime}"),
             SizedBox(
               height: 16,
             ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-              decoration: BoxDecoration(
-                color: Color(
-                    int.parse("0xff" + consultingDetailsModel!.statusColor!)),
-                border: Border.all(
-                    color: Color(int.parse(
-                        "0xff" + consultingDetailsModel!.statusColor!))),
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Text(
-                consultingDetailsModel!.statusText!,
-                style: TextStyle(fontSize: 14, color: Colors.white),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: Color(
+                        int.parse("0xff" + widget.consultingDetailsModel!.statusColor!)),
+                    border: Border.all(
+                        color: Color(int.parse(
+                            "0xff" + widget.consultingDetailsModel!.statusColor!))),
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Text(
+                    widget.consultingDetailsModel!.statusText!,
+                    style: TextStyle(fontSize: 14, color: Colors.white),
+                  ),
+                ),
+                CupertinoSwitch(
+                  value: widget.consultingDetailsModel!.rateStatus,
+                  onChanged: (value) {
+                    if(value == true){
+                      print(value);
+                      AddConsultingSwitch addConsultRequest = AddConsultingSwitch(
+                          consultingid: widget.consultingDetailsModel!.id,
+                          status: "on"
+                      );
+                      consultingBloc.switchConsulting(addConsultRequest);
+                    }else
+                    {
+                      print(value);
+                        AddConsultingSwitch addConsultRequest = AddConsultingSwitch(
+                            consultingid: widget.consultingDetailsModel!.id,
+                            status: "off"
+                        );
+                        consultingBloc.switchConsulting(addConsultRequest);
+                      }
+
+                    setState(() {
+                      widget.consultingDetailsModel!.rateStatus = value;
+                    });
+                  },
+                ),
+              ],
             ),
             if (accountType == AccountType.consultant ||
                 consultingBloc.state.current!.status != "pending")
@@ -124,4 +166,6 @@ class ConsultingDetailsWidget extends StatelessWidget {
       ),
     );
   }
+
+
 }
