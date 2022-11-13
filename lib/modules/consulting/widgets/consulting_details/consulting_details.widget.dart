@@ -96,7 +96,8 @@ class _ConsultingDetailsWidgetState extends State<ConsultingDetailsWidget> {
                     style: TextStyle(fontSize: 14, color: Colors.white),
                   ),
                 ),
-                CupertinoSwitch(
+                accountType == AccountType.consultant &&
+                    consultingBloc.state.current!.status == "in progress" ?CupertinoSwitch(
                   value: widget.consultingDetailsModel!.rateStatus,
                   onChanged: (value) {
                     if(value == true){
@@ -120,7 +121,7 @@ class _ConsultingDetailsWidgetState extends State<ConsultingDetailsWidget> {
                       widget.consultingDetailsModel!.rateStatus = value;
                     });
                   },
-                ),
+                ) :Container(),
               ],
             ),
             if (accountType == AccountType.consultant ||
