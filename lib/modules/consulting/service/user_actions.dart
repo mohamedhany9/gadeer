@@ -31,7 +31,7 @@ class UserActions {
         consultingBloc.updateSyncConsulting(value.consulting!);
 
         AddCommentRequest addCommentRequest =
-        AddCommentRequest(message: "صباح الخير");
+        AddCommentRequest(message: "السلام عليكم ورحمة الله ,  أسعدني التواصل معك , تفضل باستشارتك الآن");
 
         chatController.addComment(consultingBloc.state.current!.id.toString(), addCommentRequest).then((value){
 

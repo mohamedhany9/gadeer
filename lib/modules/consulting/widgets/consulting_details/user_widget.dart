@@ -54,9 +54,10 @@ class UserWidget extends StatelessWidget {
                 SizedBox(
                   height: 8,
                 ),
-                Container(
-                    margin: EdgeInsets.symmetric(horizontal: 20),
-                    child: CustomButton("إتمام الاستشارة",(){})),
+                if (consultingBloc.state.current!.status == "in progress" &&
+                    accountType == AccountType.consultant) Container(
+                      margin: EdgeInsets.symmetric(horizontal: 20),
+                      child: CustomButton("إتمام الاستشارة", () {})) else Container(),
                 SizedBox(
                   height: 8,
                 ),
