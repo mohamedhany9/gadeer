@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gadeer/helper/app.theme.dart';
 import 'package:gadeer/config/routes.dart';
+import 'package:gadeer/modules/account/widgets/common_question.dart';
 import 'package:gadeer/modules/account/widgets/timeline_dialog.widget.dart';
 import 'package:gadeer/modules/app/bloc/app.bloc.dart';
 import 'package:get/get.dart';
@@ -41,7 +42,15 @@ class AccountGrid extends StatelessWidget {
             icon: Icons.person,
             onTap: () {
               Get.find<AppBloc>().changePage(2);
-            })
+            }),
+        _ProfileCard(
+            title: 'الاسئله الشائعه',
+            icon: Icons.question_answer,
+            onTap: () => Get.to(CommonQuestion())),
+        _ProfileCard(
+            title: 'الملفات الاستشاريه',
+            icon: Icons.file_present,
+            onTap: () => Get.toNamed(Routes.editAccount)),
       ],
     );
   }
