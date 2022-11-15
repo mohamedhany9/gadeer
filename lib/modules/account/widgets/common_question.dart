@@ -53,7 +53,6 @@ class _CommonQuestionState extends State<CommonQuestion> {
       appBar: buildAppBar("الاسئلة الشائعة"),
       body: Container(
         height: MediaQuery.of(context).size.height,
-        padding: const EdgeInsets.symmetric(horizontal: 24.0,vertical: 24),
         decoration: BoxDecoration(
           color: Colors.white,
           image: DecorationImage(
@@ -63,25 +62,28 @@ class _CommonQuestionState extends State<CommonQuestion> {
             ),
           ),
         ),
-        child:  _loading == false ? NewOverLay() :  ListView.builder(
-            itemCount: questiondata.length,
-            itemBuilder: (context,index){
-          return Card(
-            child: ExpansionTile(
-              title: Text(questiondata[index].question!,
-                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
+        child:  _loading == false ? NewOverLay() :  Container(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0,vertical: 24),
+          child: ListView.builder(
+              itemCount: questiondata.length,
+              itemBuilder: (context,index){
+            return Card(
+              child: ExpansionTile(
+                title: Text(questiondata[index].question!,
+                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
+                ),
+                children: <Widget>[
+                  ListTile(
+                    title: Text(
+                      questiondata[index].answer!,
+                      style: TextStyle(fontWeight: FontWeight.w700),
+                    ),
+                  )
+                ],
               ),
-              children: <Widget>[
-                ListTile(
-                  title: Text(
-                    questiondata[index].answer!,
-                    style: TextStyle(fontWeight: FontWeight.w700),
-                  ),
-                )
-              ],
-            ),
-          );
-        }) ,
+            );
+          }),
+        ) ,
       ),
     );
   }
