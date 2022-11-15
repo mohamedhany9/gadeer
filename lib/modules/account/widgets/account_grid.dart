@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gadeer/helper/app.theme.dart';
 import 'package:gadeer/config/routes.dart';
 import 'package:gadeer/modules/account/widgets/common_question.dart';
+import 'package:gadeer/modules/account/widgets/pfd_webview.dart';
 import 'package:gadeer/modules/account/widgets/timeline_dialog.widget.dart';
 import 'package:gadeer/modules/app/bloc/app.bloc.dart';
 import 'package:get/get.dart';
@@ -50,7 +51,7 @@ class AccountGrid extends StatelessWidget {
         _ProfileCard(
             title: 'الملفات الاستشاريه',
             icon: Icons.file_present,
-            onTap: () => Get.toNamed(Routes.editAccount)),
+            onTap: () => Get.to(PDFWebView())),
       ],
     );
   }
