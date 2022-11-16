@@ -80,6 +80,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                             _buildEstablishDate(),
                             _buildEmailField(),
                             _buildGenderRow(),
+                            _buildPhoneNumber(),
                             SizedBox(
                               height: 10,
                             ),
@@ -211,6 +212,16 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
         icon: FontAwesomeIcons.male,
       ),
       itemBuilder: (context, dynamic gender) => gender,
+    );
+  }
+
+  _buildPhoneNumber() {
+    return TextFieldBlocBuilder(
+      textFieldBloc: _formBloc.phoneNumber,
+      keyboardType: TextInputType.number,
+      decoration: inputDecoration(
+          label: "رقم الهاتف",
+          icon: Icons.phone),
     );
   }
 }

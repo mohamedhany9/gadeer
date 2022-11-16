@@ -10,6 +10,7 @@ class UpdateAccountRequest {
   int? sectionId;
   String? gender;
   String? idNumber;
+  String? phoneNumber;
   DateTime? establishDate;
 
   UpdateAccountRequest(
@@ -22,6 +23,7 @@ class UpdateAccountRequest {
       this.sectionId,
       this.cityId,
       this.gender,
+      this.phoneNumber,
       this.idNumber});
 
   Map<String, dynamic> toJson() {
@@ -36,6 +38,7 @@ class UpdateAccountRequest {
     data['city_id'] = this.cityId;
     data['gender'] = this.gender;
     data['id_number'] = this.idNumber;
+    data['phone'] = this.phoneNumber;
     data["v"] = 2;
 
     data["section"] = sectionId;

@@ -27,6 +27,7 @@ class AccountFormBloc extends FormBloc<UpdateAccountResponse, String>
 
   final email = TextFieldBloc(name: 'email');
   final idNumber = TextFieldBloc(name: 'id_number');
+  final phoneNumber = TextFieldBloc(name: 'phone_number');
 
   final establishDate = InputFieldBloc<DateTime, Object>(
     name: 'establish_date',
@@ -41,7 +42,7 @@ class AccountFormBloc extends FormBloc<UpdateAccountResponse, String>
   final jobTitle = TextFieldBloc(name: 'job_title');
 
   AccountFormBloc() {
-    addFieldBlocs(fieldBlocs: [fName, email, city, area]);
+    addFieldBlocs(fieldBlocs: [fName, email, city, area,phoneNumber]);
     if (_accountBloc.state.accountType == AccountType.consultant) {
 
       addFieldBlocs(fieldBlocs: [idNumber,lName, jobTitle, gender]);
@@ -64,6 +65,7 @@ class AccountFormBloc extends FormBloc<UpdateAccountResponse, String>
     email.updateInitialValue(userModel?.email);
     jobTitle.updateInitialValue(userModel?.jobTitle);
     idNumber.updateInitialValue(userModel?.idNumber);
+    phoneNumber.updateInitialValue(userModel?.phone);
     if (userModel?.gender != null) {
       gender.updateInitialValue(userModel?.gender != "male" ? "انثى" : "ذكر");
     }
@@ -107,6 +109,7 @@ class AccountFormBloc extends FormBloc<UpdateAccountResponse, String>
       cityId: city.value?.id,
       email: email.value,
       firstName: fName.value,
+      phoneNumber: phoneNumber.value,
       gender: gender.value == null
           ? null
           : gender.value == "ذكر"
