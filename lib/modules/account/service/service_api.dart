@@ -1,9 +1,8 @@
 
-import 'package:dio/dio.dart';
 import 'package:gadeer/data/model/common_question_model.dart';
+import 'package:gadeer/data/model/file_data_model.dart';
 import 'package:gadeer/data/service/api.service.dart';
 import 'package:gadeer/data/service/hive.service.dart';
-import 'package:gadeer/helper/constants.dart';
 import 'package:get/get.dart';
 
 class ServiceApi {
@@ -11,6 +10,7 @@ class ServiceApi {
   final ApiService _apiService = Get.find();
 
   List<QuestionData> questiondata = [] ;
+  late FileData filedata  ;
 
 
   Future<void> getQuestionData() async {
@@ -31,6 +31,17 @@ class ServiceApi {
     // );
     QuestionModel data = new QuestionModel.fromJson(response);
     questiondata = data.data!;
+  }
+
+
+  Future<void> getFileConsultData() async {
+
+    var response = await _apiService.get(
+      "file",
+    );
+
+    FileDataModel data = new FileDataModel.fromJson(response);
+    filedata = data.data!;
   }
 
 }
