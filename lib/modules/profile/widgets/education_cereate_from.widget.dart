@@ -38,8 +38,8 @@ class _EducationCreateFormWidgetState extends State<EducationCreateFormWidget> {
           DropdownFieldBlocBuilder<String>(
             selectFieldBloc: formBloc!.title,
             decoration: inputDecoration(
-              hint: 'الدرجه العلميه',
-              label: 'الدرجه العلميه',
+              hint: 'الدرجة العلمية',
+              label: 'الدرجة العلمية',
               borderRadius: 5,
               icon: Icons.map,
             ),
@@ -96,7 +96,7 @@ class _EducationCreateFormWidgetState extends State<EducationCreateFormWidget> {
           SizedBox(
             height: 30,
           ),
-          CustomButton("اضافة", () => formBloc!.submit()),
+          CustomButton("إضافة", () => formBloc!.submit()),
         ],
       ),
     );

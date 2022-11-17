@@ -28,7 +28,7 @@ class HourPricesWidget extends StatelessWidget {
         child: Row(
           children: [
             Text(
-              "سعر ساعه الاستشاره",
+              "تكلفة ساعة الاستشارة",
               style: TextStyles.subTitle.copyWith(color: Colors.blueGrey[700]),
             ),
             Spacer(),

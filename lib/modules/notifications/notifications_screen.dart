@@ -20,7 +20,7 @@ class _NotificationsPageState extends State<NotificationsPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: buildAppBar("الاشعارات"),
+        appBar: buildAppBar("الإشعارات"),
         body: Container(
           height: double.infinity,
           decoration: BoxDecoration(

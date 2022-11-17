@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
 
                     if (_homeController.hourPriceNotSet == true)
                       _accountBloc.state.accountType == AccountType.user ? Container() :
-                      ErrorTextWidget("برجاء تحديد سعر ساعه الاستشاره", () {
+                      ErrorTextWidget("الرجاء تحديد تكلفة ساعة الاستشارة", () {
                         Get.find<AppBloc>().changePage(2);
                       }),
                     if (_accountBloc.state.user?.assosiationUncomplete == true)
@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                       }),
                     if (_homeController.isVerified == false)
                       ErrorTextWidget(
-                          "برجاء الضغط هنا لتأكيد بريدك الالكتروني  ${_accountBloc.state.user?.email}",
+                          "الرجاء الضغط هنا لتأكيد البريد الإلكتروني  ${_accountBloc.state.user?.email}",
                           () {
                         Get.dialog(Dialog(
                           child: VerifyEmailWidget(),
@@ -99,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                         _homeController.homeResponse?.isCompleted == false)
                       _accountBloc.state.accountType == AccountType.user ? Container() :
                         ErrorTextWidget(
-                          "لكي تتمكن من الاستفادة من مميزات التطبيق برحاء استكمال بيانات الملف الشخصي",
+                          "كي تستفيد أكثر من مميزات التطبيق قم باستكمال بيانات ملفك الشخصي",
                           () {
                         _appBloc.changePage(2);
                       }),
@@ -126,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     ConsultingListWidget(
                       consultings: _homeController.homeResponse?.newConsultings,
-                      title: "الاستشارات الجديده",
+                      title: "الاستشارات الجديدة",
                       status: "pending",
                     ),
                     SizedBox(

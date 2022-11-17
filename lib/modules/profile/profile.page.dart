@@ -97,7 +97,7 @@ class _ProfilePageState extends State<ProfilePage>
                             horizontal: 32.0, vertical: 12),
                         child: Column(
                           children: [
-                            CustomButton("بطاقه العضويه", () {
+                            CustomButton("بطاقة العضوية", () {
                               Get.to(PreviewCardPage(state.profile));
                             },
                                 enabled: (Get.find<HomeController>()
@@ -111,7 +111,7 @@ class _ProfilePageState extends State<ProfilePage>
                                     0) <
                                 6)
                               Text(
-                                "لكي تستخرج بطاقه عضويه يجب ان تقدم علي الاقل 6 استشارات مكتمله",
+                                "لكي تحصل على بطاقة عضويتك يجب أن تقدم ما لا يقل عن 6 استشارات مكتملة",
                                 textAlign: TextAlign.center,
                                 style: TextStyles.hint
                                     .copyWith(color: Colors.grey),

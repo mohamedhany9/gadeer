@@ -32,7 +32,7 @@ class WorkexperienceView extends StatelessWidget {
                   ? MainAxisAlignment.spaceBetween
                   : MainAxisAlignment.center,
               children: [
-                Text("الخبرات العمليه",
+                Text("الخبرات العملية",
                     style: TextStyles.subTitleBold.copyWith(
                       color: AppColors.primary,
                     )),

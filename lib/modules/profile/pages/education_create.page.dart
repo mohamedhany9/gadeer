@@ -9,7 +9,7 @@ class EducationCreatePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.primary,
-        title: Text('اضافة مرحله تعليمية جديدة'),
+        title: Text('إضافة مرحلة تعليمية جديدة'),
         centerTitle: true,
       ),
       body: Container(

@@ -32,7 +32,7 @@ class _ChangePasswordPobState extends State<ChangePasswordPob> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                "تغيير كلمه المرور",
+                "تغيير كلمة المرور",
                 style: TextStyles.title,
                 textAlign: TextAlign.center,
               ),
@@ -43,7 +43,7 @@ class _ChangePasswordPobState extends State<ChangePasswordPob> {
                 autoValidate: autoValidate,
                 cont: password,
                 isPassword: !showPassword,
-                label: "كلمه المرور الجديده",
+                label: "كلمة المرور الجديدة",
                 validator: Validator.password,
                 suffix: IconButton(
                     icon: FaIcon(
@@ -66,7 +66,7 @@ class _ChangePasswordPobState extends State<ChangePasswordPob> {
                 autoValidate: autoValidate,
                 cont: confirm,
                 isPassword: !showPassword,
-                label: "تأكيد كلمه المرور",
+                label: "تأكيد كلمة المرور",
                 validator: (String? e) {
                   if (e != password.text) {
                     return "يجب ان تتطابق كلمتي المرور";
@@ -152,7 +152,7 @@ class _ActionsRow extends StatelessWidget {
         ),
         Flexible(
             child: CustomButton(
-          "الغاء",
+          "إلغاء",
           () {
             Get.back();
           },

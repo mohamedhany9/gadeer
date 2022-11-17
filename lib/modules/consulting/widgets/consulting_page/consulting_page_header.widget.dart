@@ -51,7 +51,7 @@ class ConsultingPageHeader extends StatelessWidget {
                       decoration: inputDecoration(
                         icon: Icons.search,
                         fontSize: 12.0,
-                        hint: 'ابحث عن اي استشارة',
+                        hint: 'ابحث عن أي استشارة',
                         enabledBorder: AppColors.primary,
                       ),
                     ),
