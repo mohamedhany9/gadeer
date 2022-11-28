@@ -42,10 +42,13 @@ class ShowProfilePage extends StatelessWidget {
                     editable: true),
               ],
             ),
-            if (!isSelectable && profile?.membershipType == "consultant")
-              _buildAddConsultingButton(),
-            if (isSelectable && profile?.membershipType == "consultant")
-              _buildSelectConsultingButton(),
+            SizedBox(
+              height: 12,
+            ),
+            // if (!isSelectable && profile?.membershipType == "consultant")
+            //   _buildAddConsultingButton(),
+            // if (isSelectable && profile?.membershipType == "consultant")
+            //   _buildSelectConsultingButton(),
           ],
         ),
       ),

@@ -9,6 +9,7 @@ import 'package:gadeer/modules/consulting/bloc/consulting.state.dart';
 import 'package:gadeer/modules/meeting/widgets/add_meeting.widget.dart';
 import 'package:get/get.dart';
 
+import '../register/bloc/register.event.dart';
 import 'controller/chat_controller.dart';
 import 'widgets/add_comment.widget.dart';
 import 'widgets/comment_item.widget.dart';
@@ -18,6 +19,9 @@ class ChatPage extends StatelessWidget {
   final ConsultingBloc consultingBloc = Get.find<ConsultingBloc>();
   final ChatController chatController = Get.find();
   late final String? consultingId;
+
+  final AccountType accountType =
+  Get.find<AccountBloc>().state.accountType!;
 
   @override
   Widget build(BuildContext context) {
@@ -77,12 +81,13 @@ class ChatPage extends StatelessWidget {
               SizedBox(
                 height: 8,
               ),
+              accountType == AccountType.consultant ?
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: CustomButton("اضافة اجتماع", () {
                   Get.to(AddMeetingWidget(consultingBloc.state.current!.id));
                 },),
-              ),
+              ) : Container(),
               SizedBox(
                 height: 4,
               ),
