@@ -82,6 +82,9 @@ class _AddCommentWidgetState extends State<AddCommentWidget> {
               onPressed: () async {
                 image = await HelperMethods.pickImage();
                 setState(() {});
+                if (enabled = true) {
+                  _addCommentAction();
+                }
               }),
           IconButton(
               icon: Icon(

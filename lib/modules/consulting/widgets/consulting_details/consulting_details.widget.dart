@@ -97,31 +97,37 @@ class _ConsultingDetailsWidgetState extends State<ConsultingDetailsWidget> {
                   ),
                 ),
                 accountType == AccountType.consultant &&
-                    consultingBloc.state.current!.status == "in progress" ?CupertinoSwitch(
+                    consultingBloc.state.current!.status == "in progress" ?Row(
+                      children: [
+                        Text("تفعيل التقيم",style: TextStyle(fontSize: 10),),
+                        SizedBox(width: 6,),
+                        CupertinoSwitch(
                   value: widget.consultingDetailsModel!.rateStatus,
                   onChanged: (value) {
-                    if(value == true){
-                      print(value);
-                      AddConsultingSwitch addConsultRequest = AddConsultingSwitch(
-                          consultingid: widget.consultingDetailsModel!.id,
-                          status: "on"
-                      );
-                      consultingBloc.switchConsulting(addConsultRequest);
-                    }else
-                    {
-                      print(value);
-                        AddConsultingSwitch addConsultRequest = AddConsultingSwitch(
-                            consultingid: widget.consultingDetailsModel!.id,
-                            status: "off"
-                        );
-                        consultingBloc.switchConsulting(addConsultRequest);
-                      }
+                        if(value == true){
+                          print(value);
+                          AddConsultingSwitch addConsultRequest = AddConsultingSwitch(
+                              consultingid: widget.consultingDetailsModel!.id,
+                              status: "on"
+                          );
+                          consultingBloc.switchConsulting(addConsultRequest);
+                        }else
+                        {
+                          print(value);
+                            AddConsultingSwitch addConsultRequest = AddConsultingSwitch(
+                                consultingid: widget.consultingDetailsModel!.id,
+                                status: "off"
+                            );
+                            consultingBloc.switchConsulting(addConsultRequest);
+                          }
 
-                    setState(() {
-                      widget.consultingDetailsModel!.rateStatus = value;
-                    });
+                        setState(() {
+                          widget.consultingDetailsModel!.rateStatus = value;
+                        });
                   },
-                ) :Container(),
+                ),
+                      ],
+                    ) :Container(),
               ],
             ),
             if (accountType == AccountType.consultant ||

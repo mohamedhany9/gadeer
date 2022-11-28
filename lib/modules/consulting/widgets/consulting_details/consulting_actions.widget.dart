@@ -25,8 +25,11 @@ class _ConsultingActionsWidgetState extends State<ConsultingActionsWidget> {
 
   @override
   void initState() {
-    // TODO: implement initState
-    _modalBottomSheetMenu();
+
+    if(accountType != AccountType.consultant && consultingBloc.state.current!.rateStatus == true){
+      _modalBottomSheetMenu();
+    }
+
     super.initState();
   }
   @override
