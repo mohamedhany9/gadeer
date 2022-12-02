@@ -23,10 +23,15 @@ class EditAccountScreen extends StatefulWidget {
 class _EditAccountScreenState extends State<EditAccountScreen> {
   late final AccountFormBloc _formBloc;
   final AccountType accountType = Get.find<AccountBloc>().state.accountType!;
+
+  TextEditingController phone = TextEditingController();
+  bool autoValidate = false;
+
   @override
   void initState() {
     super.initState();
     _formBloc = AccountFormBloc();
+    phone.text = _formBloc.phoneNumber.value!;
   }
 
   @override
@@ -85,7 +90,14 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                               height: 10,
                             ),
                             CustomButton(
-                                'تحديث الحساب', () => _formBloc.submit()),
+                                'تحديث الحساب', (){
+                                  if(_formBloc.phoneNumber.value!.length == 12)
+                                    {
+                                      _formBloc.submit();
+                                    }else{
+                                    Notifications.error("رقم الهاتف 12 وحده");
+                                  }
+                            }),
                             SizedBox(
                               height: 10,
                             ),
@@ -222,6 +234,8 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
       decoration: inputDecoration(
           label: "رقم الهاتف",
           icon: Icons.phone),
+      maxLength: 12,
+
     );
   }
 }
