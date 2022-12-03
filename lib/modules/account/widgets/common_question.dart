@@ -26,7 +26,7 @@ class _CommonQuestionState extends State<CommonQuestion> {
         setState(() {
           questiondata = serviceApi.questiondata;
           _loading = true;
-          print(questiondata[0].id);
+          // print(questiondata[0].id);
         });
       // } catch (e) {
       //   setState(() {
