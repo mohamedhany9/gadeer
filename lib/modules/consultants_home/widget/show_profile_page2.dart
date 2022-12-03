@@ -11,11 +11,11 @@ import 'package:gadeer/modules/profile/widgets/educations_view.dart';
 import 'package:gadeer/modules/profile/widgets/work_experience_view.dart';
 import 'package:get/get.dart';
 
-class ShowProfilePage extends StatelessWidget {
+class ShowProfilePage2 extends StatelessWidget {
   final bool isSelectable;
   final ProfileModel? profile;
 
-  ShowProfilePage(this.profile, {this.isSelectable = false});
+  ShowProfilePage2(this.profile, {this.isSelectable = false});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +23,7 @@ class ShowProfilePage extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              height: 480,
+                height: 480,
                 child: ConsultCardPage(profile)),
             // SizedBox(
             //   height: 12,
@@ -45,10 +45,10 @@ class ShowProfilePage extends StatelessWidget {
             SizedBox(
               height: 12,
             ),
-            if (!isSelectable && profile?.membershipType == "consultant")
-              _buildAddConsultingButton(),
-            if (isSelectable && profile?.membershipType == "consultant")
-              _buildSelectConsultingButton(),
+            // if (!isSelectable && profile?.membershipType == "consultant")
+            //   _buildAddConsultingButton(),
+            // if (isSelectable && profile?.membershipType == "consultant")
+            //   _buildSelectConsultingButton(),
           ],
         ),
       ),

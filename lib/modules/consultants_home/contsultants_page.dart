@@ -10,6 +10,7 @@ import 'package:gadeer/data/response/consulting/add_consulting.response.dart';
 import 'package:gadeer/helper/constants.dart';
 import 'package:gadeer/helper/notifications.dart';
 import 'package:gadeer/modules/consultants_home/widget/all_constultants.dart';
+import 'package:gadeer/modules/consultants_home/widget/selectable_consultant_item.dart';
 import 'package:gadeer/modules/consulting/service/consulting_service.dart';
 import 'package:gadeer/modules/consulting/widgets/add_consulting_form/category_selection.widget.dart';
 import 'package:gadeer/modules/select_consultant/widgets/search_selectable_cosnultants_field.dart';
@@ -169,7 +170,7 @@ class _ConsultantsPageState extends State<ConsultantsPage> {
                                 child: ListView.builder(
                                     itemCount: consultants!.length,
                                     itemBuilder: (c, i) {
-                                      return SelectableConsultantItemWidget(
+                                      return SelectableConsultantItemWidget2(
                                         consultants![i],
                                             (id) {
                                           this.selectedId = id;
