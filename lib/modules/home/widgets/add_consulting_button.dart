@@ -15,7 +15,7 @@ class AddConsultingButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
         heroTag: tag,
-        tooltip: "اضافه استشاره",
+        tooltip: "اضافه استشارة",
         backgroundColor: status == "approved" ? AppColors.primary : Colors.grey,
         child: Icon(
           Icons.add,

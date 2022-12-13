@@ -7,11 +7,15 @@ import 'package:gadeer/component/custom_button.dart';
 import 'package:gadeer/component/input_decoration.dart';
 import 'package:gadeer/data/model/assosiation_section.dart';
 import 'package:gadeer/data/model/city.model.dart';
+import 'package:gadeer/data/request/account/update_account.request.dart';
 import 'package:gadeer/data/response/account/update_account.response.dart';
 import 'package:gadeer/helper/constants.dart';
 import 'package:gadeer/helper/notifications.dart';
+import 'package:gadeer/helper/num_helper.dart';
 import 'package:gadeer/modules/account/bloc/account_bloc.dart';
 import 'package:gadeer/modules/account/bloc/account_form.bloc.dart';
+import 'package:gadeer/modules/account/service/account_service.dart';
+import 'package:gadeer/modules/account/widgets/update_verification_code.dart';
 import 'package:gadeer/modules/register/bloc/register.event.dart';
 import 'package:get/get.dart';
 
@@ -24,14 +28,51 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
   late final AccountFormBloc _formBloc;
   final AccountType accountType = Get.find<AccountBloc>().state.accountType!;
 
-  TextEditingController phone = TextEditingController();
-  bool autoValidate = false;
+  bool frist = false;
+  String? oldphone;
+
+  getData() async{
+    Notifications.showLoading();
+    UpdateAccountRequest updateAccountRequest = UpdateAccountRequest(
+      areaId: _formBloc.area.value!.id,
+      cityId: _formBloc.city.value!.id,
+      email: _formBloc.email.value!,
+      firstName: _formBloc.fName.value!,
+      phoneNumber: _formBloc.phoneNumber.value!,
+      gender: _formBloc.gender.value! == null
+          ? null
+          : _formBloc.gender.value! == "ذكر"
+          ? "male"
+          : "female",
+      // sectionId: _formBloc.section.value!.id,
+      // establishDate: _formBloc.establishDate.value!,
+      jobTitle: _formBloc.jobTitle.value!,
+      lastName: _formBloc.lName.value!,
+      idNumber: _formBloc.idNumber.value! == null
+          ? null
+          : NumHelper.parse(_formBloc.idNumber.value!).toString(),
+    );
+    await Get.find<AccountService>()
+        .updateAccount(updateAccountRequest)
+        .then((response) async {
+      if (response.status == 1) {
+        Notifications.hideLoading();
+        print("succ");
+        Get.to(UpdateVerificationCode(oldphone: oldphone!,));
+      } else {
+        print("error");
+      }
+    }).catchError((e) {
+      print("cack");
+      return null;
+    });
+  }
 
   @override
   void initState() {
     super.initState();
     _formBloc = AccountFormBloc();
-    phone.text = _formBloc.phoneNumber.value!;
+
   }
 
   @override
@@ -63,6 +104,12 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                       }
                       if (state is FormBlocLoaded) {
                         Notifications.hideLoading();
+                        if(frist == false)
+                          {
+                            oldphone = _formBloc.phoneNumber.value!;
+                            frist = true;
+                          }
+
                       }
                     },
                     builder: (context, state) {
@@ -93,7 +140,15 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                 'تحديث الحساب', (){
                                   if(_formBloc.phoneNumber.value!.length == 12)
                                     {
-                                      _formBloc.submit();
+                                      if(_formBloc.phoneNumber.value! == oldphone)
+                                        {
+                                          _formBloc.submit();
+                                        }
+                                      else{
+                                        print("change");
+                                        getData();
+                                     //Get.to(UpdateVerificationCode(oldphone: oldphone!,));
+                                      }
                                     }else{
                                     Notifications.error("رقم الهاتف 12 وحده");
                                   }

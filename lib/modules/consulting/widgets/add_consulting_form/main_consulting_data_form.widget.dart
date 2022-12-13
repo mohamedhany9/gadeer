@@ -15,8 +15,8 @@ class MainConsultingDataFormWidget extends StatelessWidget {
         TextFieldBlocBuilder(
           textFieldBloc: formBloc!.title,
           decoration: inputDecoration(
-            hint: 'عنوان الاستشاره',
-            label: 'عنوان الاستشاره',
+            hint: 'عنوان الاستشارة',
+            label: 'عنوان الاستشارة',
             borderRadius: 5,
           ),
         ),
@@ -25,8 +25,8 @@ class MainConsultingDataFormWidget extends StatelessWidget {
           minLines: 3,
           maxLines: 7,
           decoration: inputDecoration(
-            hint: 'وصف الاستشاره',
-            label: 'وصف الاستشاره',
+            hint: 'وصف الاستشارة',
+            label: 'وصف الاستشارة',
             borderRadius: 5,
           ),
         ),

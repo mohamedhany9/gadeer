@@ -37,7 +37,7 @@ class _AddConsultingFormWidgetState extends State<AddConsultingFormWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(
-        "اضافة استشاره جديدة",
+        "اضافة استشارة جديدة",
       ),
       body: Container(
         height: double.infinity,
