@@ -28,12 +28,14 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
   late final AccountFormBloc _formBloc;
   final AccountType accountType = Get.find<AccountBloc>().state.accountType!;
 
+
   bool frist = false;
   String? oldphone;
 
   getData() async{
     Notifications.showLoading();
-    UpdateAccountRequest updateAccountRequest = UpdateAccountRequest(
+    UpdateAccountRequest updateAccountRequest = accountType == AccountType.consultant ?
+    UpdateAccountRequest(
       areaId: _formBloc.area.value!.id,
       cityId: _formBloc.city.value!.id,
       email: _formBloc.email.value!,
@@ -44,26 +46,58 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
           : _formBloc.gender.value! == "ذكر"
           ? "male"
           : "female",
-      // sectionId: _formBloc.section.value!.id,
-      // establishDate: _formBloc.establishDate.value!,
       jobTitle: _formBloc.jobTitle.value!,
       lastName: _formBloc.lName.value!,
       idNumber: _formBloc.idNumber.value! == null
           ? null
           : NumHelper.parse(_formBloc.idNumber.value!).toString(),
+    ) :
+    accountType == AccountType.user ?UpdateAccountRequest(
+      areaId: _formBloc.area.value!.id,
+      cityId: _formBloc.city.value!.id,
+      email: _formBloc.email.value!,
+      firstName: _formBloc.fName.value!,
+      phoneNumber: _formBloc.phoneNumber.value!,
+      gender: _formBloc.gender.value! == null
+          ? null
+          : _formBloc.gender.value! == "ذكر"
+          ? "male"
+          : "female",
+      jobTitle: _formBloc.jobTitle.value!,
+      lastName: _formBloc.lName.value!,
+      // idNumber: _formBloc.idNumber.value! == null
+      //     ? null
+      //     : NumHelper.parse(_formBloc.idNumber.value!).toString(),
+    ) :UpdateAccountRequest(
+      areaId: _formBloc.area.value!.id,
+      cityId: _formBloc.city.value!.id,
+      email: _formBloc.email.value!,
+      firstName: _formBloc.fName.value!,
+      phoneNumber: _formBloc.phoneNumber.value!,
+      gender: _formBloc.gender.value! == null
+          ? null
+          : _formBloc.gender.value! == "ذكر"
+          ? "male"
+          : "female",
+      jobTitle: _formBloc.jobTitle.value!,
+      lastName: _formBloc.lName.value!,
+      idNumber: _formBloc.idNumber.value! == null
+          ? null
+          : NumHelper.parse(_formBloc.idNumber.value!).toString(),
+      establishDate: _formBloc.establishDate.value,
+      sectionId: _formBloc.section.value?.id
     );
     await Get.find<AccountService>()
         .updateAccount(updateAccountRequest)
         .then((response) async {
       if (response.status == 1) {
         Notifications.hideLoading();
-        print("succ");
-        Get.to(UpdateVerificationCode(oldphone: oldphone!,));
+        Get.to(UpdateVerificationCode(oldphone: oldphone!,newphone: _formBloc.phoneNumber.value!,));
       } else {
-        print("error");
+
       }
     }).catchError((e) {
-      print("cack");
+
       return null;
     });
   }
@@ -147,7 +181,6 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                                       else{
                                         print("change");
                                         getData();
-                                     //Get.to(UpdateVerificationCode(oldphone: oldphone!,));
                                       }
                                     }else{
                                     Notifications.error("رقم الهاتف 12 وحده");

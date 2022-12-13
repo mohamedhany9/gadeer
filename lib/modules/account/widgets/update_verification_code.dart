@@ -8,6 +8,8 @@ import 'package:gadeer/data/request/auth/verify_phone.request.dart';
 import 'package:gadeer/helper/app.theme.dart';
 import 'package:gadeer/helper/notifications.dart';
 import 'package:gadeer/modules/account/bloc/account_form.bloc.dart';
+import 'package:gadeer/modules/app/bloc/app.bloc.dart';
+import 'package:gadeer/modules/home/controller/home.controller.dart';
 import 'package:gadeer/modules/register/bloc/register.bloc.dart';
 import 'package:gadeer/modules/register/service/register.service.dart';
 import 'package:get/get.dart';
@@ -15,13 +17,15 @@ import 'package:pinput/pin_put/pin_put.dart';
 
 class UpdateVerificationCode extends StatefulWidget {
   String oldphone;
-  UpdateVerificationCode({required this.oldphone});
+  String newphone;
+  UpdateVerificationCode({required this.oldphone,required this.newphone});
   @override
   _UpdateVerificationCodeState createState() => _UpdateVerificationCodeState();
 }
 
 class _UpdateVerificationCodeState extends State<UpdateVerificationCode> {
   final RegisterBloc registerBloc = Get.find();
+  final AppBloc _appBloc = Get.find<AppBloc>();
 
   TextEditingController pinCode = TextEditingController();
   int time = 60;
@@ -114,9 +118,7 @@ class _UpdateVerificationCodeState extends State<UpdateVerificationCode> {
                 children: [
                   Flexible(
                       flex: 1,
-                      child: CustomButton("تأكيد", () {
-                        print(widget.oldphone);
-                        print(_formBloc.phoneNumber.value);
+                      child: CustomButton("تأكيد", (){
                         if (pinCode.text.length == 4) {
                           Notifications.showLoading();
                           _registerService
@@ -130,16 +132,16 @@ class _UpdateVerificationCodeState extends State<UpdateVerificationCode> {
                                   first_name: _formBloc.fName.value,
                                   last_name: _formBloc.lName.value,
                                   gender: _formBloc.gender.value,
-                                  new_phone: _formBloc.phoneNumber.value
+                                  new_phone: widget.newphone
                               ))
-                              .then((response) {
+                              .then((response) async{
+                                print(response.message);
                             pinCode.clear();
 
                             Notifications.hideLoading();
                             if (response.status == 1) {
-                              print("succ");
-                              // Get.back();
-                              // Get.back();
+
+                              _appBloc.initApp();
                               Get.offAllNamed(Routes.main);
                             } else {
                               Notifications.error(response.message);
