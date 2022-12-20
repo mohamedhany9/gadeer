@@ -71,7 +71,7 @@ class EducationsView extends StatelessWidget {
 
   _buildEmptyEducation() {
     return Text(
-      "لم تضف شهاداتك العلميه بعد",
+      "لم تضف شهاداتك العلمية بعد",
       style: TextStyles.subTitle.copyWith(
         color: Colors.blueGrey,
         fontWeight: FontWeight.w300,
@@ -128,7 +128,7 @@ class _EducationItem extends StatelessWidget {
                           title: "حذف المرحله التعليميه",
                           content: "هل انت متأكد من رغبتك بعمل الحذف",
                           confirmText: "تأكيد",
-                          cancelText: "الغاء",
+                          cancelText: "إلغاء",
                           onConfirm: () {
                             _deleteEducation(education.id);
                           });

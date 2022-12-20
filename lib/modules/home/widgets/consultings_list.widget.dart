@@ -48,7 +48,7 @@ class ConsultingListWidget extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16),
               child: Text(
-                "لا يوجة لديك اي $title ",
+                "لا يوجة لديك أي $title ",
                 style: TextStyles.subTitle.copyWith(
                   color: Colors.blueGrey,
                   fontWeight: FontWeight.w300,

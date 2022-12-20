@@ -107,7 +107,7 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text("انشاء حساب جديد"),
+                  child: Text("إنشاء حساب جديد"),
                 ),
               ),
             ],

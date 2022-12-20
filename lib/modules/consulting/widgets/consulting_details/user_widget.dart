@@ -76,7 +76,7 @@ class UserWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           border: Border.all(color: AppColors.primary)),
       child: Text(
-        accountType == AccountType.consultant ? "الجمعية" : "الإستشاري",
+        user!.membershipType == "association" ? "الجمعية" : user!.membershipType == "user" ? "فرد" : "الإستشاري",
         style: TextStyles.subTitleBold.copyWith(
           color: AppColors.primary,
         ),

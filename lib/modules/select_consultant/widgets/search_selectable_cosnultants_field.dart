@@ -29,7 +29,7 @@ class SearchSelectableConsultantsField extends StatelessWidget {
               },
               decoration: inputDecoration(
                 icon: Icons.search,
-                hint: 'ابحث عن اي خبير',
+                hint: 'ابحث عن أي خبير',
                 enabledBorder: AppColors.primary,
               ),
             ),

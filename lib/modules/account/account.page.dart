@@ -22,7 +22,7 @@ class AccountPage extends StatelessWidget {
           SizedBox(
             height: 8,
           ),
-          Get.find<AccountBloc>().state.user?.number != null ?Text("رقم العضويه : ${Get.find<AccountBloc>().state.user?.number}") : Container(),
+          Get.find<AccountBloc>().state.user?.number != null ?Text("رقم العضوية : ${Get.find<AccountBloc>().state.user?.number}") : Container(),
           AccountGrid(),
           CallUsWidget(),
           DeleteUserWidget()

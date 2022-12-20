@@ -37,7 +37,7 @@ class _AddConsultingFormWidgetState extends State<AddConsultingFormWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(
-        "اضافة استشارة جديدة",
+        "إضافة استشارة جديدة",
       ),
       body: Container(
         height: double.infinity,
@@ -68,7 +68,7 @@ class _AddConsultingFormWidgetState extends State<AddConsultingFormWidget> {
                     ConsultantSelectionWidget(formBloc, () {
                       setState(() {});
                     }),
-                    CustomButton("اضافة", () => formBloc!.submit()),
+                    CustomButton("إضافة", () => formBloc!.submit()),
                   ],
                 ),
               ),

@@ -46,11 +46,11 @@ class AccountGrid extends StatelessWidget {
               Get.find<AppBloc>().changePage(2);
             }),
         _ProfileCard(
-            title: 'الاسئله الشائعه',
+            title: 'الاسئله الشائعة',
             icon: Icons.question_answer,
             onTap: () => Get.to(CommonQuestion())),
         _ProfileCard(
-            title: 'الملفات الاستشاريه',
+            title: 'الملفات الاستشارية',
             icon: Icons.file_present,
             onTap: () => Get.to(FileConsult())),
       ],

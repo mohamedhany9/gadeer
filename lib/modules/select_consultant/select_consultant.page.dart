@@ -20,7 +20,7 @@ class SelectConsultantPage extends StatefulWidget {
 
 class _SelectConsultantPageState extends State<SelectConsultantPage> {
   final consultingService = Get.find<ConsultingService>();
-  final filters = ["الاعلي تقييما", "الاقل تقييما"];
+  final filters = ["الأعلي تقييما", "الأقل تقييما"];
   List<ProfileModel>? consultants = [];
   int? selectedId;
   List<int?> cats = [];
@@ -66,7 +66,7 @@ class _SelectConsultantPageState extends State<SelectConsultantPage> {
                 await _searchConsultants(search.text);
               },
               onSelected: (filter) {
-                if (filter == "الاعلي تقييما") {
+                if (filter == "الأعلي تقييما") {
                   consultants?.sort((pro1, pro2) {
                     return (pro2.rate ?? 0.0).compareTo((pro1.rate ?? 0.0));
                   });

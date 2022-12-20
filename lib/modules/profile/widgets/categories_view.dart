@@ -114,9 +114,9 @@ class _CategoryItem extends StatelessWidget {
               onPressed: () async {
                 Notifications.confirmDialog(
                     title: "حذف المجال",
-                    content: "هل انت متأكد من رغبتك بعمل الحذف",
+                    content: "هل أنت متأكد من رغبتك بعمل الحذف",
                     confirmText: "تأكيد",
-                    cancelText: "الغاء",
+                    cancelText: "إلغاء",
                     onConfirm: () {
                       _deleteCategory(cat.id);
                     });

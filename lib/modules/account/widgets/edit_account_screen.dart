@@ -154,7 +154,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                               height: 12,
                             ),
                             Text(
-                                "رقم العضويه : ${Get.find<AccountBloc>().state.user?.number}"),
+                                "رقم العضوية : ${Get.find<AccountBloc>().state.user?.number}"),
                             SizedBox(
                               height: 8,
                             ),
@@ -205,7 +205,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
           decoration: inputDecoration(
             label: accountType == AccountType.association
                 ? "اسم الجمعية"
-                : "الاسم الاول",
+                : "الاسم الأول",
             icon: accountType == AccountType.association
                 ? Icons.location_city
                 : Icons.person,
@@ -214,7 +214,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
         TextFieldBlocBuilder(
           textFieldBloc: _formBloc.lName,
           decoration: inputDecoration(
-            label: "الاسم الاخير",
+            label: "الاسم الأخير",
             icon: Icons.person,
           ),
         ),
@@ -242,7 +242,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
       decoration: inputDecoration(
           label: accountType == AccountType.association
               ? "رقم الترخيص"
-              : "رقم الهويه",
+              : "رقم الهوية",
           icon: Icons.card_membership),
     );
   }
@@ -286,7 +286,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
         textFieldBloc: _formBloc.email,
         decoration: inputDecoration(
           hint: 'aboali@gmail.com',
-          label: "البريد الالكتروني",
+          label: "البريد الإلكتروني",
           icon: Icons.email,
         ),
       ),

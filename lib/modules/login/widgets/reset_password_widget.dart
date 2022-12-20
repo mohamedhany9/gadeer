@@ -43,7 +43,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                       height: 24,
                     ),
                     Text(
-                      "استعاده كلمه المرور",
+                      "استعادة كلمة المرور",
                       style: TextStyles.subTitle,
                       textAlign: TextAlign.center,
                     ),

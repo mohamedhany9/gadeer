@@ -49,9 +49,9 @@ class LogoutPopupMenu extends StatelessWidget {
     if (action == Actions.logout) {
       Notifications.confirmDialog(
           title: "تسجيل الخروج",
-          content: "هل انت متأكد من رغبتك بتسجيل الخروج",
+          content: "هل أنت متأكد من رغبتك بتسجيل الخروج",
           cancelText: "تأكيد",
-          confirmText: "الغاء",
+          confirmText: "إلغاء",
           onCancel: () {
             Get.find<AppBloc>().logout();
           });

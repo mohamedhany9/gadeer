@@ -80,7 +80,7 @@ class _NotificationsPageState extends State<NotificationsPage>
       child: SizedBox(
         width: Get.width * .6,
         child: Text(
-          "لا يوجد لديك اشعارات",
+          "لا يوجد لديك إشعارات",
           textAlign: TextAlign.center,
           style: TextStyles.subTitle,
         ),

@@ -39,7 +39,7 @@ class SectionsView extends StatelessWidget {
             height: 24,
           ),
           if (editable)
-            CustomButton("اضافه", () {
+            CustomButton("إضافه", () {
               Get.bottomSheet(SelectionButtomSheet(),
                   backgroundColor: Colors.white);
             })
