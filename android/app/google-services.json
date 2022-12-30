@@ -1,78 +1,34 @@
 {
   "project_info": {
-    "project_number": "598176630249",
-    "firebase_url": "https://gader-bae73.firebaseio.com",
-    "project_id": "gader-bae73",
-    "storage_bucket": "gader-bae73.appspot.com"
+    "project_number": "193614299679",
+    "project_id": "gadeer-8d481",
+    "storage_bucket": "gadeer-8d481.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:598176630249:android:fc975adc9e40adda13f778",
-        "android_client_info": {
-          "package_name": "com.example.gadeer"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "598176630249-ikam9lblfca9onenda0amb5ia0k1lvj4.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAWJkzrcjvyPTEc2ov4Uk1j-gCbAbIVXhY"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "598176630249-ikam9lblfca9onenda0amb5ia0k1lvj4.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "598176630249-5dothpl92aaeakoe51agh2iltphs364g.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.gadeer"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:598176630249:android:2682fde647d5a03113f778",
+        "mobilesdk_app_id": "1:193614299679:android:189d4f26b5ea9914d30b2a",
         "android_client_info": {
           "package_name": "sa.com.gader"
         }
       },
       "oauth_client": [
         {
-          "client_id": "598176630249-ikam9lblfca9onenda0amb5ia0k1lvj4.apps.googleusercontent.com",
+          "client_id": "193614299679-stn8n9toep04iej6rttrrup7tu258ks5.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAWJkzrcjvyPTEc2ov4Uk1j-gCbAbIVXhY"
+          "current_key": "AIzaSyDRq1_WPgs7IVqzyB0gw0VprM2TqrwowFE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "598176630249-ikam9lblfca9onenda0amb5ia0k1lvj4.apps.googleusercontent.com",
+              "client_id": "193614299679-stn8n9toep04iej6rttrrup7tu258ks5.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "598176630249-5dothpl92aaeakoe51agh2iltphs364g.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.gadeer"
-              }
             }
           ]
         }

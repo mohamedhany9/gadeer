@@ -86,7 +86,7 @@ class _ConsultingActionsWidgetState extends State<ConsultingActionsWidget> {
                 if ((consultingBloc.state.current!.status == "accepted" ||
                         consultingBloc.state.current!.status ==
                             "in progress") &&
-                    accountType == AccountType.association)
+                    accountType == AccountType.association || accountType == AccountType.user)
                   _buildRateButton(),
               ],
             ),

@@ -10,6 +10,7 @@ import 'package:gadeer/modules/profile/bloc/profile.state.dart';
 import 'package:gadeer/modules/profile/pages/preview_card.page.dart';
 import 'package:gadeer/modules/profile/widgets/categories_view.dart';
 import 'package:gadeer/modules/profile/widgets/hour_prices.widget.dart';
+import 'package:gadeer/modules/profile/widgets/permission_consult_view.dart';
 import 'package:gadeer/modules/profile/widgets/sections_view.dart';
 import 'package:gadeer/modules/register/bloc/register.event.dart';
 import 'package:get/get.dart';
@@ -86,6 +87,14 @@ class _ProfilePageState extends State<ProfilePage>
                                   WorkexperienceView(
                                       state.profile?.workExperiences,
                                       editable: true),
+                                  SizedBox(
+                                    height: 16,
+                                  ),
+                                  PermissionConsultView(
+                                      state.profile?.workExperiences,
+                                      editable: true
+                                  )
+
                                 ],
                               )
                             : SectionsView(state.profile?.sections,
