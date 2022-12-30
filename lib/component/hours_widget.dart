@@ -37,7 +37,7 @@ class _HoursWidgetState extends State<HoursWidget> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                        Duration(seconds: meetingSeconds ?? 0)
+                        Duration(hours: meetingSeconds ?? 0)
                             .inHours
                             .toString(),
                         style:
@@ -58,7 +58,7 @@ class _HoursWidgetState extends State<HoursWidget> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                        Duration(seconds: consultingSeconds ?? 0)
+                        Duration(hours: consultingSeconds ?? 0)
                             .inHours
                             .toString(),
                         style:
@@ -89,7 +89,7 @@ class _HoursWidgetState extends State<HoursWidget> {
                 ),
                 Text(
                   Duration(
-                          seconds:
+                          hours:
                               meetingSeconds ?? 0 + (consultingSeconds ?? 0))
                       .inHours
                       .toString(),
