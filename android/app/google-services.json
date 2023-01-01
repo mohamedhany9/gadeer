@@ -1,34 +1,41 @@
 {
   "project_info": {
-    "project_number": "193614299679",
-    "project_id": "gadeer-8d481",
-    "storage_bucket": "gadeer-8d481.appspot.com"
+    "project_number": "779491313943",
+    "project_id": "gadeerdev-42ebe",
+    "storage_bucket": "gadeerdev-42ebe.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:193614299679:android:189d4f26b5ea9914d30b2a",
+        "mobilesdk_app_id": "1:779491313943:android:ecff9642bab2db2b82cf52",
         "android_client_info": {
           "package_name": "sa.com.gader"
         }
       },
       "oauth_client": [
         {
-          "client_id": "193614299679-stn8n9toep04iej6rttrrup7tu258ks5.apps.googleusercontent.com",
+          "client_id": "779491313943-nnbusv3gmctou2nud69f2ffbb8lal3bn.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDRq1_WPgs7IVqzyB0gw0VprM2TqrwowFE"
+          "current_key": "AIzaSyAvQquFmn8xkPWXMqXHk8pFdHXnPmhMelI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "193614299679-stn8n9toep04iej6rttrrup7tu258ks5.apps.googleusercontent.com",
+              "client_id": "779491313943-nnbusv3gmctou2nud69f2ffbb8lal3bn.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "779491313943-4isgdd9r2ftvro8ej6e26gv5nedt323g.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "sa.com.gader"
+              }
             }
           ]
         }

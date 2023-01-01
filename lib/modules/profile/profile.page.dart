@@ -91,7 +91,7 @@ class _ProfilePageState extends State<ProfilePage>
                                     height: 16,
                                   ),
                                   PermissionConsultView(
-                                      state.profile?.workExperiences,
+                                      state.profile!.licensefile!,
                                       editable: true
                                   )
 

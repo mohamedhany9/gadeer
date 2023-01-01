@@ -1,21 +1,65 @@
 import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:gadeer/data/model/work_experience.model.dart';
+import 'package:gadeer/data/service/hive.service.dart';
 import 'package:gadeer/helper/app.theme.dart';
 import 'package:gadeer/helper/constants.dart';
 import 'package:gadeer/helper/helper_methods.dart';
 import 'package:gadeer/helper/notifications.dart';
 import 'package:gadeer/modules/account/widgets/image_fullscreen.dart';
 import 'package:gadeer/modules/profile/bloc/profile.bloc.dart';
-import 'package:gadeer/modules/profile/pages/work_create.page.dart';
-import 'package:gadeer/modules/profile/pages/work_edit.page.dart';
-import 'package:gadeer/modules/profile/service/profile.service.dart';
-import 'package:get/get.dart';
+import 'package:get/instance_manager.dart';
+import 'package:get/route_manager.dart';
+
 
 class PermissionConsultView extends StatelessWidget {
-  final List<WorkExperienceModel>? workExperiences;
+  final String licensefile;
   final bool editable;
-  PermissionConsultView(this.workExperiences, {this.editable = false});
+  PermissionConsultView(this.licensefile, {this.editable = false});
+
+  final HiveService _hiveService = Get.find();
+
+  Future<FormData> imageData(File image) async {
+    String fileName = image.path.split('/').last;
+    return FormData.fromMap({
+      "file": await MultipartFile.fromFile(image.path, filename: fileName),
+    });
+  }
+
+
+  Future AddImage(File image) async {
+    Notifications.showLoading();
+    Response response =
+    await Dio().post("https://gadeer.org/api/users/files",
+        data: await imageData(image),
+        options: Options(
+          validateStatus: (status) => true,
+          headers: {
+            "Accept": "application/json",
+            'Content-Type': 'multipart/form-data',
+            Constants.authorization: Constants.bearer +
+                (await _hiveService.get<String>(
+                    Constants.gaderBox, Constants.token) ??
+                    "")
+          },
+        ));
+
+    if(response.statusCode == 200)
+    {
+      Notifications.hideLoading();
+      print("added");
+      Get.find<ProfileBloc>().initProfile();
+    }
+    else if(response.statusCode == 422)
+    {
+      Notifications.hideLoading();
+      print("Fail");
+
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -29,6 +73,9 @@ class PermissionConsultView extends StatelessWidget {
                 ? null
                 : () async{
               File? image = await HelperMethods.pickImage();
+              if (image != null) {
+                AddImage(image);
+              }
             },
             child: Row(
               mainAxisAlignment: editable
@@ -51,22 +98,24 @@ class PermissionConsultView extends StatelessWidget {
             ),
           ),
         ),
-        // workExperiences == null
-        //     ? Container(
-        //   height: 1,
-        // )
-        //     : workExperiences!.isEmpty
-        //     ? Center(
-        //   child: _buildEmptyExperience(),
-        // )
-        //     :
+        licensefile == null
+            ? Container(
+          height: 1,
+        )
+            : licensefile.isEmpty
+            ? Center(
+          child: _buildEmptyExperience(),
+        )
+            :
         GestureDetector(
           onTap: (){
-            Get.to(ImageFullScreen());
+            Get.to(ImageFullScreen(
+              image: "https://gadeer.org/storage/$licensefile",
+            ));
           },
           child: Container(
             alignment: Alignment.center,
-            child: Image.network("https://test.gadeer.org/storage/avatar/01EEe5vv2t2yYhXoKHTWG3d6zNm0dYtfDhlA64y9.jpg"
+            child: Image.network("https://gadeer.org/storage/$licensefile"
               ,height: 40,width: 40,),
           ),
         )
@@ -86,114 +135,3 @@ class PermissionConsultView extends StatelessWidget {
   }
 }
 
-// tiny widgets
-
-class _WorkExperienceItem extends StatelessWidget {
-  const _WorkExperienceItem(this.workExperienceModel, this.editable, {Key? key})
-      : super(key: key);
-  final WorkExperienceModel workExperienceModel;
-  final bool editable;
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 32),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Text(
-                workExperienceModel.title ?? "",
-                style:
-                TextStyles.subTitle.copyWith(color: Colors.blueGrey[700]),
-              ),
-              if (editable) Spacer(),
-              if (editable)
-                IconButton(
-                    icon: Icon(
-                      Icons.edit,
-                      color: Colors.grey,
-                    ),
-                    onPressed: () {
-                      Get.to(WorkEditPage(workExperienceModel));
-                    }),
-              if (editable)
-                SizedBox(
-                  height: 8,
-                ),
-              if (editable)
-                IconButton(
-                    icon: Icon(
-                      Icons.cancel,
-                      color: Colors.red,
-                    ),
-                    onPressed: () async {
-                      Notifications.confirmDialog(
-                          title: "حذف خبره العمل",
-                          content: "هل انت متأكد من رغبتك بعمل الحذف",
-                          confirmText: "تأكيد",
-                          cancelText: "الغاء",
-                          onConfirm: () {
-                            _deleteWork(workExperienceModel.id);
-                          });
-                    }),
-            ],
-          ),
-          Text(
-            workExperienceModel.place ?? "",
-            style: TextStyles.hint.copyWith(color: Colors.grey),
-          ),
-          Row(
-            children: [
-              Text(
-                "من:",
-                style: TextStyles.subTitleBold.copyWith(color: Colors.blueGrey),
-              ),
-              SizedBox(
-                width: 4,
-              ),
-              Text(
-                workExperienceModel.from ?? "",
-                style: TextStyles.subTitle.copyWith(color: Colors.grey),
-              ),
-              Spacer(),
-              if (workExperienceModel.to != null)
-                Text(
-                  "الى:",
-                  style:
-                  TextStyles.subTitleBold.copyWith(color: Colors.blueGrey),
-                ),
-              SizedBox(
-                width: 4,
-              ),
-              Text(
-                workExperienceModel.to ?? "",
-                style: TextStyles.subTitle.copyWith(color: Colors.grey),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Future _deleteWork(int? id) async {
-    Notifications.showLoading();
-    await Get.find<ProfileService>()
-        .deleteWorkExperience(id)
-        .then((value) async {
-      Notifications.hideLoading();
-
-      if (value.status == 1) {
-        Get.find<ProfileBloc>().updateProfile(value.profile);
-      } else {
-        Notifications.error("فشل العملية");
-      }
-    }).catchError((e) {
-      print(e.toString());
-      Notifications.hideLoading();
-
-      Notifications.error(Constants.netError);
-    });
-  }
-}

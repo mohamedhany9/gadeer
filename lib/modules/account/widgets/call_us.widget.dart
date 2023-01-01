@@ -10,7 +10,7 @@ class CallUsWidget extends StatelessWidget {
   const CallUsWidget({Key? key}) : super(key: key);
 
   openWhatsapp() async {
-    var whatsapp = "+966540458334";
+    var whatsapp = "+966545879659";
     var whatsAndroid = "whatsapp://send?phone=$whatsapp";
     var whatsIos = "https://wa.me/$whatsapp";
     if (Platform.isIOS) {

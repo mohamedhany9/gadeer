@@ -16,6 +16,7 @@ class ProfileModel {
   String? sectionText;
   CityModel? city;
   int? price;
+  String? licensefile;
   List<WorkExperienceModel>? workExperiences;
   List<EducationModel>? educations;
   List<CategoryModel>? categories;
@@ -45,6 +46,7 @@ class ProfileModel {
     this.sections,
     this.workExperiences,
     this.educations,
+    this.licensefile
   });
 
   ProfileModel.fromJson(Map<String, dynamic> json) {
@@ -59,6 +61,7 @@ class ProfileModel {
     membershipType = json['membership_type'];
     photo = json['photo'];
     rate = json["rate"];
+    licensefile = json["license_file"];
     if (json['area'] != null) {
       area = CityModel.fromJson(json['area']);
     }
