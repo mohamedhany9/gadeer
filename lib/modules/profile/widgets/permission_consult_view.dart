@@ -14,7 +14,7 @@ import 'package:get/route_manager.dart';
 
 
 class PermissionConsultView extends StatelessWidget {
-  final String licensefile;
+  final String? licensefile;
   final bool editable;
   PermissionConsultView(this.licensefile, {this.editable = false});
 
@@ -98,11 +98,7 @@ class PermissionConsultView extends StatelessWidget {
             ),
           ),
         ),
-        licensefile == null
-            ? Container(
-          height: 1,
-        )
-            : licensefile.isEmpty
+         licensefile == null
             ? Center(
           child: _buildEmptyExperience(),
         )
