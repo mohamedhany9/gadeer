@@ -3,6 +3,7 @@ import 'package:gadeer/data/model/city.model.dart';
 import 'package:gadeer/data/model/education.model.dart';
 import 'package:gadeer/data/model/section.model.dart';
 import 'package:gadeer/data/model/work_experience.model.dart';
+import 'package:gadeer/modules/register/bloc/register.event.dart';
 
 class ProfileModel {
   int? id;
@@ -23,7 +24,21 @@ class ProfileModel {
   List<SectionModel>? sections;
   int? meetingSeconds;
   int? consultingSeconds;
+  List<ProfileFileModel>? files;
 
+  bool get isFilesComplete {
+    bool toReturn = true;
+    if (membershipType == AccountType.consultant.toShortString()) {
+      files?.forEach((element) {
+        if (element.path == null && element.key != "other") {
+          toReturn = false;
+        }
+      });
+    } else {
+      toReturn = false;
+    }
+    return toReturn;
+  }
   String get workHours {
     return Duration(seconds: (consultingSeconds ?? 0) + (meetingSeconds ?? 0))
         .inHours
@@ -75,6 +90,14 @@ class ProfileModel {
         sections!.add(SectionModel.fromJson(item));
       });
     }
+
+    if (json['files'] != null) {
+      files = <ProfileFileModel>[];
+      json['files'].forEach((item) {
+        files!.add(ProfileFileModel.fromJson(item));
+      });
+    }
+
     if (json['work_experiences'] != null) {
       workExperiences = <WorkExperienceModel>[];
       json['work_experiences'].forEach((item) {
@@ -94,5 +117,18 @@ class ProfileModel {
         educations!.add(EducationModel.fromJson(item));
       });
     }
+  }
+}
+class ProfileFileModel {
+  String? key;
+  String? name;
+  String? path;
+
+  ProfileFileModel({this.key, this.name, this.path});
+
+  ProfileFileModel.fromJson(Map<String, dynamic> json) {
+    key = json['key'];
+    name = json['name'];
+    path = json['path'];
   }
 }

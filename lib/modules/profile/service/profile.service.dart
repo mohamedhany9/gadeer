@@ -1,8 +1,11 @@
+import 'package:file_picker/file_picker.dart';
+import 'package:dio/dio.dart' as dio;
 import 'package:gadeer/data/request/profile/add_category_request.dart';
 import 'package:gadeer/data/request/profile/profile_work.request.dart';
 import 'package:gadeer/data/request/profile/section.request.dart';
 import 'package:gadeer/data/request/profile/update_hour_price.request.dart';
 import 'package:gadeer/data/response/profile/profile.response.dart';
+import 'package:gadeer/data/response/profile/upload_file.response.dart';
 import 'package:gadeer/data/service/api.service.dart';
 import 'package:gadeer/data/service/hive.service.dart';
 import 'package:gadeer/helper/constants.dart';
@@ -169,5 +172,21 @@ class ProfileService {
               "")
     });
     return ProfileResponse.fromJson(response);
+  }
+
+  Future<UploadFileResponse?> uploadFile(String key, PlatformFile file) async {
+    var response = await _apiService.post("user/profile/upload-file",
+        headers: {
+          Constants.authorization: Constants.bearer +
+              (await _hiveService.get<String>(
+                  Constants.gaderBox, Constants.token) ??
+                  ""),
+        },
+        data: dio.FormData.fromMap({
+          "key": key,
+          "file": await dio.MultipartFile.fromFile(file.path ?? "",
+              filename: file.name)
+        }));
+    return UploadFileResponse.fromJson(response);
   }
 }

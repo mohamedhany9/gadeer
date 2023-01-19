@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:gadeer/component/custom_button.dart';
 import 'package:get/get.dart';
@@ -105,6 +106,18 @@ class HelperMethods {
     );
   }
 
+  static Future<PlatformFile?> pickPdf() async {
+    List<PlatformFile>? files = (await FilePicker.platform.pickFiles(
+        allowMultiple: false,
+        type: FileType.custom,
+        allowedExtensions: ["pdf"]))
+        ?.files;
+
+    if (files?.isNotEmpty == true) {
+      return files?.first;
+    }
+    return null;
+  }
   // Future<void> takePicture(GlobalKey genKey) async {
   //   RenderRepaintBoundary boundary = genKey.currentContext.findRenderObject();
   //   ui.Image image = await boundary.toImage();

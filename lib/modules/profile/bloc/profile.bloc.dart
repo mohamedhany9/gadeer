@@ -1,7 +1,9 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gadeer/data/model/profile.model.dart';
 import 'package:gadeer/data/response/profile/profile.response.dart';
 import 'package:gadeer/helper/constants.dart';
+import 'package:gadeer/helper/helper_methods.dart';
 import 'package:gadeer/helper/notifications.dart';
 import 'package:gadeer/modules/home/controller/home.controller.dart';
 import 'package:gadeer/modules/profile/bloc/profile.state.dart';
@@ -30,4 +32,22 @@ class ProfileBloc extends Cubit<ProfileState> {
     emit(state.copyWith(profile: profileModel));
     Get.find<HomeController>().updateIsCompleted(profileModel);
   }
+
+  addProfileFile(String key) async {
+    PlatformFile? file = await HelperMethods.pickPdf();
+    if (file == null) {
+      Notifications.error("اختر ملف من فضلك");
+      return;
+    }
+    Notifications.showLoading();
+    await _profileService.uploadFile(key, file).then((value) {
+      Notifications.hideLoading();
+      if (value?.status == 1) {
+        initProfile();
+      } else {
+        Notifications.error(value?.message);
+      }
+    });
+  }
+
 }
