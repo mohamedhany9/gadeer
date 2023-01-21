@@ -26,6 +26,7 @@ class ConsultantRegisterForm extends StatefulWidget {
 class _ConsultantRegisterFormState extends State<ConsultantRegisterForm> {
   ConsultantRegisterFormBloc? _formBloc;
 
+  int? id  ;
   @override
   void initState() {
     _formBloc = ConsultantRegisterFormBloc();
@@ -73,6 +74,7 @@ class _ConsultantRegisterFormState extends State<ConsultantRegisterForm> {
                   _buildEmailForm(),
                   _buildPassword(),
                   _buildPartnersForm(),
+                  id == 1 ? _buildPartnersNameForm() :Container(),
                   _buildagreePolicy(),
                   SizedBox(
                     height: 10,
@@ -168,9 +170,29 @@ class _ConsultantRegisterFormState extends State<ConsultantRegisterForm> {
       selectFieldBloc: _formBloc!.partners,
       decoration: inputDecoration(
         hint: 'الشريك',
-        icon: Icons.map,
+        icon: Icons.accessibility,
       ),
-      itemBuilder: (context, partners) => partners.title!,
+      itemBuilder: (context, partners) => partners.title! ,
+      onChanged: (v){
+        setState(() {
+          id = v!.id ;
+        });
+      },
+    );
+  }
+
+  _buildPartnersNameForm() {
+    return _formRow(
+      children: [
+        TextFieldBlocBuilder(
+          textFieldBloc: _formBloc!.note,
+          decoration: inputDecoration(
+            label: 'أخرى',
+            hint: "أخرى",
+            //icon: Icons.person,
+          ),
+        ),
+      ],
     );
   }
 

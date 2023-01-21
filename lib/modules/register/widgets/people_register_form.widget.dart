@@ -63,7 +63,7 @@ class _PeopleFormWidgetState extends State<PeopleFormWidget> {
                   _buildLocationField(),
                   // _buildEstablishDate(),
                   _buildEmailField(),
-                  _buildPartnersForm(),
+                  //_buildPartnersForm(),
                   _buildPasswordField(),
                   _buildagreePolicy(),
                   SizedBox(

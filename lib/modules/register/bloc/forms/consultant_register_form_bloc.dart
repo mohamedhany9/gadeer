@@ -31,6 +31,7 @@ class ConsultantRegisterFormBloc extends FormBloc<LoginResponse, Object>
   final area = SelectFieldBloc<CityModel, Object>(name: 'area_id');
   final city = SelectFieldBloc<CityModel, Object>(name: 'city_id');
   final partners = SelectFieldBloc<PartnersModel, Object>(name: 'partner_id');
+  final note = TextFieldBloc(name: 'partner_name');
   final gender = SelectFieldBloc<String, String>(
     name: 'gender',
     items: ['ذكر', 'انثى'],
@@ -52,6 +53,7 @@ class ConsultantRegisterFormBloc extends FormBloc<LoginResponse, Object>
       jobTitle,
       idNumber,
       partners,
+      note,
       agreePolicy
     ]);
   }
@@ -124,6 +126,7 @@ class ConsultantRegisterFormBloc extends FormBloc<LoginResponse, Object>
       partnersId: partners.value?.id,
       gender: gender.value == "ذكر" ? "male" : "female",
       jobTitle: jobTitle.value,
+      note: note.value,
       membershipType: AccountType.consultant.toShortString(),
     );
     this

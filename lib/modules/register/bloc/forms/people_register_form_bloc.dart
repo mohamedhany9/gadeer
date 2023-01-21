@@ -34,7 +34,7 @@ class PeopleFormBloc extends FormBloc<LoginResponse, Object>
       password,
       area,
       city,
-      partners,
+     // partners,
       agreePolicy
     ]);
   }
@@ -125,7 +125,7 @@ class PeopleFormBloc extends FormBloc<LoginResponse, Object>
       sectionId: section.value?.id ?? 0,
       areaId: area.value?.id,
       cityId: city.value?.id,
-      partnersId: partners.value?.id,
+      //partnersId: partners.value?.id,
       membershipType: "user",
     );
     this

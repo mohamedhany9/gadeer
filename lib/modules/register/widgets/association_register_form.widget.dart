@@ -63,7 +63,7 @@ class _AssociationFormWidgetState extends State<AssociationFormWidget> {
                   _buildLocationField(),
                   _buildEstablishDate(),
                   _buildEmailField(),
-                  _buildPartnersForm(),
+                  //_buildPartnersForm(),
                   _buildPasswordField(),
                   _buildagreePolicy(),
                   SizedBox(
