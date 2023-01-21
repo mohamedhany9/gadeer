@@ -1,4 +1,5 @@
 import 'package:gadeer/data/request/account/update_token.request.dart';
+import 'package:gadeer/data/response/auth/partners_response.dart';
 import 'package:gadeer/data/response/home/assosiation_sections.dart';
 import 'package:gadeer/data/response/home/categories.response.dart';
 import 'package:gadeer/data/response/home/cities.response.dart';
@@ -22,6 +23,12 @@ class DataService {
     var response = await apiService.get('areas');
     return CitiesResponse.fromJson(response);
   }
+
+  Future<PartnersResponse> getPartners() async {
+    var response = await apiService.get('partners');
+    return PartnersResponse.fromJson(response);
+  }
+
    Future<HourPricesResponse> getHourPrices() async {
     var response = await apiService.get('user/hour-prices');
     return HourPricesResponse.fromJson(response);

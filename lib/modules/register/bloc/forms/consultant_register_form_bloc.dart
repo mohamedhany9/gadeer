@@ -1,8 +1,10 @@
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:gadeer/data/model/category.model.dart';
 import 'package:gadeer/data/model/city.model.dart';
+import 'package:gadeer/data/model/parnet_model.dart';
 import 'package:gadeer/data/request/auth/register.request.dart';
 import 'package:gadeer/data/response/auth/login.response.dart';
+import 'package:gadeer/data/response/auth/partners_response.dart';
 import 'package:gadeer/data/response/home/cities.response.dart';
 import 'package:gadeer/helper/constants.dart';
 import 'package:gadeer/helper/form_validate_errors.dart';
@@ -28,6 +30,7 @@ class ConsultantRegisterFormBloc extends FormBloc<LoginResponse, Object>
   final password = TextFieldBloc(name: 'password');
   final area = SelectFieldBloc<CityModel, Object>(name: 'area_id');
   final city = SelectFieldBloc<CityModel, Object>(name: 'city_id');
+  final partners = SelectFieldBloc<PartnersModel, Object>(name: 'partner_id');
   final gender = SelectFieldBloc<String, String>(
     name: 'gender',
     items: ['ذكر', 'انثى'],
@@ -48,6 +51,7 @@ class ConsultantRegisterFormBloc extends FormBloc<LoginResponse, Object>
       city,
       jobTitle,
       idNumber,
+      partners,
       agreePolicy
     ]);
   }
@@ -68,6 +72,23 @@ class ConsultantRegisterFormBloc extends FormBloc<LoginResponse, Object>
         });
       }
     });
+
+    PartnersResponse partnersResponse =
+    await this.dataService.getPartners().catchError((e) {
+      print(e.toString());
+      Notifications.error(Constants.netError);
+    });
+    partnersResponse.data!.forEach((item) => partners.addItem(item));
+    partners.onValueChanges(onData: (p, current) async* {
+      // if (current.value != null) {
+      //   await loadCities(areaId: current.value!.id).catchError((e) {
+      //     print(e.toString());
+      //     Notifications.error(Constants.netError);
+      //   });
+      // }
+    });
+
+
     emitLoaded();
   }
 
@@ -100,6 +121,7 @@ class ConsultantRegisterFormBloc extends FormBloc<LoginResponse, Object>
           ? null
           : NumHelper.parse(idNumber.value).toString(),
       cityId: city.value?.id,
+      partnersId: partners.value?.id,
       gender: gender.value == "ذكر" ? "male" : "female",
       jobTitle: jobTitle.value,
       membershipType: AccountType.consultant.toShortString(),

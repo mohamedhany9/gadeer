@@ -12,6 +12,7 @@ class RegisterRequest {
   int? phoneId;
   int? areaId;
   int? cityId;
+  int? partnersId;
   String? gender;
   String? birthDate;
   String? jobTitle;
@@ -25,6 +26,7 @@ class RegisterRequest {
       this.phoneId,
       this.areaId,
       this.cityId,
+      this.partnersId,
       this.establishDate,
       this.sectionId,
       this.idNumber,
@@ -45,6 +47,7 @@ class RegisterRequest {
     data['phone_id'] = this.phoneId;
     data['area_id'] = this.areaId;
     data['city_id'] = this.cityId;
+    data['partner_id'] = this.partnersId;
     data['gender'] = this.gender;
     data["id_number"] = this.idNumber;
     data['birth_date'] = this.birthDate;

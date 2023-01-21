@@ -5,6 +5,7 @@ import 'package:gadeer/component/custom_button.dart';
 import 'package:gadeer/component/input_decoration.dart';
 import 'package:gadeer/data/model/assosiation_section.dart';
 import 'package:gadeer/data/model/city.model.dart';
+import 'package:gadeer/data/model/parnet_model.dart';
 import 'package:gadeer/data/response/auth/login.response.dart';
 import 'package:gadeer/helper/app.theme.dart';
 import 'package:gadeer/helper/notifications.dart';
@@ -62,6 +63,7 @@ class _PeopleFormWidgetState extends State<PeopleFormWidget> {
                   _buildLocationField(),
                   // _buildEstablishDate(),
                   _buildEmailField(),
+                  _buildPartnersForm(),
                   _buildPasswordField(),
                   _buildagreePolicy(),
                   SizedBox(
@@ -118,6 +120,17 @@ class _PeopleFormWidgetState extends State<PeopleFormWidget> {
   //     itemBuilder: (context, sec) => sec.title ?? "",
   //   );
   // }
+
+  _buildPartnersForm() {
+    return DropdownFieldBlocBuilder<PartnersModel>(
+      selectFieldBloc: _formBloc!.partners,
+      decoration: inputDecoration(
+        hint: 'الشريك',
+        icon: Icons.map,
+      ),
+      itemBuilder: (context, partners) => partners.title!,
+    );
+  }
 
   _buildLocationField() {
     return Column(

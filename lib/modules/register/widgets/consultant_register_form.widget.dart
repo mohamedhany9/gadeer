@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gadeer/component/custom_button.dart';
 import 'package:gadeer/component/input_decoration.dart';
 import 'package:gadeer/data/model/city.model.dart';
+import 'package:gadeer/data/model/parnet_model.dart';
 import 'package:gadeer/data/response/auth/login.response.dart';
 import 'package:gadeer/helper/app.theme.dart';
 import 'package:gadeer/helper/notifications.dart';
@@ -71,6 +72,7 @@ class _ConsultantRegisterFormState extends State<ConsultantRegisterForm> {
                   _buildLocationForm(),
                   _buildEmailForm(),
                   _buildPassword(),
+                  _buildPartnersForm(),
                   _buildagreePolicy(),
                   SizedBox(
                     height: 10,
@@ -158,6 +160,17 @@ class _ConsultantRegisterFormState extends State<ConsultantRegisterForm> {
           itemBuilder: (context, city) => city.title!,
         ),
       ],
+    );
+  }
+
+  _buildPartnersForm() {
+    return DropdownFieldBlocBuilder<PartnersModel>(
+      selectFieldBloc: _formBloc!.partners,
+      decoration: inputDecoration(
+        hint: 'الشريك',
+        icon: Icons.map,
+      ),
+      itemBuilder: (context, partners) => partners.title!,
     );
   }
 
