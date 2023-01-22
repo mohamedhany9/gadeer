@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:gadeer/data/model/assosiation_section.dart';
 import 'package:gadeer/data/model/city.model.dart';
+import 'package:gadeer/data/model/parnet_model.dart';
 import 'package:gadeer/data/model/user.model.dart';
 import 'package:gadeer/data/request/account/update_account.request.dart';
 import 'package:gadeer/data/response/account/update_account.response.dart';
@@ -34,6 +35,8 @@ class AccountFormBloc extends FormBloc<UpdateAccountResponse, String>
   );
   final area = SelectFieldBloc<CityModel, Object>(name: 'area_id');
   final city = SelectFieldBloc<CityModel, Object>(name: 'city_id');
+  final partnername = TextFieldBloc(name: 'partner_name');
+  final partner = SelectFieldBloc<PartnersModel, Object>(name: 'partner_id');
   final section = SelectFieldBloc<AssosiationSection, Object>(name: 'section');
   final gender = SelectFieldBloc<String, String>(
     name: 'gender',
@@ -45,7 +48,7 @@ class AccountFormBloc extends FormBloc<UpdateAccountResponse, String>
     addFieldBlocs(fieldBlocs: [fName, email, city, area,phoneNumber]);
     if (_accountBloc.state.accountType == AccountType.consultant) {
 
-      addFieldBlocs(fieldBlocs: [idNumber,lName, jobTitle, gender]);
+      addFieldBlocs(fieldBlocs: [idNumber,lName, jobTitle, gender,partner,partnername]);
 
     } else if(_accountBloc.state.accountType == AccountType.association){
 
@@ -66,6 +69,7 @@ class AccountFormBloc extends FormBloc<UpdateAccountResponse, String>
     jobTitle.updateInitialValue(userModel?.jobTitle);
     idNumber.updateInitialValue(userModel?.idNumber);
     phoneNumber.updateInitialValue(userModel?.phone);
+    partnername.updateInitialValue(userModel?.partnername);
     if (userModel?.gender != null) {
       gender.updateInitialValue(userModel?.gender != "male" ? "انثى" : "ذكر");
     }
@@ -78,6 +82,7 @@ class AccountFormBloc extends FormBloc<UpdateAccountResponse, String>
 
     area.updateItems(_homeController.areas);
     city.updateItems(_homeController.cities);
+    partner.updateItems(_homeController.partner);
     section.updateItems(_homeController.sections);
     print(userModel?.area?.id);
     print(userModel?.city?.id);
@@ -86,6 +91,10 @@ class AccountFormBloc extends FormBloc<UpdateAccountResponse, String>
         .firstWhere((element) => element.id == userModel?.area?.id));
     city.updateInitialValue(_homeController.cities
         .firstWhere((element) => element.id == userModel?.city?.id , orElse: () => _homeController.cities[0]));
+
+    partner.updateInitialValue(_homeController.partner
+        .firstWhere((element) => element.id == userModel?.partnerid));
+
     if(userModel?.membershipType != "user"){
     if (userModel?.section != null) {
       section.updateInitialValue(_homeController.sections
@@ -110,6 +119,8 @@ class AccountFormBloc extends FormBloc<UpdateAccountResponse, String>
       email: email.value,
       firstName: fName.value,
       phoneNumber: phoneNumber.value,
+      partnerid: partner.value!.id,
+      partnername: partnername.value,
       gender: gender.value == null
           ? null
           : gender.value == "ذكر"

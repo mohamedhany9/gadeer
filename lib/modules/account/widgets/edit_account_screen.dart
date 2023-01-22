@@ -7,6 +7,7 @@ import 'package:gadeer/component/custom_button.dart';
 import 'package:gadeer/component/input_decoration.dart';
 import 'package:gadeer/data/model/assosiation_section.dart';
 import 'package:gadeer/data/model/city.model.dart';
+import 'package:gadeer/data/model/parnet_model.dart';
 import 'package:gadeer/data/request/account/update_account.request.dart';
 import 'package:gadeer/data/response/account/update_account.response.dart';
 import 'package:gadeer/helper/constants.dart';
@@ -32,6 +33,9 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
   bool frist = false;
   String? oldphone;
 
+  int? partnerid;
+
+
   getData() async{
     Notifications.showLoading();
     UpdateAccountRequest updateAccountRequest = accountType == AccountType.consultant ?
@@ -41,6 +45,8 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
       email: _formBloc.email.value!,
       firstName: _formBloc.fName.value!,
       phoneNumber: _formBloc.phoneNumber.value!,
+      partnerid: _formBloc.partner.value!.id,
+      partnername: _formBloc.partnername.value!,
       gender: _formBloc.gender.value! == null
           ? null
           : _formBloc.gender.value! == "ذكر"
@@ -52,7 +58,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
           ? null
           : NumHelper.parse(_formBloc.idNumber.value!).toString(),
     ) :
-    accountType == AccountType.user ?UpdateAccountRequest(
+    accountType == AccountType.user ? UpdateAccountRequest(
       areaId: _formBloc.area.value!.id,
       cityId: _formBloc.city.value!.id,
       email: _formBloc.email.value!,
@@ -68,7 +74,8 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
       // idNumber: _formBloc.idNumber.value! == null
       //     ? null
       //     : NumHelper.parse(_formBloc.idNumber.value!).toString(),
-    ) :UpdateAccountRequest(
+    ) :
+    UpdateAccountRequest(
       areaId: _formBloc.area.value!.id,
       cityId: _formBloc.city.value!.id,
       email: _formBloc.email.value!,
@@ -140,6 +147,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                         Notifications.hideLoading();
                         if(frist == false)
                           {
+                            partnerid = _formBloc.partner.value!.id;
                             oldphone = _formBloc.phoneNumber.value!;
                             frist = true;
                           }
@@ -167,6 +175,8 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                             _buildEmailField(),
                             _buildGenderRow(),
                             _buildPhoneNumber(),
+                            _buildPartnerField(),
+                            partnerid == 1 ? _buildPartnerNote(): Container(),
                             SizedBox(
                               height: 10,
                             ),
@@ -273,6 +283,35 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
             icon: Icons.location_city,
           ),
           itemBuilder: (context, city) => city.title!,
+        ),
+      ],
+    );
+  }
+
+  _buildPartnerField() {
+    return DropdownFieldBlocBuilder<PartnersModel>(
+      selectFieldBloc: _formBloc.partner,
+      decoration: inputDecoration(
+        hint: 'الشريك',
+        icon: Icons.accessibility_new_outlined,
+      ),
+      itemBuilder: (context, p) => p.title!,
+      onChanged: (v){
+        setState(() {
+          partnerid = v!.id;
+        });
+      },
+    );
+  }
+
+  _buildPartnerNote() {
+    return Column(
+      children: [
+        TextFieldBlocBuilder(
+          textFieldBloc: _formBloc.partnername,
+          decoration: inputDecoration(
+            label: "أخرى",
+          ),
         ),
       ],
     );

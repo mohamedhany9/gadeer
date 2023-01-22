@@ -6,6 +6,7 @@ import 'package:gadeer/data/model/city.model.dart';
 import 'package:gadeer/data/model/consulting.model.dart';
 import 'package:gadeer/data/model/consulting_details_model.dart';
 import 'package:gadeer/data/model/meeting_model.dart';
+import 'package:gadeer/data/model/parnet_model.dart';
 import 'package:gadeer/data/model/profile.model.dart';
 import 'package:gadeer/data/response/home/home.response.dart';
 import 'package:gadeer/helper/constants.dart';
@@ -27,6 +28,7 @@ class HomeController extends GetxController {
   //presestant data
   List<CityModel> areas = [];
   List<CityModel> cities = [];
+  List<PartnersModel> partner = [];
   List<int> hourPrices = [];
 
   List<AssosiationSection> sections = [];
@@ -43,6 +45,7 @@ class HomeController extends GetxController {
 
   Future getDependencies() async {
     areas = (await _dataService.getAreas()).data ?? [];
+    partner = (await _dataService.getPartners()).data ?? [];
     cities = (await _dataService.getCities(
                 areaId: Get.find<AccountBloc>().state.user?.area?.id ?? 1))
             .data ??

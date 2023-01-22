@@ -25,6 +25,8 @@ class UserModel {
   int? meetingSeconds;
   bool? isActive;
   String? status;
+  int? partnerid;
+  String? partnername;
   int? consultingSeconds;
 
   bool get assosiationUncomplete {
@@ -56,6 +58,8 @@ class UserModel {
     this.city,
     this.photo,
     this.meetingSeconds,
+    this.partnerid,
+    this.partnername
   });
 
   UserModel.fromJson(Map<String, dynamic> json) {
@@ -78,6 +82,8 @@ class UserModel {
     phone = json['phone'] ?? "";
     gender = json['gender'] ?? "";
     photo = json['photo'] ?? "";
+    partnerid = json['partner_id'] ?? "";
+    partnername = json['partner_name'] ?? "";
     area = json['area'] != null ? new CityModel.fromJson(json['area']) : null;
     city = json['city'] != null ? new CityModel.fromJson(json['city']) : null;
     meetingSeconds = json["meeting_seconds"] ?? 0;
@@ -101,6 +107,8 @@ class UserModel {
     data['job_title'] = this.jobTitle;
     data['phone'] = this.phone;
     data['gender'] = this.gender;
+    data['partner_id'] = this.partnerid;
+    data['partner_name'] = this.partnername;
     if (this.area != null) {
       data['area'] = this.area!.toJson();
     }
