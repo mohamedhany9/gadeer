@@ -144,14 +144,17 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                         Notifications.showLoading();
                       }
                       if (state is FormBlocLoaded) {
-                        Notifications.hideLoading();
                         if(frist == false)
-                          {
-                            partnerid = _formBloc.partner.value!.id;
-                            oldphone = _formBloc.phoneNumber.value!;
-                            frist = true;
-                          }
+                        {
+                          if(_formBloc.partner.value != null)
+                            {
+                              partnerid = _formBloc.partner.value!.id;
+                            }
 
+                          oldphone = _formBloc.phoneNumber.value!;
+                          frist = true;
+                        }
+                        Notifications.hideLoading();
                       }
                     },
                     builder: (context, state) {
