@@ -111,6 +111,13 @@ class ConsultantRegisterFormBloc extends FormBloc<LoginResponse, Object>
       return;
     }
 
+    if (partners.value == null) {
+      emitFailure(
+          failureResponse:
+          "يجب عليك أختيار شريك");
+      return;
+    }
+
     //print("phone id" + Get.find<RegisterBloc>().state.phoneId.toString());
     RegisterRequest registerRequest = RegisterRequest(
       firstName: firstName.value,

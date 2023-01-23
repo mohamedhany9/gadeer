@@ -121,6 +121,19 @@ class AccountHeaderWidget extends StatelessWidget {
                           ),
                         ),
                       SizedBox(
+                        height: 5,
+                      ),
+                      if (accountBloc.state.user?.partnername != "")
+                        Text(
+                          "${accountBloc.state.user?.partnername ?? ""}",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      SizedBox(
                         height: 10,
                       ),
                       if (Get.find<AccountBloc>().state.accountType ==
