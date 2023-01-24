@@ -295,7 +295,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
     return DropdownFieldBlocBuilder<PartnersModel>(
       selectFieldBloc: _formBloc.partner,
       decoration: inputDecoration(
-        hint: 'الشريك',
+        hint: 'جهة العمل',
         icon: Icons.accessibility_new_outlined,
       ),
       itemBuilder: (context, p) => p.title!,

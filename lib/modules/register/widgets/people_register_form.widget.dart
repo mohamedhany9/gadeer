@@ -125,7 +125,7 @@ class _PeopleFormWidgetState extends State<PeopleFormWidget> {
     return DropdownFieldBlocBuilder<PartnersModel>(
       selectFieldBloc: _formBloc!.partners,
       decoration: inputDecoration(
-        hint: 'الشريك',
+        hint: 'جهة العمل',
         icon: Icons.map,
       ),
       itemBuilder: (context, partners) => partners.title!,

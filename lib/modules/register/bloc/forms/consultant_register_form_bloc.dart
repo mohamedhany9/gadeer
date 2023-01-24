@@ -114,7 +114,7 @@ class ConsultantRegisterFormBloc extends FormBloc<LoginResponse, Object>
     if (partners.value == null) {
       emitFailure(
           failureResponse:
-          "يجب عليك أختيار شريك");
+          "يجب عليك أختيار جهة العمل");
       return;
     }
 

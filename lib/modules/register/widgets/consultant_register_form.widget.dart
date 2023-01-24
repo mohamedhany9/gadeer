@@ -169,7 +169,7 @@ class _ConsultantRegisterFormState extends State<ConsultantRegisterForm> {
     return DropdownFieldBlocBuilder<PartnersModel>(
       selectFieldBloc: _formBloc!.partners,
       decoration: inputDecoration(
-        hint: 'الشريك',
+        hint: 'جهة العمل',
         icon: Icons.accessibility,
       ),
       itemBuilder: (context, partners) => partners.title! ,
