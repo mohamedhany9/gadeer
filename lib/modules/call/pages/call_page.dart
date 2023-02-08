@@ -5,12 +5,15 @@ import 'package:agora_rtc_engine/rtc_local_view.dart' as RtcLocalView;
 import 'package:agora_rtc_engine/rtc_remote_view.dart' as RtcRemoteView;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:gadeer/data/request/consulting/add_offline_time.request.dart';
 import 'package:gadeer/data/request/consulting/end_consulting.request.dart';
 import 'package:gadeer/helper/app.theme.dart';
 import 'package:gadeer/helper/constants.dart';
 import 'package:gadeer/helper/notifications.dart';
 import 'package:gadeer/modules/account/bloc/account_bloc.dart';
 import 'package:gadeer/modules/call/service/call.service.dart';
+import 'package:gadeer/modules/consulting/bloc/consulting.bloc.dart';
+import 'package:gadeer/modules/consulting/service/consulting_service.dart';
 import 'package:gadeer/modules/register/bloc/register.event.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -25,6 +28,10 @@ class CallPage extends StatefulWidget {
 }
 
 class _CallPageState extends State<CallPage> {
+
+  final ConsultingService consultingService = Get.find();
+  final ConsultingBloc consultingBloc = Get.find();
+
   Map<String, dynamic>? parameters;
 
   AccountType? type;
@@ -342,6 +349,8 @@ class _CallPageState extends State<CallPage> {
     }, leaveChannel: (s) {
       Notifications.success('تم انهاء المكالمة');
       endConsulting();
+      _createOfflineTime();
+      print("hany1");
     }, joinChannelSuccess: (String channel, int uid, int elapsed) {
       setState(() {
         _joined = true;
@@ -355,6 +364,8 @@ class _CallPageState extends State<CallPage> {
     }, userOffline: (int uid, UserOfflineReason reason) {
       Notifications.success('تم انهاء المكالمة');
       endConsulting();
+      _createOfflineTime();
+      print("hany2");
       setState(() {
         _remoteUid = null;
       });
@@ -392,6 +403,31 @@ class _CallPageState extends State<CallPage> {
     }).catchError((e) {
       print(e.toString());
       Notifications.error(Constants.netError);
+    });
+  }
+
+  Future<void> _createOfflineTime() async {
+    print(begin);
+    print(callDuration.inSeconds);
+    await consultingService
+        .addOfflineTime(
+        consultingBloc.state.current?.id,
+        AddOfflineTimeRequest(
+            seconds: callDuration.inSeconds,
+            date: begin,
+            type: "type.value",
+            ))
+        .then((value) {
+      if (value.status == 1) {
+        print("SUcc Call Mohamed");
+
+        //emitSuccess(successResponse: value, canSubmitAgain: true);
+      } else {
+       // handleValidateErrors(state, value.errors);
+       // emitFailure(failureResponse: "خطأ في اضافه الوقت");
+      }
+    }).catchError((e) {
+     //emitFailure(failureResponse: Constants.netError);
     });
   }
 }
