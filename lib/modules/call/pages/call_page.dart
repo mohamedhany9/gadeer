@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:agora_rtc_engine/rtc_local_view.dart' as RtcLocalView;
 import 'package:agora_rtc_engine/rtc_remote_view.dart' as RtcRemoteView;
@@ -282,6 +281,7 @@ class _CallPageState extends State<CallPage> {
                     size: 40,
                   ),
                   onTap: () async {
+                    _createOfflineTime();
                     Get.back();
                   }),
             )
@@ -350,7 +350,7 @@ class _CallPageState extends State<CallPage> {
       Notifications.success('تم انهاء المكالمة');
       endConsulting();
       _createOfflineTime();
-      print("hany1");
+      print("hany11111111111111111111111111111111111111111111111111111111111111111111111111111");
     }, joinChannelSuccess: (String channel, int uid, int elapsed) {
       setState(() {
         _joined = true;
@@ -365,7 +365,7 @@ class _CallPageState extends State<CallPage> {
       Notifications.success('تم انهاء المكالمة');
       endConsulting();
       _createOfflineTime();
-      print("hany2");
+      print("hany2222222222222222222222222222222222222222222222222222222222222222222");
       setState(() {
         _remoteUid = null;
       });
@@ -396,6 +396,8 @@ class _CallPageState extends State<CallPage> {
         .endConsulting(int.parse(parameters!["id"]),
             EndConsultingRequest(callDuration.inSeconds))
         .then((value) {
+      _createOfflineTime();
+
       if (value.status == 1) {
       } else {
         Notifications.error(value.message ?? "");
@@ -407,17 +409,21 @@ class _CallPageState extends State<CallPage> {
   }
 
   Future<void> _createOfflineTime() async {
+    print("begin");
     print(begin);
+    print("duration");
     print(callDuration.inSeconds);
+    print(consultingBloc.state.current?.id);
     await consultingService
         .addOfflineTime(
         consultingBloc.state.current?.id,
         AddOfflineTimeRequest(
             seconds: callDuration.inSeconds,
             date: begin,
-            type: "type.value",
+            type: "Calling",
             ))
         .then((value) {
+      print("SUcc Call Mohamed 22222222222222222222222222222222");
       if (value.status == 1) {
         print("SUcc Call Mohamed");
 

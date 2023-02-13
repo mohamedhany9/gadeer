@@ -69,6 +69,13 @@ class NotificationService {
     } else if (event.data["type"] == "comment") {
       Get.toNamed(Routes.chatPage, arguments: event.data["consulting_id"]);
     }
+    // else if (event.data["type"] == "consulting") {
+    //   print("hany");
+    //   print(event.data);
+    //   print(event.data["id"]);
+    //   Get.toNamed(Routes.consultingDetails, arguments: event.data["id"]);
+    // }
+
 
     // else if (event.data['type'] == 'meeting_started') {
     //   Get.to(MeetingCallPage(int.parse(event.data["id"]), false));
