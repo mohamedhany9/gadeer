@@ -4,16 +4,19 @@ import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gadeer/component/custom_button.dart';
 import 'package:gadeer/component/input_decoration.dart';
+import 'package:gadeer/data/model/category.model.dart';
 import 'package:gadeer/data/model/city.model.dart';
 import 'package:gadeer/data/model/parnet_model.dart';
 import 'package:gadeer/data/response/auth/login.response.dart';
 import 'package:gadeer/helper/app.theme.dart';
 import 'package:gadeer/helper/notifications.dart';
+import 'package:gadeer/modules/home/controller/home.controller.dart';
 import 'package:gadeer/modules/register/bloc/forms/consultant_register_form_bloc.dart';
 import 'package:gadeer/modules/register/bloc/register.bloc.dart';
 import 'package:gadeer/modules/register/bloc/register.event.dart';
 import 'package:gadeer/modules/register/widgets/privacy_policy.widget.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ConsultantRegisterForm extends StatefulWidget {
   final RegisterBloc? registerBloc;
@@ -27,6 +30,9 @@ class _ConsultantRegisterFormState extends State<ConsultantRegisterForm> {
   ConsultantRegisterFormBloc? _formBloc;
 
   int? id  ;
+  bool sub = false;
+
+
   @override
   void initState() {
     _formBloc = ConsultantRegisterFormBloc();
@@ -75,6 +81,8 @@ class _ConsultantRegisterFormState extends State<ConsultantRegisterForm> {
                   _buildPassword(),
                   _buildPartnersForm(),
                   id == 1 ? _buildPartnersNameForm() :Container(),
+                  _buildCategoriesForm(),
+                  sub == true ? _buildSubCategoriesForm() : Container(),
                   _buildagreePolicy(),
                   SizedBox(
                     height: 10,
@@ -162,6 +170,36 @@ class _ConsultantRegisterFormState extends State<ConsultantRegisterForm> {
           itemBuilder: (context, city) => city.title!,
         ),
       ],
+    );
+  }
+  _buildCategoriesForm() {
+    return DropdownFieldBlocBuilder<CategoryModel>(
+      selectFieldBloc: _formBloc!.category,
+      decoration: inputDecoration(
+        hint: 'اختيار المجال',
+        icon: Icons.accessibility,
+      ),
+      itemBuilder: (context, category) => category.title! ,
+      onChanged: (v){
+        setState(() {
+          sub = false;
+          if(v!.children!.isNotEmpty)
+            {
+              sub = true;
+            }
+        });
+      },
+    );
+  }
+
+  _buildSubCategoriesForm() {
+    return DropdownFieldBlocBuilder<CategoryModel>(
+      selectFieldBloc: _formBloc!.subcategory,
+      decoration: inputDecoration(
+        hint: 'اختيار المجال الثانوى',
+        icon: Icons.accessibility,
+      ),
+      itemBuilder: (context, category) => category.title! ,
     );
   }
 

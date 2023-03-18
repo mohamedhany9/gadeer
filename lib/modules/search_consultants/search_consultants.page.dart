@@ -4,7 +4,6 @@ import 'package:gadeer/helper/constants.dart';
 import 'package:gadeer/modules/consulting/widgets/consulting_page/empty_list.widget.dart';
 import 'package:gadeer/modules/search_consultants/controller/search_consultants.controller.dart';
 import 'package:get/get.dart';
-
 import 'widgets/consultant_item.widget.dart';
 import 'widgets/consultants_search_field.widet.dart';
 

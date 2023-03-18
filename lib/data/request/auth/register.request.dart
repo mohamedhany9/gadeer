@@ -13,6 +13,8 @@ class RegisterRequest {
   int? areaId;
   int? cityId;
   int? partnersId;
+  int? categoryId;
+  int? subcategoryId;
   String? note;
   String? gender;
   String? birthDate;
@@ -28,6 +30,8 @@ class RegisterRequest {
       this.areaId,
       this.cityId,
       this.partnersId,
+      this.categoryId,
+      this.subcategoryId,
       this.note,
       this.establishDate,
       this.sectionId,
@@ -50,6 +54,8 @@ class RegisterRequest {
     data['area_id'] = this.areaId;
     data['city_id'] = this.cityId;
     data['partner_id'] = this.partnersId;
+    data['category_id'] = this.categoryId;
+    data['sub_category_id'] = this.subcategoryId;
     data['partner_name'] = this.note;
     data['gender'] = this.gender;
     data["id_number"] = this.idNumber;

@@ -181,7 +181,7 @@ class _FotterWidget extends StatelessWidget {
           SizedBox(
             width: 12,
           ),
-          Flexible(
+          accountBloc.state.accountType == AccountType.consultant ? Flexible(
             flex: 1,
             child: InkWell(
               onTap: () {
@@ -218,7 +218,7 @@ class _FotterWidget extends StatelessWidget {
                   ),
                   Text(
                     accountBloc.state.user?.membershipType ==
-                            AccountType.association.toShortString()
+                        AccountType.association.toShortString()
                         ? "خبير"
                         : "جمعية",
                     textAlign: TextAlign.center,
@@ -231,7 +231,7 @@ class _FotterWidget extends StatelessWidget {
                 ],
               ),
             ),
-          )
+          ) : Container()
         ],
       ),
     );

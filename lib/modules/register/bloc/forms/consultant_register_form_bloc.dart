@@ -17,11 +17,12 @@ import 'package:gadeer/modules/register/service/register.service.dart';
 import 'package:gadeer/data/service/data.service.dart';
 import 'package:get/get.dart';
 
+import '../../../../data/response/home/categories.response.dart';
+
 class ConsultantRegisterFormBloc extends FormBloc<LoginResponse, Object>
     with FormValidateErrors {
   final DataService dataService = Get.find();
   final RegisterService registerService = Get.find();
-  final List<CategoryModel> allCategories = <CategoryModel>[];
 
   final firstName = TextFieldBloc(name: 'first_name');
   final lastName = TextFieldBloc(name: 'last_name');
@@ -31,6 +32,8 @@ class ConsultantRegisterFormBloc extends FormBloc<LoginResponse, Object>
   final area = SelectFieldBloc<CityModel, Object>(name: 'area_id');
   final city = SelectFieldBloc<CityModel, Object>(name: 'city_id');
   final partners = SelectFieldBloc<PartnersModel, Object>(name: 'partner_id');
+  final category = SelectFieldBloc<CategoryModel, Object>(name: 'category_id');
+  final subcategory = SelectFieldBloc<CategoryModel, Object>(name: 'sub_category_id');
   final note = TextFieldBloc(name: 'partner_name');
   final gender = SelectFieldBloc<String, String>(
     name: 'gender',
@@ -53,6 +56,8 @@ class ConsultantRegisterFormBloc extends FormBloc<LoginResponse, Object>
       jobTitle,
       idNumber,
       partners,
+      category,
+      subcategory,
       note,
       agreePolicy
     ]);
@@ -88,6 +93,29 @@ class ConsultantRegisterFormBloc extends FormBloc<LoginResponse, Object>
       //     Notifications.error(Constants.netError);
       //   });
       // }
+    });
+
+
+    CategoriesResponse categoriesResponse =
+    await this.dataService.getCategories().catchError((e) {
+      print(e.toString());
+      Notifications.error(Constants.netError);
+    });
+    categoriesResponse.data!.forEach((item) => category.addItem(item));
+    category.onValueChanges(onData: (p, current) async* {
+
+      for(int i = 0 ; i<subcategory.state.items!.length ; i++)
+      {
+        print(subcategory.state.items![i].title);
+        subcategory.removeItem(subcategory.state.items![i]);
+      }
+
+      if (current.value!.children!.isNotEmpty){
+        for(int i = 0 ; i<current.value!.children!.length ; i++)
+          {
+            subcategory.addItem(current.value!.children![i]);
+          }
+      }
     });
 
 
@@ -131,6 +159,8 @@ class ConsultantRegisterFormBloc extends FormBloc<LoginResponse, Object>
           : NumHelper.parse(idNumber.value).toString(),
       cityId: city.value?.id,
       partnersId: partners.value?.id,
+      categoryId: category.value?.id,
+      subcategoryId: subcategory.value?.id,
       gender: gender.value == "ذكر" ? "male" : "female",
       jobTitle: jobTitle.value,
       note: note.value,
