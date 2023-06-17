@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:gadeer/data/model/assosiation_section.dart';
 import 'package:gadeer/data/model/city.model.dart';
+import 'package:gadeer/data/model/naitionality_model.dart';
 import 'package:gadeer/data/model/parnet_model.dart';
 import 'package:gadeer/data/model/user.model.dart';
 import 'package:gadeer/data/request/account/update_account.request.dart';
@@ -44,8 +45,10 @@ class AccountFormBloc extends FormBloc<UpdateAccountResponse, String>
   );
   final jobTitle = TextFieldBloc(name: 'job_title');
 
+  final nationality = SelectFieldBloc<NationalityModel, Object>(name: 'nationality');
+
   AccountFormBloc() {
-    addFieldBlocs(fieldBlocs: [fName, email, city, area,phoneNumber]);
+    addFieldBlocs(fieldBlocs: [fName, email, city, area,phoneNumber,nationality]);
     if (_accountBloc.state.accountType == AccountType.consultant) {
 
       addFieldBlocs(fieldBlocs: [idNumber,lName, jobTitle, gender,partner,partnername]);
@@ -84,6 +87,7 @@ class AccountFormBloc extends FormBloc<UpdateAccountResponse, String>
     city.updateItems(_homeController.cities);
     partner.updateItems(_homeController.partner);
     section.updateItems(_homeController.sections);
+    nationality.updateItems(_homeController.nationality);
     print(userModel?.area?.id);
     print(userModel?.city?.id);
 
@@ -92,15 +96,20 @@ class AccountFormBloc extends FormBloc<UpdateAccountResponse, String>
     city.updateInitialValue(_homeController.cities
         .firstWhere((element) => element.id == userModel?.city?.id , orElse: () => _homeController.cities[0]));
 
-    partner.updateInitialValue(_homeController.partner
-        .firstWhere((element) => element.id == userModel?.partnerid));
 
     if(userModel?.membershipType != "user"){
     if (userModel?.section != null) {
       section.updateInitialValue(_homeController.sections
           .firstWhere((element) => element.id == userModel?.section));
     }
+
+      partner.updateInitialValue(_homeController.partner
+          .firstWhere((element) => element.id == userModel?.partnerid));
+
     }
+
+    nationality.updateInitialValue(_homeController.nationality
+        .firstWhere((element) => element.id == userModel?.nationalityid));
 
     area.onValueChanges(onData: (p, current) async* {
       if (area.value != null && p.value != null) {
@@ -121,6 +130,8 @@ class AccountFormBloc extends FormBloc<UpdateAccountResponse, String>
       phoneNumber: phoneNumber.value,
       partnerid: partner.value!.id,
       partnername: partnername.value,
+      nationalityid: nationality.value!.id,
+      nationalityname: nationality.value!.name,
       gender: gender.value == null
           ? null
           : gender.value == "ذكر"

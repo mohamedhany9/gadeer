@@ -113,22 +113,22 @@ class _ProfilePageState extends State<ProfilePage>
                             CustomButton("بطاقة العضوية", () {
                               Get.to(PreviewCardPage(state.profile));
                             },
-                                enabled: (Get.find<HomeController>()
-                                            .homeResponse
-                                            ?.consultingCount ??
-                                        0) >=
-                                    6),
-                            if ((Get.find<HomeController>()
-                                        .homeResponse
-                                        ?.consultingCount ??
-                                    0) <
-                                6)
-                              Text(
-                                "لكي تحصل على بطاقة عضويتك يجب أن تقدم ما لا يقل عن 6 استشارات مكتملة",
-                                textAlign: TextAlign.center,
-                                style: TextStyles.hint
-                                    .copyWith(color: Colors.grey),
-                              )
+                                // enabled: (Get.find<HomeController>()
+                                //             .homeResponse
+                                //             ?.consultingCount ??
+                                //         0) >= 6
+                            ),
+                            // if ((Get.find<HomeController>()
+                            //             .homeResponse
+                            //             ?.consultingCount ??
+                            //         0) <
+                            //     6)
+                            //   Text(
+                            //     "لكي تحصل على بطاقة عضويتك يجب أن تقدم ما لا يقل عن 6 استشارات مكتملة",
+                            //     textAlign: TextAlign.center,
+                            //     style: TextStyles.hint
+                            //         .copyWith(color: Colors.grey),
+                            //   )
                           ],
                         ),
                       ),

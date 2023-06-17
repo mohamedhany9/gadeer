@@ -7,6 +7,7 @@ import 'package:gadeer/component/custom_button.dart';
 import 'package:gadeer/component/input_decoration.dart';
 import 'package:gadeer/data/model/assosiation_section.dart';
 import 'package:gadeer/data/model/city.model.dart';
+import 'package:gadeer/data/model/naitionality_model.dart';
 import 'package:gadeer/data/model/parnet_model.dart';
 import 'package:gadeer/data/request/account/update_account.request.dart';
 import 'package:gadeer/data/response/account/update_account.response.dart';
@@ -34,6 +35,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
   String? oldphone;
 
   int? partnerid;
+  int? nationalityid;
 
 
   getData() async{
@@ -47,6 +49,8 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
       phoneNumber: _formBloc.phoneNumber.value!,
       partnerid: _formBloc.partner.value!.id,
       partnername: _formBloc.partnername.value!,
+      nationalityname: _formBloc.nationality.value!.name,
+      nationalityid: _formBloc.nationality.value!.id,
       gender: _formBloc.gender.value! == null
           ? null
           : _formBloc.gender.value! == "ذكر"
@@ -71,6 +75,8 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
           : "female",
       jobTitle: _formBloc.jobTitle.value!,
       lastName: _formBloc.lName.value!,
+      nationalityname: _formBloc.nationality.value!.name,
+      nationalityid: _formBloc.nationality.value!.id,
       // idNumber: _formBloc.idNumber.value! == null
       //     ? null
       //     : NumHelper.parse(_formBloc.idNumber.value!).toString(),
@@ -92,7 +98,9 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
           ? null
           : NumHelper.parse(_formBloc.idNumber.value!).toString(),
       establishDate: _formBloc.establishDate.value,
-      sectionId: _formBloc.section.value?.id
+      sectionId: _formBloc.section.value?.id,
+      nationalityname: _formBloc.nationality.value!.name,
+      nationalityid: _formBloc.nationality.value!.id,
     );
     await Get.find<AccountService>()
         .updateAccount(updateAccountRequest)
@@ -151,6 +159,11 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                               partnerid = _formBloc.partner.value!.id;
                             }
 
+                          if(_formBloc.nationality.value != null)
+                          {
+                            nationalityid = _formBloc.nationality.value!.id;
+                          }
+
                           oldphone = _formBloc.phoneNumber.value!;
                           frist = true;
                         }
@@ -178,6 +191,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
                             _buildEmailField(),
                             _buildGenderRow(),
                             _buildPhoneNumber(),
+                            _buildNationalityForm(),
                             _buildPartnerField(),
                             partnerid == 1 ? _buildPartnerNote(): Container(),
                             SizedBox(
@@ -317,6 +331,22 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
           ),
         ),
       ],
+    );
+  }
+
+  _buildNationalityForm() {
+    return DropdownFieldBlocBuilder<NationalityModel>(
+      selectFieldBloc: _formBloc.nationality,
+      decoration: inputDecoration(
+        hint: 'اختيار الجنسيه',
+        icon: Icons.accessibility,
+      ),
+      itemBuilder: (context, nationality) => nationality.name!,
+      onChanged: (v){
+        setState(() {
+          nationalityid = v!.id ;
+        });
+      },
     );
   }
 

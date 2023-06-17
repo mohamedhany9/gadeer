@@ -28,7 +28,8 @@ class UserModel {
   int? partnerid;
   String? partnername;
   int? consultingSeconds;
-
+  int? nationalityid ;
+  String? nationalityname = "";
   bool get assosiationUncomplete {
     return membershipType == AccountType.association.toShortString() &&
         (section == null || idNumber == null || establishDate == null);
@@ -59,7 +60,9 @@ class UserModel {
     this.photo,
     this.meetingSeconds,
     this.partnerid,
-    this.partnername
+    this.partnername,
+    this.nationalityname,
+    this.nationalityid
   });
 
   UserModel.fromJson(Map<String, dynamic> json) {
@@ -84,6 +87,8 @@ class UserModel {
     photo = json['photo'] ?? "";
     partnerid = json['partner_id'] ?? "";
     partnername = json['partner_name'] ?? "";
+    nationalityid = json['nationality_id'] ?? "";
+    nationalityname = json['nationality_name'] ?? "";
     area = json['area'] != null ? new CityModel.fromJson(json['area']) : null;
     city = json['city'] != null ? new CityModel.fromJson(json['city']) : null;
     meetingSeconds = json["meeting_seconds"] ?? 0;
@@ -109,6 +114,8 @@ class UserModel {
     data['gender'] = this.gender;
     data['partner_id'] = this.partnerid;
     data['partner_name'] = this.partnername;
+    data['nationality_id'] = this.nationalityid;
+    data['nationality_name'] = this.nationalityname;
     if (this.area != null) {
       data['area'] = this.area!.toJson();
     }

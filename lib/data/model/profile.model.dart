@@ -25,6 +25,7 @@ class ProfileModel {
   int? meetingSeconds;
   int? consultingSeconds;
   List<ProfileFileModel>? files;
+  dynamic link;
 
   bool get isFilesComplete {
     bool toReturn = true;
@@ -61,13 +62,15 @@ class ProfileModel {
     this.sections,
     this.workExperiences,
     this.educations,
-    this.licensefile
+    this.licensefile,
+    this.link
   });
 
   ProfileModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     gender = json['gender'];
+    link = json['link'];
     jobTitle = json['job_title'];
     price=json['price'];
     sectionText = json["section_text"];

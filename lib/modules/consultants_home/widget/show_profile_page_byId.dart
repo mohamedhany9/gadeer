@@ -1,64 +1,97 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gadeer/component/custom_button.dart';
+import 'package:gadeer/data/model/consuilt_profile_model.dart';
 import 'package:gadeer/data/model/profile.model.dart';
-import 'package:gadeer/modules/account/bloc/account_bloc.dart';
 import 'package:gadeer/modules/consultants_home/widget/consult_card_page.dart';
 import 'package:gadeer/modules/consultants_home/widget/consult_educations_view.dart';
 import 'package:gadeer/modules/consultants_home/widget/consult_work_experience.dart';
-import 'package:gadeer/modules/consulting/pages/add_consulting_form.widget.dart';
-import 'package:gadeer/modules/register/bloc/register.event.dart';
+import 'package:gadeer/modules/register/service/register_api_service.dart';
 import 'package:get/get.dart';
 
-class ShowProfilePage2 extends StatefulWidget {
-  final bool isSelectable;
-  final ProfileModel? profile;
+class ShowProfilePageId extends StatefulWidget {
+  // final bool isSelectable;
+  // final ProfileModel? profile;
+  //
+  // ShowProfilePageId(this.profile, {this.isSelectable = false});'
 
-  ShowProfilePage2(this.profile, {this.isSelectable = false});
+  int id;
+  ShowProfilePageId({required this.id});
 
   @override
-  State<ShowProfilePage2> createState() => _ShowProfilePage2State();
+  State<ShowProfilePageId> createState() => _ShowProfilePageIdState();
 }
 
-class _ShowProfilePage2State extends State<ShowProfilePage2> {
+class _ShowProfilePageIdState extends State<ShowProfilePageId> {
 
-  final AccountBloc _accountBloc = Get.find();
+  late ProfileModel consuiltData ;
 
+  bool _loading = true ;
+
+  getSubjectData() async {
+    try {
+      ServiceApi serviceApi = new ServiceApi();
+      await serviceApi.getConsultProfile(widget.id);
+      setState(() {
+        consuiltData = serviceApi.consuiltdata;
+        _loading = false;
+      });
+    } catch (e) {
+
+    }
+  }
+
+  @override
+  void initState() {
+    getSubjectData();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: Column(
+        child: _loading == true ? Container(
+            height: MediaQuery
+                .of(context)
+                .size
+                .height,
+            width: MediaQuery
+                .of(context)
+                .size
+                .width,
+            child: Center(child: CircularProgressIndicator())) : Column(
           children: [
             Container(
                 height: 480,
-                child: ConsultCardPage(widget.profile)),
+                child: ConsultCardPage(consuiltData)),
             // SizedBox(
             //   height: 12,
             // ),
             Column(
               children: [
                 ConsultEducationsView(
-                  widget.profile?.educations,
+                  consuiltData.educations,
                   editable: true,
                 ),
                 SizedBox(
                   height: 16,
                 ),
                 ConsultWorkexperienceView(
-                    widget.profile?.workExperiences,
+                    consuiltData.workExperiences,
                     editable: true),
               ],
             ),
             SizedBox(
               height: 12,
             ),
+            // if (!isSelectable && profile?.membershipType == "consultant")
+            //   _buildAddConsultingButton(),
+            // if (isSelectable && profile?.membershipType == "consultant")
+            //   _buildSelectConsultingButton(),
 
-            _accountBloc.state.accountType != AccountType.consultant ?
-            _buildSelectConsultingButton() : Container(),
+            // _buildAddConsultingButton()
 
 
-            _buildAddConsultingButton()
             // GestureDetector(
             //   onTap: (){
             //     print(profile!.link);
@@ -81,9 +114,9 @@ class _ShowProfilePage2State extends State<ShowProfilePage2> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: CustomButton("مشاركة الخبير", () {
-        print(widget.profile!.link);
-        Clipboard.setData(new ClipboardData(text: widget.profile!.link));
-         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Copied to Clipboard")));
+        print(consuiltData.link);
+        Clipboard.setData(new ClipboardData(text: consuiltData.link));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Copied to Clipboard")));
         // key!.currentState.showSnackBar(
         //     new SnackBar(content: new Text("Copied to Clipboard"),));
       }),
@@ -94,7 +127,7 @@ class _ShowProfilePage2State extends State<ShowProfilePage2> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: CustomButton("تعيين الخبير", () {
-        Get.to(AddConsultingFormWidget(widget.profile));
+        Get.back(result: consuiltData);
       }),
     );
   }

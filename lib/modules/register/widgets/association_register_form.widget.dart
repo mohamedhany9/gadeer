@@ -5,6 +5,7 @@ import 'package:gadeer/component/custom_button.dart';
 import 'package:gadeer/component/input_decoration.dart';
 import 'package:gadeer/data/model/assosiation_section.dart';
 import 'package:gadeer/data/model/city.model.dart';
+import 'package:gadeer/data/model/naitionality_model.dart';
 import 'package:gadeer/data/model/parnet_model.dart';
 import 'package:gadeer/data/response/auth/login.response.dart';
 import 'package:gadeer/helper/app.theme.dart';
@@ -64,6 +65,7 @@ class _AssociationFormWidgetState extends State<AssociationFormWidget> {
                   _buildEstablishDate(),
                   _buildEmailField(),
                   //_buildPartnersForm(),
+                  _buildNationalityForm(),
                   _buildPasswordField(),
                   _buildagreePolicy(),
                   SizedBox(
@@ -110,6 +112,22 @@ class _AssociationFormWidgetState extends State<AssociationFormWidget> {
       keyboardType: TextInputType.number,
       decoration:
           inputDecoration(label: "رقم الترخيص", icon: Icons.card_membership),
+    );
+  }
+
+  _buildNationalityForm() {
+    return DropdownFieldBlocBuilder<NationalityModel>(
+      selectFieldBloc: _formBloc!.nationality,
+      decoration: inputDecoration(
+        hint: 'اختيار الجنسيه',
+        icon: Icons.accessibility,
+      ),
+      itemBuilder: (context, nationality) => nationality.name!,
+      onChanged: (v){
+        setState(() {
+          // id = v!.id ;
+        });
+      },
     );
   }
 

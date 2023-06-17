@@ -7,6 +7,7 @@ import 'package:gadeer/data/request/consulting/add_comment.request.dart';
 import 'package:gadeer/helper/app.theme.dart';
 import 'package:gadeer/helper/helper_methods.dart';
 import 'package:gadeer/modules/chat/controller/chat_controller.dart';
+import 'package:gadeer/modules/chat/widgets/record_button.dart';
 import 'package:get/get.dart';
 
 class AddCommentWidget extends StatefulWidget {
@@ -74,6 +75,17 @@ class _AddCommentWidgetState extends State<AddCommentWidget> {
           SizedBox(
             width: 4,
           ),
+          RecordButton(recordingFinishedCallback: (String ) {
+
+          },),
+          // IconButton(
+          //     icon: Icon(
+          //       Icons.keyboard_voice,
+          //       color: Colors.grey,
+          //     ),
+          //     onPressed: () async {
+          //
+          //     }),
           IconButton(
               icon: Icon(
                 Icons.image,

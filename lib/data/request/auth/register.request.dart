@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
 
 class RegisterRequest {
@@ -20,6 +23,7 @@ class RegisterRequest {
   String? birthDate;
   String? jobTitle;
   List<int>? categories;
+  int? natoinality;
   RegisterRequest(
       {this.firstName,
       this.lastName,
@@ -39,6 +43,7 @@ class RegisterRequest {
       this.gender,
       this.birthDate,
       this.categories,
+      this.natoinality,
       this.jobTitle});
 
   Map<String, dynamic> toMap() {
@@ -64,6 +69,7 @@ class RegisterRequest {
     data['categories'] = this.categories;
     data["job_title"] = this.jobTitle;
     data["section"] = this.sectionId;
+    data["nationality"] = this.natoinality;
     if (this.establishDate != null) {
       data["establish_date"] = dt.format(this.establishDate!);
     }

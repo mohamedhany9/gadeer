@@ -1,6 +1,8 @@
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:gadeer/data/model/assosiation_section.dart';
 import 'package:gadeer/data/model/city.model.dart';
+import 'package:gadeer/data/model/naitionality_model.dart';
+import 'package:gadeer/data/model/nationality_respone.dart';
 import 'package:gadeer/data/model/parnet_model.dart';
 import 'package:gadeer/data/request/auth/register.request.dart';
 import 'package:gadeer/data/response/auth/partners_response.dart';
@@ -34,6 +36,7 @@ class AssociationFormBloc extends FormBloc<LoginResponse, Object>
       password,
       area,
       city,
+      nationality,
      // partners,
       agreePolicy
     ]);
@@ -51,6 +54,8 @@ class AssociationFormBloc extends FormBloc<LoginResponse, Object>
   final city = SelectFieldBloc<CityModel, Object>(name: 'city_id');
   final partners = SelectFieldBloc<PartnersModel, Object>(name: 'partner_id');
   final section = SelectFieldBloc<AssosiationSection, Object>(name: 'section');
+
+  final nationality = SelectFieldBloc<NationalityModel, Object>(name: 'nationality');
 
   final agreePolicy =
       BooleanFieldBloc(name: "agree_policy", initialValue: false);
@@ -79,6 +84,21 @@ class AssociationFormBloc extends FormBloc<LoginResponse, Object>
     });
     partnersResponse.data!.forEach((item) => partners.addItem(item));
     partners.onValueChanges(onData: (p, current) async* {
+      // if (current.value != null) {
+      //   await loadCities(areaId: current.value!.id).catchError((e) {
+      //     print(e.toString());
+      //     Notifications.error(Constants.netError);
+      //   });
+      // }
+    });
+
+    NationalityResponse nationalityResponse =
+    await this.dataService.getNationality().catchError((e) {
+      print(e.toString());
+      Notifications.error(Constants.netError);
+    });
+    nationalityResponse.data!.forEach((item) => nationality.addItem(item));
+    nationality.onValueChanges(onData: (p, current) async* {
       // if (current.value != null) {
       //   await loadCities(areaId: current.value!.id).catchError((e) {
       //     print(e.toString());
@@ -127,6 +147,7 @@ class AssociationFormBloc extends FormBloc<LoginResponse, Object>
       sectionId: section.value?.id ?? 0,
       areaId: area.value?.id,
       cityId: city.value?.id,
+      natoinality: nationality.value!.id,
       //partnersId: partners.value?.id,
       membershipType: AccountType.association.toShortString(),
     );

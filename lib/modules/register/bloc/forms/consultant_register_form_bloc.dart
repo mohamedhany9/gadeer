@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
 import 'package:gadeer/data/model/category.model.dart';
 import 'package:gadeer/data/model/city.model.dart';
+import 'package:gadeer/data/model/naitionality_model.dart';
+import 'package:gadeer/data/model/nationality_respone.dart';
 import 'package:gadeer/data/model/parnet_model.dart';
 import 'package:gadeer/data/request/auth/register.request.dart';
 import 'package:gadeer/data/response/auth/login.response.dart';
@@ -15,9 +19,11 @@ import 'package:gadeer/modules/register/bloc/register.bloc.dart';
 import 'package:gadeer/modules/register/bloc/register.event.dart';
 import 'package:gadeer/modules/register/service/register.service.dart';
 import 'package:gadeer/data/service/data.service.dart';
-import 'package:get/get.dart';
-
+import 'package:get/instance_manager.dart';
+// import 'package:get/get.dart';
 import '../../../../data/response/home/categories.response.dart';
+import '../../widgets/consultant_register_form.widget.dart';
+import 'package:dio/dio.dart';
 
 class ConsultantRegisterFormBloc extends FormBloc<LoginResponse, Object>
     with FormValidateErrors {
@@ -44,6 +50,8 @@ class ConsultantRegisterFormBloc extends FormBloc<LoginResponse, Object>
 
   final jobTitle = TextFieldBloc(name: 'job_title');
 
+  final nationality = SelectFieldBloc<NationalityModel, Object>(name: 'nationality');
+
   ConsultantRegisterFormBloc() : super(isLoading: true) {
     addFieldBlocs(fieldBlocs: [
       firstName,
@@ -59,7 +67,8 @@ class ConsultantRegisterFormBloc extends FormBloc<LoginResponse, Object>
       category,
       subcategory,
       note,
-      agreePolicy
+      agreePolicy,
+      nationality,
     ]);
   }
 
@@ -95,6 +104,15 @@ class ConsultantRegisterFormBloc extends FormBloc<LoginResponse, Object>
       // }
     });
 
+    NationalityResponse nationalityResponse =
+    await this.dataService.getNationality().catchError((e) {
+      print(e.toString());
+      Notifications.error(Constants.netError);
+    });
+    nationalityResponse.data!.forEach((item) => nationality.addItem(item));
+    nationality.onValueChanges(onData: (p, current) async* {
+
+    });
 
     CategoriesResponse categoriesResponse =
     await this.dataService.getCategories().catchError((e) {
@@ -164,6 +182,7 @@ class ConsultantRegisterFormBloc extends FormBloc<LoginResponse, Object>
       gender: gender.value == "ذكر" ? "male" : "female",
       jobTitle: jobTitle.value,
       note: note.value,
+      natoinality: nationality.value!.id,
       membershipType: AccountType.consultant.toShortString(),
     );
     this

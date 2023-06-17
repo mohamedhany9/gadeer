@@ -5,6 +5,7 @@ import 'package:gadeer/component/custom_button.dart';
 import 'package:gadeer/component/input_decoration.dart';
 import 'package:gadeer/data/model/assosiation_section.dart';
 import 'package:gadeer/data/model/city.model.dart';
+import 'package:gadeer/data/model/naitionality_model.dart';
 import 'package:gadeer/data/model/parnet_model.dart';
 import 'package:gadeer/data/response/auth/login.response.dart';
 import 'package:gadeer/helper/app.theme.dart';
@@ -63,6 +64,7 @@ class _PeopleFormWidgetState extends State<PeopleFormWidget> {
                   _buildLocationField(),
                   // _buildEstablishDate(),
                   _buildEmailField(),
+                  _buildNationalityForm(),
                   //_buildPartnersForm(),
                   _buildPasswordField(),
                   _buildagreePolicy(),
@@ -189,6 +191,22 @@ class _PeopleFormWidgetState extends State<PeopleFormWidget> {
           color: Colors.blueGrey,
         ),
       ),
+    );
+  }
+
+  _buildNationalityForm() {
+    return DropdownFieldBlocBuilder<NationalityModel>(
+      selectFieldBloc: _formBloc!.nationality,
+      decoration: inputDecoration(
+        hint: 'اختيار الجنسيه',
+        icon: Icons.accessibility,
+      ),
+      itemBuilder: (context, nationality) => nationality.name!,
+      onChanged: (v){
+        setState(() {
+          // id = v!.id ;
+        });
+      },
     );
   }
 

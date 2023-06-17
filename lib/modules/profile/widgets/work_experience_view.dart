@@ -138,35 +138,35 @@ class _WorkExperienceItem extends StatelessWidget {
             workExperienceModel.place ?? "",
             style: TextStyles.hint.copyWith(color: Colors.grey),
           ),
-          Row(
-            children: [
-              Text(
-                "من:",
-                style: TextStyles.subTitleBold.copyWith(color: Colors.blueGrey),
-              ),
-              SizedBox(
-                width: 4,
-              ),
-              Text(
-                workExperienceModel.from ?? "",
-                style: TextStyles.subTitle.copyWith(color: Colors.grey),
-              ),
-              Spacer(),
-              if (workExperienceModel.to != null)
-                Text(
-                  "الى:",
-                  style:
-                      TextStyles.subTitleBold.copyWith(color: Colors.blueGrey),
-                ),
-              SizedBox(
-                width: 4,
-              ),
-              Text(
-                workExperienceModel.to ?? "",
-                style: TextStyles.subTitle.copyWith(color: Colors.grey),
-              ),
-            ],
-          ),
+          // Row(
+          //   children: [
+          //     Text(
+          //       "من:",
+          //       style: TextStyles.subTitleBold.copyWith(color: Colors.blueGrey),
+          //     ),
+          //     SizedBox(
+          //       width: 4,
+          //     ),
+          //     Text(
+          //       workExperienceModel.from ?? "",
+          //       style: TextStyles.subTitle.copyWith(color: Colors.grey),
+          //     ),
+          //     Spacer(),
+          //     if (workExperienceModel.to != null)
+          //       Text(
+          //         "الى:",
+          //         style:
+          //             TextStyles.subTitleBold.copyWith(color: Colors.blueGrey),
+          //       ),
+          //     SizedBox(
+          //       width: 4,
+          //     ),
+          //     Text(
+          //       workExperienceModel.to ?? "",
+          //       style: TextStyles.subTitle.copyWith(color: Colors.grey),
+          //     ),
+          //   ],
+          // ),
         ],
       ),
     );

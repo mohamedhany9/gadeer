@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
@@ -6,9 +8,11 @@ import 'package:gadeer/component/custom_button.dart';
 import 'package:gadeer/component/input_decoration.dart';
 import 'package:gadeer/data/model/category.model.dart';
 import 'package:gadeer/data/model/city.model.dart';
+import 'package:gadeer/data/model/naitionality_model.dart';
 import 'package:gadeer/data/model/parnet_model.dart';
 import 'package:gadeer/data/response/auth/login.response.dart';
 import 'package:gadeer/helper/app.theme.dart';
+import 'package:gadeer/helper/helper_methods.dart';
 import 'package:gadeer/helper/notifications.dart';
 import 'package:gadeer/modules/home/controller/home.controller.dart';
 import 'package:gadeer/modules/register/bloc/forms/consultant_register_form_bloc.dart';
@@ -18,6 +22,7 @@ import 'package:gadeer/modules/register/widgets/privacy_policy.widget.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+File? image ;
 class ConsultantRegisterForm extends StatefulWidget {
   final RegisterBloc? registerBloc;
   ConsultantRegisterForm(this.registerBloc);
@@ -31,6 +36,7 @@ class _ConsultantRegisterFormState extends State<ConsultantRegisterForm> {
 
   int? id  ;
   bool sub = false;
+
 
 
   @override
@@ -83,6 +89,8 @@ class _ConsultantRegisterFormState extends State<ConsultantRegisterForm> {
                   id == 1 ? _buildPartnersNameForm() :Container(),
                   _buildCategoriesForm(),
                   sub == true ? _buildSubCategoriesForm() : Container(),
+                  _buildNationalityForm(),
+                  _buildImageWidget(),
                   _buildagreePolicy(),
                   SizedBox(
                     height: 10,
@@ -234,6 +242,22 @@ class _ConsultantRegisterFormState extends State<ConsultantRegisterForm> {
     );
   }
 
+  _buildNationalityForm() {
+    return DropdownFieldBlocBuilder<NationalityModel>(
+      selectFieldBloc: _formBloc!.nationality,
+      decoration: inputDecoration(
+        hint: 'اختيار الجنسيه',
+        icon: Icons.accessibility,
+      ),
+      itemBuilder: (context, nationality) => nationality.name!,
+      onChanged: (v){
+        setState(() {
+          // id = v!.id ;
+        });
+      },
+    );
+  }
+
   _buildEmailForm() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -281,6 +305,61 @@ class _ConsultantRegisterFormState extends State<ConsultantRegisterForm> {
           hint: "المسمي الوظيفي",
           icon: Icons.label,
         ),
+      ),
+    );
+  }
+
+  // _buildImageWidget() {
+  //   return BlocBuilder<InputFieldBloc<File?, String>,
+  //       InputFieldBlocState<File?, String>>(
+  //       bloc: _formBloc!.imageFile,
+  //       builder: (context, state) {
+  //         return GestureDetector(
+  //           onTap: () async {
+  //             image = await HelperMethods.pickImage();
+  //             setState(() {
+  //             });
+  //           },
+  //           child: Container(
+  //             height: 140,
+  //             padding: const EdgeInsets.symmetric(vertical: 5),
+  //             width: MediaQuery.of(context).size.width,
+  //             decoration: BoxDecoration(
+  //               borderRadius: BorderRadius.circular(8),
+  //               border: Border.all(color: Colors.black),
+  //             ),
+  //             child: image != null ? Image.file(image!,width: MediaQuery.of(context).size.width,) :Icon(Icons.add),
+  //           ),
+  //         );
+  //       });
+  // }
+
+  _buildImageWidget() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 5),
+      child: Column(
+        children: [
+          Text("اضف صورة الهويه"),
+
+          GestureDetector(
+            onTap: () async{
+              image = await HelperMethods.pickImage();
+              setState(() {
+                image;
+              });
+            },
+            child: Container(
+              height: 140,
+              padding: const EdgeInsets.symmetric(vertical: 5),
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.black),
+              ),
+              child: image != null ? Image.file(image!,width: MediaQuery.of(context).size.width,) :Icon(Icons.add),
+            ),
+          ),
+        ],
       ),
     );
   }
