@@ -30,9 +30,13 @@ class _SelectConsultantPageState extends State<SelectConsultantPage> {
     cats = widget.cats;
 
     print(cats.length);
-    Future.microtask(() async {
-      await _searchConsultants(null);
-    });
+    if(cats.isNotEmpty)
+      {
+        Future.microtask(() async {
+          await _searchConsultants(null);
+        });
+      }
+
 
     super.initState();
   }
@@ -120,6 +124,8 @@ class _SelectConsultantPageState extends State<SelectConsultantPage> {
   }
 
   Future _searchConsultants(String? jobTitle) async {
+    print("لاشي");
+    print(cats);
     Notifications.showLoading();
     await consultingService
         .searchConsulting(

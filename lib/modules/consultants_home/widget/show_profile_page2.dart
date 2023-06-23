@@ -93,7 +93,7 @@ class _ShowProfilePage2State extends State<ShowProfilePage2> {
   _buildSelectConsultingButton() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: CustomButton("تعيين الخبير", () {
+      child: CustomButton("طلب استشارة", () {
         Get.to(AddConsultingFormWidget(widget.profile));
       }),
     );

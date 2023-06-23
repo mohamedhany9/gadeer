@@ -21,6 +21,9 @@ class CategorySelectionWidget extends StatelessWidget {
             icon: FontAwesomeIcons.clipboard,
             borderRadius: 5,
           ),
+          onChanged: (c){
+            formBloc!.subCategory.clear();
+          },
           itemBuilder: (context, cat) => cat.title!,
         ),
         SizedBox(

@@ -49,8 +49,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
       phoneNumber: _formBloc.phoneNumber.value!,
       partnerid: _formBloc.partner.value!.id,
       partnername: _formBloc.partnername.value!,
-      nationalityname: _formBloc.nationality.value!.name,
-      nationalityid: _formBloc.nationality.value!.id,
+      nationality: _formBloc.nationality.value!.id,
       gender: _formBloc.gender.value! == null
           ? null
           : _formBloc.gender.value! == "ذكر"
@@ -75,8 +74,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
           : "female",
       jobTitle: _formBloc.jobTitle.value!,
       lastName: _formBloc.lName.value!,
-      nationalityname: _formBloc.nationality.value!.name,
-      nationalityid: _formBloc.nationality.value!.id,
+      nationality: _formBloc.nationality.value!.id,
       // idNumber: _formBloc.idNumber.value! == null
       //     ? null
       //     : NumHelper.parse(_formBloc.idNumber.value!).toString(),
@@ -99,8 +97,7 @@ class _EditAccountScreenState extends State<EditAccountScreen> {
           : NumHelper.parse(_formBloc.idNumber.value!).toString(),
       establishDate: _formBloc.establishDate.value,
       sectionId: _formBloc.section.value?.id,
-      nationalityname: _formBloc.nationality.value!.name,
-      nationalityid: _formBloc.nationality.value!.id,
+      nationality: _formBloc.nationality.value!.id,
     );
     await Get.find<AccountService>()
         .updateAccount(updateAccountRequest)

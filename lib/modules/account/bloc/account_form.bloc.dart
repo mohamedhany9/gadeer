@@ -91,8 +91,11 @@ class AccountFormBloc extends FormBloc<UpdateAccountResponse, String>
     print(userModel?.area?.id);
     print(userModel?.city?.id);
 
+    if(userModel?.area?.id !=null)
     area.updateInitialValue(_homeController.areas
         .firstWhere((element) => element.id == userModel?.area?.id));
+
+    if(userModel?.city?.id !=null)
     city.updateInitialValue(_homeController.cities
         .firstWhere((element) => element.id == userModel?.city?.id , orElse: () => _homeController.cities[0]));
 
@@ -103,8 +106,15 @@ class AccountFormBloc extends FormBloc<UpdateAccountResponse, String>
           .firstWhere((element) => element.id == userModel?.section));
     }
 
-      partner.updateInitialValue(_homeController.partner
-          .firstWhere((element) => element.id == userModel?.partnerid));
+    if(userModel?.partnername != null || userModel?.partnername != "")
+      {
+
+        print("userModel?.partnerid");
+        print(userModel?.partnername);
+        partner.updateInitialValue(_homeController.partner
+            .firstWhere((element) => element.id == userModel?.partnerid));
+      }
+
 
     }
 
@@ -128,10 +138,9 @@ class AccountFormBloc extends FormBloc<UpdateAccountResponse, String>
       email: email.value,
       firstName: fName.value,
       phoneNumber: phoneNumber.value,
-      partnerid: partner.value!.id,
+      partnerid: partner.value?.id,
       partnername: partnername.value,
-      nationalityid: nationality.value!.id,
-      nationalityname: nationality.value!.name,
+      nationality: nationality.value?.id,
       gender: gender.value == null
           ? null
           : gender.value == "ذكر"

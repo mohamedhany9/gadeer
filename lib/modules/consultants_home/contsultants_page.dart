@@ -120,6 +120,15 @@ class _ConsultantsPageState extends State<ConsultantsPage> {
                           icon: FontAwesomeIcons.clipboard,
                           borderRadius: 5,
                         ),
+                        onChanged: (c){
+                          setState(() {
+                            selctedCats = [];
+                            selctedCats.add(c!.id);
+                          });
+                          Future.microtask(() async {
+                            await _searchConsultants(null);
+                          });
+                        },
                         itemBuilder: (context, sub) => sub.title ?? "",
                       ),
                     ],
@@ -212,6 +221,8 @@ class _ConsultantsPageState extends State<ConsultantsPage> {
 
   Future _searchConsultants(String? jobTitle) async {
     //Notifications.showLoading();
+    print("selctedCats");
+    print(selctedCats);
     await consultingService
         .searchConsulting(
         ConsultingSearchRequest(categories: selctedCats, jobTitle: jobTitle ?? ""))

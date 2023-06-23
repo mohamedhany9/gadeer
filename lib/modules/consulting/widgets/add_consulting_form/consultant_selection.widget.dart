@@ -36,8 +36,10 @@ class ConsultantSelectionWidget extends StatelessWidget {
               selctedCats.add(formBloc!.category.value!.id);
             }
             if (formBloc!.subCategory.value != null) {
+              selctedCats.clear();
               selctedCats.add(formBloc!.subCategory.value!.id);
             }
+            print(selctedCats);
             var consultantx = await Get.to(SelectConsultantPage(selctedCats));
             if (consultantx != null) {
               formBloc!.updateConsultant(consultantx);
@@ -52,7 +54,7 @@ class ConsultantSelectionWidget extends StatelessWidget {
                 width: 6,
               ),
               Text(
-                formBloc!.consultant == null ? "اختيار الخبير" : "تغيير الخبير",
+                formBloc!.consultant == null ? "اختيار الخبير (أختيارى)" : "تغيير الخبير",
               ),
             ],
           )),

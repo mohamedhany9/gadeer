@@ -87,11 +87,11 @@ class ConsultingCreateFormBloc extends FormBloc<AddConsultingResponse, Object>
     //   return;
     // }
 
-    if (category.value?.id != 16) {
-      emitFailure(
-          failureResponse: "يجب اختيار الاستشاري");
-      return;
-    }
+    // if (category.value?.id != 16) {
+    //   emitFailure(
+    //       failureResponse: "يجب اختيار الاستشاري");
+    //   return;
+    // }
 
     AddConsultRequest addConsultRequest = AddConsultRequest(
       title: title.value,

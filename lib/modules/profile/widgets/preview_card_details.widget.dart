@@ -4,17 +4,31 @@ import 'package:gadeer/helper/app.theme.dart';
 import 'package:gadeer/modules/home/controller/home.controller.dart';
 import 'package:get/get.dart';
 
-class PreviewCardDetails extends StatelessWidget {
+class PreviewCardDetails extends StatefulWidget {
   const PreviewCardDetails(this.profileModel, {Key? key}) : super(key: key);
   final ProfileModel? profileModel;
 
+  @override
+  State<PreviewCardDetails> createState() => _PreviewCardDetailsState();
+}
+
+
+class _PreviewCardDetailsState extends State<PreviewCardDetails> {
+
+  @override
+  void initState() {
+   print( Get.find<HomeController>().homeResponse?.consultingCount.toString());
+   print(widget.profileModel?.meetingSeconds);
+   print(Get.find<HomeController>().homeResponse?.userCount?.toString());
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _DetailsColumn("ساعات التطوع", profileModel?.workHours),
+        _DetailsColumn("ساعات التطوع", widget.profileModel?.workHours),
         _DetailsColumn(
             "الاستشارات",
             Get.find<HomeController>()

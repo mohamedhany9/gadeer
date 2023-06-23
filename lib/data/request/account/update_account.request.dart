@@ -14,8 +14,7 @@ class UpdateAccountRequest {
   DateTime? establishDate;
   int? partnerid;
   String? partnername;
-  int? nationalityid;
-  String? nationalityname;
+  int? nationality;
 
 
   UpdateAccountRequest(
@@ -31,8 +30,7 @@ class UpdateAccountRequest {
       this.phoneNumber,
       this.partnerid,
       this.partnername,
-      this.nationalityid,
-      this.nationalityname,
+        this.nationality,
       this.idNumber});
 
   Map<String, dynamic> toJson() {
@@ -50,8 +48,7 @@ class UpdateAccountRequest {
     data['phone'] = this.phoneNumber;
     data['partner_id'] = this.partnerid;
     data['partner_name'] = this.partnername;
-    data['nationality_id'] = this.nationalityid;
-    data['nationality_name'] = this.nationalityname;
+    data['nationality'] = this.nationality;
     data["v"] = 2;
 
     data["section"] = sectionId;
