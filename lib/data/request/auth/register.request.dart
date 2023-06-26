@@ -24,6 +24,7 @@ class RegisterRequest {
   String? jobTitle;
   List<int>? categories;
   int? natoinality;
+  String? id_image;
   RegisterRequest(
       {this.firstName,
       this.lastName,
@@ -44,6 +45,7 @@ class RegisterRequest {
       this.birthDate,
       this.categories,
       this.natoinality,
+        this.id_image,
       this.jobTitle});
 
   Map<String, dynamic> toMap() {
@@ -70,6 +72,7 @@ class RegisterRequest {
     data["job_title"] = this.jobTitle;
     data["section"] = this.sectionId;
     data["nationality"] = this.natoinality;
+    data["id_image"] = this.id_image;
     if (this.establishDate != null) {
       data["establish_date"] = dt.format(this.establishDate!);
     }

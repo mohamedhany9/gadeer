@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_bloc/flutter_form_bloc.dart';
@@ -10,8 +11,10 @@ import 'package:gadeer/data/model/category.model.dart';
 import 'package:gadeer/data/model/city.model.dart';
 import 'package:gadeer/data/model/naitionality_model.dart';
 import 'package:gadeer/data/model/parnet_model.dart';
+import 'package:gadeer/data/model/upluad_image_model.dart';
 import 'package:gadeer/data/response/auth/login.response.dart';
 import 'package:gadeer/helper/app.theme.dart';
+import 'package:gadeer/helper/constants.dart';
 import 'package:gadeer/helper/helper_methods.dart';
 import 'package:gadeer/helper/notifications.dart';
 import 'package:gadeer/modules/home/controller/home.controller.dart';
@@ -20,9 +23,12 @@ import 'package:gadeer/modules/register/bloc/register.bloc.dart';
 import 'package:gadeer/modules/register/bloc/register.event.dart';
 import 'package:gadeer/modules/register/widgets/privacy_policy.widget.dart';
 import 'package:get/get.dart';
+import 'package:get/route_manager.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 
 File? image ;
+String? image_id ;
 class ConsultantRegisterForm extends StatefulWidget {
   final RegisterBloc? registerBloc;
   ConsultantRegisterForm(this.registerBloc);
@@ -37,6 +43,34 @@ class _ConsultantRegisterFormState extends State<ConsultantRegisterForm> {
   int? id  ;
   bool sub = false;
 
+  // Future<FormData> upluadimage( File file) async {
+  //   String fileName = file.path.split('/').last;
+  //   return FormData.fromMap({
+  //     "file": await MultipartFile.fromFile(file.path, filename:fileName),
+  //   });
+  // }
+  //
+  // Future UpluadimageMethod(File file) async {
+  //   print("go hANy");
+  //   Response response =
+  //   await Dio().post("${Constants.baseUrl}uploade/files",
+  //       data: await upluadimage(file),
+  //       options: Options(
+  //         validateStatus: (status) => true,
+  //         headers: {
+  //           "Avar : "application/json",
+  //           'Content-Type': 'multipart/form-data',
+  //         },
+  //       ));
+  //
+  //   if(response.statusCode == 200)
+  //   {
+  //     print(response.data);
+  //     ProductCategoryModel data = ProductCategoryModel.fromJson(response.data);
+  //     image_id = data.file;
+  //    _formBloc!.submit();
+  //   }
+  // }
 
 
   @override
@@ -95,7 +129,11 @@ class _ConsultantRegisterFormState extends State<ConsultantRegisterForm> {
                   SizedBox(
                     height: 10,
                   ),
-                  CustomButton('تسجيل الحساب', () => _formBloc!.submit()),
+                  CustomButton('تسجيل الحساب', (){
+                    _formBloc!.submit();
+                    //UpluadimageMethod(image!);
+
+                  }),
                   SizedBox(
                     height: 10,
                   ),
@@ -345,7 +383,7 @@ class _ConsultantRegisterFormState extends State<ConsultantRegisterForm> {
             onTap: () async{
               image = await HelperMethods.pickImage();
               setState(() {
-                image;
+                 image;
               });
             },
             child: Container(

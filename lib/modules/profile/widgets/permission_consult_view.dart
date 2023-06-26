@@ -31,7 +31,7 @@ class PermissionConsultView extends StatelessWidget {
   Future AddImage(File image) async {
     Notifications.showLoading();
     Response response =
-    await Dio().post("https://gadeer.org/api/users/files",
+    await Dio().post("${Constants.baseUrl}users/files",
         data: await imageData(image),
         options: Options(
           validateStatus: (status) => true,

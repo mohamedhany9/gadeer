@@ -17,6 +17,7 @@ class ConsultingModel {
   String? startAt;
   String? endAt;
   String? type;
+  DateTime? created_at;
 
   ConsultingModel(
       {this.id,
@@ -32,6 +33,7 @@ class ConsultingModel {
       this.categories,
       this.type,
       this.startAt,
+        this.created_at,
       this.endAt});
 
   ConsultingModel.fromJson(Map<String, dynamic> json) {
@@ -58,5 +60,6 @@ class ConsultingModel {
     status = json['status'];
     startAt = json['start_at'];
     endAt = json['end_at'];
+    created_at =  DateTime.parse(json["created_at"]);
   }
 }

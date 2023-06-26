@@ -6,6 +6,7 @@ import 'package:gadeer/data/model/city.model.dart';
 import 'package:gadeer/data/model/naitionality_model.dart';
 import 'package:gadeer/data/model/nationality_respone.dart';
 import 'package:gadeer/data/model/parnet_model.dart';
+import 'package:gadeer/data/model/upluad_image_model.dart';
 import 'package:gadeer/data/request/auth/register.request.dart';
 import 'package:gadeer/data/response/auth/login.response.dart';
 import 'package:gadeer/data/response/auth/partners_response.dart';
@@ -148,6 +149,34 @@ class ConsultantRegisterFormBloc extends FormBloc<LoginResponse, Object>
     emitLoaded();
   }
 
+  Future<FormData> upluadimage( File file) async {
+    String fileName = file.path.split('/').last;
+    return FormData.fromMap({
+      "file": await MultipartFile.fromFile(file.path, filename:fileName),
+    });
+  }
+
+  Future UpluadimageMethod(File file) async {
+    print("go hANy");
+    Response response =
+    await Dio().post("${Constants.baseUrl}uploade/files",
+        data: await upluadimage(file),
+        options: Options(
+          validateStatus: (status) => true,
+          headers: {
+            "Accept": "application/json",
+            'Content-Type': 'multipart/form-data',
+          },
+        ));
+
+    if(response.statusCode == 200)
+    {
+      print(response.data);
+      ProductCategoryModel data = ProductCategoryModel.fromJson(response.data);
+      image_id = data.file;
+    }
+  }
+
   @override
   void onSubmitting() {
     if (agreePolicy.value != true) {
@@ -164,40 +193,77 @@ class ConsultantRegisterFormBloc extends FormBloc<LoginResponse, Object>
       return;
     }
 
-    //print("phone id" + Get.find<RegisterBloc>().state.phoneId.toString());
-    RegisterRequest registerRequest = RegisterRequest(
-      firstName: firstName.value,
-      lastName: lastName.value,
-      phoneId: Get.find<RegisterBloc>().state.phoneId,
-      email: email.value,
-      password: password.value,
-      areaId: area.value?.id,
-      idNumber: idNumber.value == null
-          ? null
-          : NumHelper.parse(idNumber.value).toString(),
-      cityId: city.value?.id,
-      partnersId: partners.value?.id,
-      categoryId: category.value?.id,
-      subcategoryId: subcategory.value?.id,
-      gender: gender.value == "ذكر" ? "male" : "female",
-      jobTitle: jobTitle.value,
-      note: note.value,
-      natoinality: nationality.value!.id,
-      membershipType: AccountType.consultant.toShortString(),
-    );
-    this
-        .registerService
-        .register(request: registerRequest)
-        .then((response) async {
-      if (response.status == 0) {
-        handleValidateErrors(state, response.errors);
-        emitFailure(failureResponse: response.message);
-      } else {
-        emitSuccess(successResponse: response);
+    if (image == null) {
+      emitFailure(
+          failureResponse:
+          "يجب عليك أختيار صوره");
+      return;
+    }
+
+    if(firstName.value!.isEmpty ||lastName.value!.isEmpty||idNumber.value!.isEmpty
+        ||jobTitle.value!.isEmpty
+        ||email.value!.isEmpty
+        ||password.value!.isEmpty)
+      {
+         print('saas');
+        // Map<String, dynamic>? errorss =
+        // {"status":0,"message":"جميع الحقول مطلوبة برجاء التأكد من البيانات","errors":{"first_name":["الاسم الأول مطلوب."],"email":["البريد الالكتروني مطلوب."],"password":["كلمة المرور مطلوب."],"last_name":["اسم العائلة مطلوب."],"job_title":["المسمي الوظيفي مطلوب."],"id_number":["قيمة رقم الهوية مُستخدمة من قبل."]},"user":null};
+        // handleValidateErrors(0, errorss);
+
+        emitFailure(
+            failureResponse:
+            "يجب عليك ادخال البايانات كامله");
       }
-    }).catchError((error) {
-      emitFailure(failureResponse: error);
-    });
+    else{
+
+      UpluadimageMethod(image!).then((value) {
+
+        RegisterRequest registerRequest = RegisterRequest(
+            firstName: firstName.value,
+            lastName: lastName.value,
+            phoneId: Get.find<RegisterBloc>().state.phoneId,
+            email: email.value,
+            password: password.value,
+            areaId: area.value?.id,
+            idNumber: idNumber.value == null
+                ? null
+                : NumHelper.parse(idNumber.value).toString(),
+            cityId: city.value?.id,
+            partnersId: partners.value?.id,
+            categoryId: category.value?.id,
+            subcategoryId: subcategory.value?.id,
+            gender: gender.value == "ذكر" ? "male" : "female",
+            jobTitle: jobTitle.value,
+            note: note.value,
+            natoinality: nationality.value!.id,
+            membershipType: AccountType.consultant.toShortString(),
+            id_image: image_id
+        );
+        this
+            .registerService
+            .register(request: registerRequest)
+            .then((response) async {
+          if (response.status == 0) {
+            print("state");
+            print(state);
+            handleValidateErrors(state, response.errors);
+            emitFailure(failureResponse: response.message);
+          } else {
+            emitSuccess(successResponse: response);
+          }
+        }).catchError((error) {
+          emitFailure(failureResponse: error);
+        });
+
+      });
+    }
+
+
+
+
+
+    //print("phone id" + Get.find<RegisterBloc>().state.phoneId.toString());
+
   }
 
   void onSuccess(_, FormBlocSuccess<LoginResponse, Object> state) {

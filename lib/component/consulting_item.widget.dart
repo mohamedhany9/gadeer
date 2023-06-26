@@ -5,11 +5,13 @@ import 'package:gadeer/modules/account/bloc/account_bloc.dart';
 import 'package:gadeer/modules/consulting/bloc/consulting.bloc.dart';
 import 'package:gadeer/modules/register/bloc/register.event.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class ConsultingItemWidget extends StatelessWidget {
   ConsultingItemWidget(this.consulting, {Key? key}) : super(key: key);
   final ConsultingModel consulting;
   final AccountType accountType = Get.find<AccountBloc>().state.accountType!;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -73,6 +75,13 @@ class ConsultingItemWidget extends StatelessWidget {
                       style: TextStyle(
                         color: Colors.blueGrey[300],
                         fontSize: 10,
+                      ),
+                    ),
+                    consulting.created_at == null ? Container() : Text(
+                      DateFormat('yyyy-MM-dd – kk:mm').format(consulting.created_at!),
+                      style: TextStyle(
+                        color: Colors.blueGrey[300],
+                        fontSize: 12,
                       ),
                     ),
                   ],

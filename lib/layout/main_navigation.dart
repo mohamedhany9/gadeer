@@ -58,9 +58,9 @@ class _MainNavigationState extends State<MainNavigation> {
                   child: IndexedStack(
                     index: state.currentPage,
                     children: [
-                      HomePage(),
                       ConsultingPage(),
                       ProfilePage(),
+                      HomePage(),
                       AccountPage(),
                       ConsultantsPage(null),
                     ],

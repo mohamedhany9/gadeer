@@ -51,12 +51,6 @@ class _MasterLayoutState extends State<MasterLayout> {
             onItemSelected: (index) => _appBloc.changePage(index),
             items: [
               BottomNavyBarItem(
-                  icon: Icon(Icons.home),
-                  title: Text('الرئيسية'),
-                  inactiveColor: Colors.blueGrey,
-                  activeColor: Colors.white,
-                  activeBackgroundColor: AppColors.primary),
-              BottomNavyBarItem(
                   icon: Icon(FontAwesomeIcons.commentDots),
                   title: Text("الاستشارات"),
                   inactiveColor: Colors.blueGrey,
@@ -72,6 +66,12 @@ class _MasterLayoutState extends State<MasterLayout> {
                       minFontSize: 10,
                     ),
                   ),
+                  inactiveColor: Colors.blueGrey,
+                  activeColor: Colors.white,
+                  activeBackgroundColor: AppColors.primary),
+              BottomNavyBarItem(
+                  icon: Icon(Icons.home),
+                  title: Text('الرئيسية'),
                   inactiveColor: Colors.blueGrey,
                   activeColor: Colors.white,
                   activeBackgroundColor: AppColors.primary),
