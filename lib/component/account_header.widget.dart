@@ -142,9 +142,9 @@ class AccountHeaderWidget extends StatelessWidget {
                             accountBloc.state.user?.rate?.toDouble() ?? 0.0),
                       HoursWidget(
                         accountType: accountBloc.state.user!.membershipType ==
-                                AccountType.association.toShortString()
-                            ? AccountType.association
-                            : AccountType.consultant,
+                                AccountType.consultant.toShortString()
+                            ? AccountType.consultant
+                            : AccountType.association,
                         consultingSeconds:
                             accountBloc.state.user!.consultingSeconds,
                         meetingSeconds: accountBloc.state.user!.meetingSeconds,
