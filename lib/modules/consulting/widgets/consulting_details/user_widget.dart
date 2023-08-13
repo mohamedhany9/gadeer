@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gadeer/component/custom_button.dart';
 import 'package:gadeer/data/model/profile.model.dart';
 import 'package:gadeer/helper/app.theme.dart';
+import 'package:gadeer/helper/notifications.dart';
 import 'package:gadeer/modules/account/bloc/account_bloc.dart';
 import 'package:gadeer/modules/consulting/bloc/consulting.bloc.dart';
 import 'package:gadeer/modules/consulting/pages/show_profile_page.dart';
@@ -57,7 +58,9 @@ class UserWidget extends StatelessWidget {
                 if (consultingBloc.state.current!.status == "in progress" &&
                     accountType == AccountType.consultant) Container(
                       margin: EdgeInsets.symmetric(horizontal: 20),
-                      child: CustomButton("إتمام الاستشارة", () {})) else Container(),
+                      child: CustomButton("إتمام الاستشارة", () {
+                        Notifications.success("سوف يتم تحويل حاله الاستشاره الي مكتمله بعد ٢٤ ساعه من الان");
+                      })) else Container(),
                 SizedBox(
                   height: 8,
                 ),
