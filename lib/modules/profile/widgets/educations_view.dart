@@ -139,35 +139,35 @@ class _EducationItem extends StatelessWidget {
             education.place!,
             style: TextStyles.hint.copyWith(color: Colors.grey),
           ),
-          Row(
-            children: [
-              Text(
-                "من:",
-                style: TextStyles.subTitleBold.copyWith(color: Colors.blueGrey),
-              ),
-              SizedBox(
-                width: 4,
-              ),
-              Text(
-                education.from!,
-                style: TextStyles.subTitle.copyWith(color: Colors.grey),
-              ),
-              Spacer(),
-              if (education.to != null)
-                Text(
-                  "الى:",
-                  style:
-                      TextStyles.subTitleBold.copyWith(color: Colors.blueGrey),
-                ),
-              SizedBox(
-                width: 4,
-              ),
-              Text(
-                education.to ?? "",
-                style: TextStyles.subTitle.copyWith(color: Colors.grey),
-              ),
-            ],
-          ),
+          // Row(
+          //   children: [
+          //     Text(
+          //       "من:",
+          //       style: TextStyles.subTitleBold.copyWith(color: Colors.blueGrey),
+          //     ),
+          //     SizedBox(
+          //       width: 4,
+          //     ),
+          //     Text(
+          //       education.from!,
+          //       style: TextStyles.subTitle.copyWith(color: Colors.grey),
+          //     ),
+          //     Spacer(),
+          //     if (education.to != null)
+          //       Text(
+          //         "الى:",
+          //         style:
+          //             TextStyles.subTitleBold.copyWith(color: Colors.blueGrey),
+          //       ),
+          //     SizedBox(
+          //       width: 4,
+          //     ),
+          //     Text(
+          //       education.to ?? "",
+          //       style: TextStyles.subTitle.copyWith(color: Colors.grey),
+          //     ),
+          //   ],
+          // ),
         ],
       ),
     );

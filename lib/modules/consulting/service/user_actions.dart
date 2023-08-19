@@ -24,11 +24,11 @@ class UserActions {
 
   static Future acceptConsulting(int? id) async {
     Notifications.showLoading();
-    await Get.find<ConsultingService>().acceptConsulting(id).then((value) {
+    await Get.find<ConsultingService>().acceptConsulting(id).then((value) async {
       Notifications.hideLoading();
       if (value.status == 1) {
         Notifications.success("تم قبول الاستشارة");
-        consultingBloc.updateSyncConsulting(value.consulting!);
+        //consultingBloc.updateSyncConsulting(value.consulting!);
 
         AddCommentRequest addCommentRequest =
         AddCommentRequest(message: "السلام عليكم ورحمة الله ,  أسعدني التواصل معك , تفضل باستشارتك الآن");

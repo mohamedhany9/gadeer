@@ -34,6 +34,7 @@ class ConsultantActionsWidget extends StatelessWidget {
                           child: CustomButton(
                         "قبول",
                         () async {
+
                           UserActions.acceptConsulting(
                               consultingBloc.state.current!.id);
                         },

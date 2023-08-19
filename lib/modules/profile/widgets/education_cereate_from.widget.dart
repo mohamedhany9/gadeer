@@ -63,36 +63,36 @@ class _EducationCreateFormWidgetState extends State<EducationCreateFormWidget> {
               borderRadius: 5,
             ),
           ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: DateTimeFieldBlocBuilder(
-                  dateTimeFieldBloc: formBloc!.from,
-                  format: DateFormat("dd-MM-yyyy"),
-                  initialDate: formBloc!.from.value ?? DateTime.now(),
-                  firstDate: DateTime(1950),
-                  lastDate: DateTime.now(),
-                  decoration:
-                      inputDecoration(hint: 'تاريخ بداية الدراسة', label: 'من'),
-                ),
-              ),
-              SizedBox(
-                width: 10,
-              ),
-              Expanded(
-                child: DateTimeFieldBlocBuilder(
-                  dateTimeFieldBloc: formBloc!.to,
-                  format: DateFormat("dd-MM-yyyy"),
-                  initialDate: formBloc!.to.value ?? DateTime.now(),
-                  firstDate: DateTime(1950),
-                  lastDate: DateTime.now(),
-                  decoration:
-                      inputDecoration(hint: 'تاريخ التخرج', label: 'الي'),
-                ),
-              ),
-            ],
-          ),
+          // Row(
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   children: [
+          //     Expanded(
+          //       child: DateTimeFieldBlocBuilder(
+          //         dateTimeFieldBloc: formBloc!.from,
+          //         format: DateFormat("dd-MM-yyyy"),
+          //         initialDate: formBloc!.from.value ?? DateTime.now(),
+          //         firstDate: DateTime(1950),
+          //         lastDate: DateTime.now(),
+          //         decoration:
+          //             inputDecoration(hint: 'تاريخ بداية الدراسة', label: 'من'),
+          //       ),
+          //     ),
+          //     SizedBox(
+          //       width: 10,
+          //     ),
+          //     Expanded(
+          //       child: DateTimeFieldBlocBuilder(
+          //         dateTimeFieldBloc: formBloc!.to,
+          //         format: DateFormat("dd-MM-yyyy"),
+          //         initialDate: formBloc!.to.value ?? DateTime.now(),
+          //         firstDate: DateTime(1950),
+          //         lastDate: DateTime.now(),
+          //         decoration:
+          //             inputDecoration(hint: 'تاريخ التخرج', label: 'الي'),
+          //       ),
+          //     ),
+          //   ],
+          // ),
           SizedBox(
             height: 30,
           ),

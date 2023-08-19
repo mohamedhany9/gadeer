@@ -31,13 +31,14 @@ class _PreviewCardDetailsState extends State<PreviewCardDetails> {
         _DetailsColumn("ساعات التطوع", widget.profileModel?.workHours),
         _DetailsColumn(
             "الاستشارات",
-            Get.find<HomeController>()
-                    .homeResponse
-                    ?.consultingCount
-                    .toString() ??
+            // Get.find<HomeController>()
+            //         .homeResponse
+            //         ?.consultingCount
+            //         .toString() ??
+            widget.profileModel?.consultingSeconds.toString() ??
                 "0"),
         _DetailsColumn(
-            "الجمعيات",
+            "جمعيه/فرد",
             Get.find<HomeController>().homeResponse?.userCount?.toString() ??
                 "0"),
       ],
