@@ -56,7 +56,7 @@ class CommentItemWidget extends StatelessWidget {
         crossAxisAlignment: WrapCrossAlignment.end,
         alignment: WrapAlignment.end,
         children: [
-          AutoSizeText(
+          SelectableText(
             comment.message!,
             style: TextStyles.hint.copyWith(
                 color: comment.userId == userId.toString()

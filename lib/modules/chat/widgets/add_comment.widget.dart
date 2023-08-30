@@ -75,9 +75,9 @@ class _AddCommentWidgetState extends State<AddCommentWidget> {
           SizedBox(
             width: 4,
           ),
-          RecordButton(recordingFinishedCallback: (String ) {
-
-          },),
+          // RecordButton(recordingFinishedCallback: (String ) {
+          //
+          // },),
           // IconButton(
           //     icon: Icon(
           //       Icons.keyboard_voice,
